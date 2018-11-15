@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_15_132906) do
+ActiveRecord::Schema.define(version: 2018_11_15_143218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,13 @@ ActiveRecord::Schema.define(version: 2018_11_15_132906) do
   create_table "questions", force: :cascade do |t|
     t.string "text"
     t.text "comment"
+  end
+
+  create_table "tests", force: :cascade do |t|
+    t.integer "user_id"
+    t.datetime "start", null: false
+    t.datetime "end", null: false
+    t.boolean "passed", default: false, null: false
   end
 
   add_foreign_key "answers", "questions"
