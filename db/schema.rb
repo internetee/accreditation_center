@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_15_153333) do
+ActiveRecord::Schema.define(version: 2018_11_15_153909) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2018_11_15_153333) do
     t.bigint "answer_id"
     t.index ["answer_id"], name: "index_answered_questions_on_answer_id"
     t.index ["question_id"], name: "index_answered_questions_on_question_id"
+    t.index ["test_id", "question_id", "answer_id"], name: "one_answer_per_test_question", unique: true
     t.index ["test_id"], name: "index_answered_questions_on_test_id"
   end
 
