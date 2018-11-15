@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_15_143218) do
+ActiveRecord::Schema.define(version: 2018_11_15_153333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "answered_questions", force: :cascade do |t|
+    t.bigint "test_id"
+    t.bigint "question_id"
+    t.bigint "answer_id"
+    t.index ["answer_id"], name: "index_answered_questions_on_answer_id"
+    t.index ["question_id"], name: "index_answered_questions_on_question_id"
+    t.index ["test_id"], name: "index_answered_questions_on_test_id"
+  end
 
   create_table "answers", force: :cascade do |t|
     t.bigint "question_id", null: false
@@ -34,5 +43,8 @@ ActiveRecord::Schema.define(version: 2018_11_15_143218) do
     t.boolean "passed", default: false, null: false
   end
 
+  add_foreign_key "answered_questions", "answers"
+  add_foreign_key "answered_questions", "questions"
+  add_foreign_key "answered_questions", "tests"
   add_foreign_key "answers", "questions"
 end
