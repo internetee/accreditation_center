@@ -10,9 +10,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2018_11_15_182752) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "answered_questions", force: :cascade do |t|
+    t.bigint "test_id"
+    t.bigint "question_id"
+    t.bigint "answer_id"
+    t.index ["answer_id"], name: "index_answered_questions_on_answer_id"
+    t.index ["question_id"], name: "index_answered_questions_on_question_id"
+    t.index ["test_id", "question_id", "answer_id"], name: "one_answer_per_test_question", unique: true
+    t.index ["test_id"], name: "index_answered_questions_on_test_id"
+  end
+
+  create_table "answers", force: :cascade do |t|
+    t.bigint "question_id", null: false
+    t.string "text_en", null: false
+    t.boolean "correct", default: false, null: false
+    t.string "text_et", null: false
+    t.index ["question_id"], name: "index_answers_on_question_id"
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.string "text_en", null: false
+    t.text "comment"
+    t.string "text_et", null: false
+  end
+
+  create_table "tests", force: :cascade do |t|
+    t.integer "user_id"
+    t.datetime "start", null: false
+    t.datetime "end", null: false
+    t.boolean "passed", default: false, null: false
+  end
+
+  add_foreign_key "answered_questions", "answers"
+  add_foreign_key "answered_questions", "questions"
+  add_foreign_key "answered_questions", "tests"
+  add_foreign_key "answers", "questions"
 end
