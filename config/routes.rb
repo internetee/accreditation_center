@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   end
 
   root 'home#index'
-  devise_for :admins
+  devise_for :administrators
 end
