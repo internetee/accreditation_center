@@ -1,8 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Text:</strong>
-  <%= @question.text %>
+  <strong>Text EN:</strong>
+  <%= @question.text_en %>
+</p>
+
+<p>
+  <strong>Text ET:</strong>
+  <%= @question.text_et %>
 </p>
 
 <%= link_to 'Edit', edit_admin_question_path(@question) %> |
