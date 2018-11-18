@@ -1,5 +1,5 @@
 module Admin
-  class QuestionsController < ApplicationController
+  class QuestionsController < BaseController
     before_action :set_question, only: [:show, :edit, :update, :destroy]
 
     def index
