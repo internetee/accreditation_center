@@ -1,17 +1,24 @@
 <%= form_with(model: [:admin, @question], local: true) do |form| %>
   <%= render 'form_errors', target: @question %>
 
-  <div class="field">
-    <%= form.label :text_en %>
-    <%= form.text_field :text_en %>
+  <div class="form-group row">
+    <%= form.label :text_en, class: 'col-sm-2 col-form-label' %>
+      <div class="col-sm-10">
+        <%= form.text_field :text_en, class: 'form-control' %>
+      </div>
   </div>
 
-  <div class="field">
-    <%= form.label :text_et %>
-    <%= form.text_field :text_et %>
+  <div class="form-group row">
+    <%= form.label :text_et, class: 'col-sm-2 col-form-label' %>
+
+      <div class="col-sm-10">
+        <%= form.text_field :text_et, class: 'form-control' %>
+      </div>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <%= form.submit class: 'btn btn-primary' %>
+    </div>
   </div>
 <% end %>
