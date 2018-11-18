@@ -1,0 +1,6 @@
+en:
+  admin:
+    base:
+      navbar:
+        questions: Questions
+        sign_out: Sign out
