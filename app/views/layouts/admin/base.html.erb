@@ -6,11 +6,11 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
   </head>
 
   <body>
     <%= render 'flash_messages' %>
     <%= yield %>
+    <%= javascript_include_tag 'application', async: true %>
   </body>
 </html>
