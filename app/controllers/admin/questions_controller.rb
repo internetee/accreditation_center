@@ -46,7 +46,7 @@ module Admin
     end
 
     def question_params
-      params.require(:question).permit(:text_en, :text_et)
+      params.require(:question).permit(:text_en, :text_et, :comment)
     end
   end
 end
