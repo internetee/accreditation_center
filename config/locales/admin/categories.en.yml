@@ -1,0 +1,11 @@
+en:
+  admin:
+    categories:
+      index:
+        header: Categories
+
+      new:
+        header: New category
+
+      edit:
+        header: Edit category

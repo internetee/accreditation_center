@@ -8,6 +8,9 @@
             <li class="nav-item">
                 <%= link_to t('.questions'), admin_questions_path, class: 'nav-link' %>
             </li>
+            <li class="nav-item">
+                <%= link_to t('.categories'), admin_categories_path, class: 'nav-link' %>
+            </li>
         </ul>
         <%= current_administrator %>|
         <%= link_to t('.sign_out'), destroy_administrator_session_path, method: :delete %>

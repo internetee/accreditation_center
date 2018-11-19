@@ -3,4 +3,5 @@ en:
     base:
       navbar:
         questions: Questions
+        categories: Categories
         sign_out: Sign out

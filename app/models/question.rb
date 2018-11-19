@@ -1,4 +1,5 @@
 class Question < ApplicationRecord
+  belongs_to :category
   has_many :answers
 
   validates :text_en, :text_et, presence: true

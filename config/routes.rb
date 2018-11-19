@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     end
 
     resources :questions
+    resources :categories
   end
 
   root 'home#index'

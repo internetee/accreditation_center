@@ -1,0 +1,16 @@
+<%= form_with(model: [:admin, category], local: true) do |form| %>
+    <%= render 'form_errors', target: category %>
+
+    <div class="form-group row">
+        <%= form.label :name, class: 'col-sm-2 col-form-label' %>
+        <div class="col-sm-10">
+            <%= form.text_field :name, class: 'form-control', required: true, autofocus: true %>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <%= form.submit class: 'btn btn-primary' %>
+        </div>
+    </div>
+<% end %>
