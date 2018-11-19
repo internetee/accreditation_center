@@ -18,7 +18,11 @@
 
 <p>
     <strong>Comment:</strong>
-    <%= @question.comment %>
+    <%= simple_format @question.comment %>
 </p>
+
+<h2>Answers</h2>
+
+<%= render @question.answers %>
 
 <%= link_to 'Edit', edit_admin_question_path(@question) %>

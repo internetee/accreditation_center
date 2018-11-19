@@ -4,7 +4,7 @@
     <div class="form-group row">
         <%= form.label :text_en, class: 'col-sm-2 col-form-label' %>
         <div class="col-sm-10">
-            <%= form.text_field :text_en, class: 'form-control' %>
+            <%= form.text_field :text_en, class: 'form-control', required: true, autofocus: true %>
         </div>
     </div>
 
@@ -12,7 +12,7 @@
         <%= form.label :text_et, class: 'col-sm-2 col-form-label' %>
 
         <div class="col-sm-10">
-            <%= form.text_field :text_et, class: 'form-control' %>
+            <%= form.text_field :text_et, class: 'form-control', required: true %>
         </div>
     </div>
 
@@ -22,6 +22,46 @@
         <div class="col-sm-10">
             <%= form.text_area :comment, class: 'form-control' %>
         </div>
+    </div>
+
+    <h2>Answers</h2>
+
+    <div class="form-group">
+
+        <div class="row">
+            <div class="col-sm">
+                TEXT EN
+            </div>
+
+            <div class="col-sm">
+                TEXT ET
+            </div>
+            <div class="col-sm"></div>
+            <div class="col-sm"></div>
+        </div>
+
+        <%= form.fields_for :answers do |answer_fields| %>
+            <div class="form-row">
+                <div class="col-sm">
+                    <%= answer_fields.text_field :text_en, class: 'form-control', required: true %>
+                </div>
+
+                <div class="col-sm">
+                    <%= answer_fields.text_field :text_et, class: 'form-control', required: true %>
+                </div>
+
+                <div class="col-sm">
+                    <label><%= answer_fields.check_box :correct %> Correct</label>
+                </div>
+
+                <div class="col-sm">
+                    <% if answer_fields.object.persisted? %>
+                        <label class="form-check-label"><%= answer_fields.check_box :_destroy, class: 'form-check-input' %>
+                            Delete</label>
+                    <% end %>
+                </div>
+            </div>
+        <% end %>
     </div>
 
     <div class="form-group row">

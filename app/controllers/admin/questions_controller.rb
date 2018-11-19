@@ -11,6 +11,7 @@ module Admin
 
     def new
       @question = Question.new
+      @question.answers.build
     end
 
     def edit
@@ -46,7 +47,11 @@ module Admin
     end
 
     def question_params
-      params.require(:question).permit(:text_en, :text_et, :comment)
+      params.require(:question).permit(:text_en, :text_et, :comment, answers_attributes: [:id,
+                                                                                          :_destroy,
+                                                                                          :text_en,
+                                                                                          :text_et,
+                                                                                          :correct])
     end
   end
 end

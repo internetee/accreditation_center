@@ -2,23 +2,17 @@
 
 <h1><%= t '.header' %></h1>
 
-<table>
-    <thead>
-    <tr>
-        <th>Text</th>
-        <th colspan="3"></th>
-    </tr>
-    </thead>
-
+<table class="table">
     <tbody>
-    <% @questions.each do |question| %>
-        <tr>
-            <td><%= question.text_en %></td>
-            <td><%= link_to 'Show', admin_question_path(question) %></td>
-            <td><%= link_to 'Edit', edit_admin_question_path(question) %></td>
-            <td><%= link_to 'Destroy', admin_question_path(question), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-    <% end %>
+        <% @questions.each do |question| %>
+            <tr>
+                <td><%= link_to question, admin_question_path(question) %></td>
+                <td>
+                    <%= link_to 'Edit', edit_admin_question_path(question) %>
+                    <%= link_to 'Destroy', admin_question_path(question), method: :delete, data: { confirm: 'Are you sure?' } %>
+                </td>
+            </tr>
+        <% end %>
     </tbody>
 </table>
 
