@@ -1,6 +1,8 @@
 require "test_helper"
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
+  include Devise::Test::IntegrationHelpers
+
   Capybara.register_driver(:headless_chrome) do |app|
     options = ::Selenium::WebDriver::Chrome::Options.new
     options.add_argument('--headless')
