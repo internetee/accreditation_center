@@ -1,0 +1,11 @@
+en:
+  admin:
+    questions:
+      index:
+        header: Questions
+
+      new:
+        header: New question
+
+      edit:
+        header: Edit question

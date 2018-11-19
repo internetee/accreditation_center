@@ -1,4 +1,10 @@
-<p id="notice"><%= notice %></p>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><%= link_to t('admin.questions.index.header'), admin_questions_path %></li>
+    </ol>
+</nav>
+
+<h1><%= @question %></h1>
 
 <p>
     <strong>Text EN:</strong>
@@ -15,5 +21,4 @@
     <%= @question.comment %>
 </p>
 
-<%= link_to 'Edit', edit_admin_question_path(@question) %> |
-<%= link_to 'Back', admin_questions_path %>
+<%= link_to 'Edit', edit_admin_question_path(@question) %>
