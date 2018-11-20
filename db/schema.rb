@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_20_121755) do
+ActiveRecord::Schema.define(version: 2018_11_20_122131) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,9 +36,9 @@ ActiveRecord::Schema.define(version: 2018_11_20_121755) do
   end
 
   create_table "answered_questions", force: :cascade do |t|
-    t.bigint "test_id"
-    t.bigint "question_id"
-    t.bigint "answer_id"
+    t.bigint "test_id", null: false
+    t.bigint "question_id", null: false
+    t.bigint "answer_id", null: false
     t.index ["answer_id"], name: "index_answered_questions_on_answer_id"
     t.index ["question_id"], name: "index_answered_questions_on_question_id"
     t.index ["test_id", "question_id", "answer_id"], name: "one_answer_per_test_question", unique: true
