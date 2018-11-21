@@ -1,0 +1,10 @@
+<tr>
+    <td><%= link_to question, admin_question_path(question) %></td>
+    <td><%= question.category.name %></td>
+    <td>
+        <%= link_to t('.edit_btn'), edit_admin_question_path(question) %>
+        <%= link_to t('.delete_btn'), admin_question_path(question), method: :delete,
+                    data: { confirm: t('.delete_btn_confirm') } %>
+    </td>
+</tr>
+

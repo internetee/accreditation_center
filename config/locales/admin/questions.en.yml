@@ -18,3 +18,8 @@ en:
 
       destroy:
         deleted: Question was successfully deleted
+
+      question:
+        edit_btn: Edit
+        delete_btn: Delete
+        delete_btn_confirm: Are you sure?

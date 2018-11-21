@@ -9,16 +9,7 @@
         </tr>
     </thead>
     <tbody>
-        <% @questions.each do |question| %>
-            <tr>
-                <td><%= link_to question, admin_question_path(question) %></td>
-                <td><%= question.category.name %></td>
-                <td>
-                    <%= link_to 'Edit', edit_admin_question_path(question) %>
-                    <%= link_to 'Destroy', admin_question_path(question), method: :delete, data: { confirm: 'Are you sure?' } %>
-                </td>
-            </tr>
-        <% end %>
+        <%= render @questions %>
     </tbody>
 </table>
 
