@@ -22,7 +22,7 @@ module Admin
       @question = Question.new(question_params)
 
       if @question.save
-        redirect_to admin_question_url(@question), notice: 'Question was successfully created.'
+        redirect_to admin_question_url(@question), notice: t('.created')
       else
         render :new
       end
@@ -30,7 +30,7 @@ module Admin
 
     def update
       if @question.update(question_params)
-        redirect_to admin_question_url(@question), notice: 'Question was successfully updated.'
+        redirect_to admin_question_url(@question), notice: t('.updated')
       else
         render :edit
       end
@@ -38,7 +38,7 @@ module Admin
 
     def destroy
       @question.destroy
-      redirect_to admin_questions_url, notice: 'Question was successfully destroyed.'
+      redirect_to admin_questions_url, notice: t('.deleted')
     end
 
     private

@@ -9,3 +9,12 @@ en:
 
       edit:
         header: Edit category
+
+      create:
+        created: Category was successfully created
+
+      update:
+        updated: Category was successfully updated
+
+      destroy:
+        deleted: Category was successfully deleted

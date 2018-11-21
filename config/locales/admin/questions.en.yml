@@ -9,3 +9,12 @@ en:
 
       edit:
         header: Edit question
+
+      create:
+        created: Question was successfully created
+
+      update:
+        updated: Question was successfully updated
+
+      destroy:
+        deleted: Question was successfully deleted
