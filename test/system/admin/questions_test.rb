@@ -2,6 +2,7 @@ require 'application_system_test_case'
 
 class Admin::QuestionsTest < ApplicationSystemTestCase
   setup do
+    sign_in administrators(:one)
     @admin_question = questions(:one)
   end
 
@@ -14,21 +15,24 @@ class Admin::QuestionsTest < ApplicationSystemTestCase
     visit admin_questions_url
     click_on "New Question"
 
-    fill_in "Text", with: @admin_question.text
+    fill_in "question[text_en]", with: 'test'
+    fill_in "question[text_et]", with: 'test'
+
+    fill_in "question[answers_attributes][0][text_en]", with: 'test'
+    fill_in "question[answers_attributes][0][text_et]", with: 'test'
+
     click_on "Create Question"
 
     assert_text "Question was successfully created"
-    click_on "Back"
   end
 
   test "updating a Question" do
     visit admin_questions_url
     click_on "Edit", match: :first
 
-    fill_in "Text", with: @admin_question.text
+    fill_in "Text en", with: 'new text en'
     click_on "Update Question"
 
     assert_text "Question was successfully updated"
-    click_on "Back"
   end
 end

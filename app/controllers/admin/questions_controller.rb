@@ -1,6 +1,7 @@
 module Admin
   class QuestionsController < BaseController
     before_action :set_question, only: [:show, :edit, :update, :destroy]
+    helper_method :categories
 
     def index
       @questions = Question.all
@@ -47,11 +48,19 @@ module Admin
     end
 
     def question_params
-      params.require(:question).permit(:text_en, :text_et, :comment, answers_attributes: [:id,
-                                                                                          :_destroy,
-                                                                                          :text_en,
-                                                                                          :text_et,
-                                                                                          :correct])
+      params.require(:question).permit(:category_id,
+                                       :text_en,
+                                       :text_et,
+                                       :comment,
+                                       answers_attributes: [:id,
+                                                            :_destroy,
+                                                            :text_en,
+                                                            :text_et,
+                                                            :correct])
+    end
+
+    def categories
+      Category.all
     end
   end
 end
