@@ -1,0 +1,13 @@
+<h1><%= t '.header' %></h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th><%= Test.human_attribute_name :start %></th>
+            <th><%= Test.human_attribute_name :end %></th>
+        </tr>
+    </thead>
+    <tbody>
+        <%= render @tests %>
+    </tbody>
+</table>

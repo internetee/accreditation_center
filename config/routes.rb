@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
     resources :questions
     resources :categories
+    resources :tests, only: %i[index show]
   end
 
   root 'home#index'
