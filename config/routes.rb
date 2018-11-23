@@ -6,7 +6,13 @@ Rails.application.routes.draw do
       root 'questions#index', as: :authenticated_root
     end
 
-    resources :questions
+    resources :questions do
+      member do
+        patch :activate
+        patch :deactivate
+      end
+    end
+
     resources :categories
     resources :tests, only: %i[index show]
   end

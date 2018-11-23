@@ -3,7 +3,6 @@ require 'application_system_test_case'
 class Admin::QuestionsTest < ApplicationSystemTestCase
   setup do
     sign_in administrators(:one)
-    @admin_question = questions(:one)
   end
 
   test 'visiting the index' do
@@ -34,5 +33,33 @@ class Admin::QuestionsTest < ApplicationSystemTestCase
     click_on 'Update Question'
 
     assert_text 'Question was successfully updated'
+  end
+
+  def test_activation
+    question = questions(:one)
+    assert question.inactive?
+
+    visit admin_question_path(question)
+
+    click_on 'Activate'
+    question.reload
+
+    assert question.active?
+    assert_text 'Question has been activated'
+    assert_current_path admin_question_path(question)
+  end
+
+  def test_deactivation
+    question = questions(:one)
+    question.activate
+
+    visit admin_question_path(question)
+
+    click_on 'Deactivate'
+    question.reload
+
+    assert question.inactive?
+    assert_text 'Question has been deactivated'
+    assert_current_path admin_question_path(question)
   end
 end

@@ -26,3 +26,13 @@
 <%= render @question.answers %>
 
 <%= link_to 'Edit', edit_admin_question_path(@question) %>
+
+<% if @question.inactive? %>
+    <%= link_to t('.activate_btn'), activate_admin_question_path(@question), method: :patch,
+                class: 'btn btn-primary' %>
+<% end %>
+
+<% if @question.active? %>
+    <%= link_to t('.deactivate_btn'), deactivate_admin_question_path(@question), method: :patch,
+                class: 'btn btn-primary' %>
+<% end %>

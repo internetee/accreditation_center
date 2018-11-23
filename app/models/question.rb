@@ -9,4 +9,18 @@ class Question < ApplicationRecord
   def to_s
     text_en
   end
+
+  def inactive?
+    !active?
+  end
+
+  def activate
+    self.active = true
+    save!
+  end
+
+  def deactivate
+    self.active = false
+    save!
+  end
 end

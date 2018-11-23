@@ -23,4 +23,43 @@ class QuestionTest < ActiveSupport::TestCase
     question = Question.new(text_en: 'Why?')
     assert_equal 'Why?', question.to_s
   end
+
+  def test_inactive_by_default
+    question = Question.new
+    assert question.inactive?
+  end
+
+  def test_active
+    question = Question.new(active: true)
+    assert question.active?
+
+    question.active = false
+    assert_not question.active?
+  end
+
+  def test_inactive
+    question = Question.new(active: false)
+    assert question.inactive?
+
+    question.active = true
+    assert_not question.inactive?
+  end
+
+  def test_activation
+    assert @question.inactive?
+
+    @question.activate
+    @question.reload
+
+    assert @question.active?
+  end
+
+  def test_deactivation
+    @question.activate
+
+    @question.deactivate
+    @question.reload
+
+    assert @question.inactive?
+  end
 end

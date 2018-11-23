@@ -1,6 +1,6 @@
 module Admin
   class QuestionsController < BaseController
-    before_action :set_question, only: [:show, :edit, :update, :destroy]
+    before_action :set_question, only: %i[show edit update destroy activate deactivate]
     helper_method :categories
 
     def index
@@ -39,6 +39,16 @@ module Admin
     def destroy
       @question.destroy
       redirect_to admin_questions_url, notice: t('.deleted')
+    end
+
+    def activate
+      @question.activate
+      redirect_to admin_question_url(@question), notice: t('.activated')
+    end
+
+    def deactivate
+      @question.deactivate
+      redirect_to admin_question_url(@question), notice: t('.deactivated')
     end
 
     private

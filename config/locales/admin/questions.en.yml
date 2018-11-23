@@ -4,6 +4,10 @@ en:
       index:
         header: Questions
 
+      show:
+        activate_btn: Activate
+        deactivate_btn: Deactivate
+
       new:
         header: New question
 
@@ -18,6 +22,12 @@ en:
 
       destroy:
         deleted: Question was successfully deleted
+
+      activate:
+        activated: Question has been activated
+
+      deactivate:
+        deactivated: Question has been deactivated
 
       question:
         edit_btn: Edit
