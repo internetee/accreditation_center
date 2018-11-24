@@ -28,5 +28,6 @@ module AccreditationCenter
     # the framework and any gems in your application.
 
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
+    config.tests = OpenStruct.new(config_for(:tests))
   end
 end

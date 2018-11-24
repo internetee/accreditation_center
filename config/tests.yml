@@ -1,0 +1,9 @@
+default: &default
+  days_before_cleaning: 30
+
+development:
+  <<: *default
+test:
+  <<: *default
+production:
+  <<: *default
