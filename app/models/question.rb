@@ -1,6 +1,6 @@
 class Question < ApplicationRecord
   belongs_to :category
-  has_many :answers
+  has_many :answers, inverse_of: :question
 
   validates :text_en, :text_et, presence: true
 
