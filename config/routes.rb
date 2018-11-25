@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :categories
+    resources :categories, except: %i[show]
     resources :tests, only: %i[index show]
   end
 
