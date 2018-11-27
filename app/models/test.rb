@@ -17,4 +17,15 @@ class Test < ApplicationRecord
       where(%{("end" + interval '?' day) < ?}, days_before_cleaning, Time.zone.now)
     end
   end
+
+  def results
+    results = {}
+
+    answered_questions.each do |answered_question|
+      results[answered_question.question] = [] unless results[answered_question.question]
+      results[answered_question.question] << answered_question.answer
+    end
+
+    results
+  end
 end

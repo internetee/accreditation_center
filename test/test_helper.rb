@@ -22,4 +22,5 @@ end
 
 class ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
+  include AbstractController::Translation
 end

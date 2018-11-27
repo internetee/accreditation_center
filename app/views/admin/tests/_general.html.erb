@@ -1,0 +1,12 @@
+<div class="card">
+    <div class="card-header"><%= t '.header' %></div>
+    <div class="card-body">
+        <dl>
+            <dt><%= Test.human_attribute_name :start %></dt>
+            <dd><%= l @test.start %></dd>
+
+            <dt><%= Test.human_attribute_name :end %></dt>
+            <dd><%= l @test.end %></dd>
+        </dl>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="card-header"><%= t '.header' %></div>
+<div class="card-body">
+    <ul>
+        <% @test.results.each do |question, answers| %>
+            <li><%= question.text_en %>
+                <ul class="answers">
+                    <% answers.each do |answer| %>
+                        <li class="text-<%= answer.correct? ? 'success' : 'danger' %>"><%= answer.correct? ? '✓' : '✘' %> <%= answer.text_en %></li>
+                    <% end %>
+                </ul>
+            </li>
+        <% end %>
+    </ul>
+</div>

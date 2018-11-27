@@ -3,3 +3,9 @@ en:
     tests:
       index:
         header: Tests
+
+      general:
+        header: General
+
+      results:
+        header: Results

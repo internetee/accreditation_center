@@ -1,7 +1,24 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><%= link_to t('admin.tests.index.header'), admin_tests_path %></li>
+        <li class="breadcrumb-item">
+            <%= link_to t('admin.tests.index.header'), admin_tests_path %>
+        </li>
     </ol>
 </nav>
 
-<h1><%= @test %></h1>
+<h1 class="mb-3">Test #<%= @test.id %>
+    <span class="badge badge-<%= @test.passed? ? 'success' : 'danger' %>">
+        <%= @test.passed? ? 'Passed' : 'Failed' %></span>
+</h1>
+
+<div class="row">
+    <div class="col-sm-4">
+        <%= render 'general' %>
+    </div>
+
+    <div class="col-sm-8">
+        <div class="card mb-3">
+            <%= render 'results' %>
+        </div>
+    </div>
+</div>
