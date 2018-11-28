@@ -1,5 +1,5 @@
 class Test < ApplicationRecord
-  belongs_to :user
+  belongs_to :examinee
   has_many :answered_questions, dependent: :destroy
 
   class << self

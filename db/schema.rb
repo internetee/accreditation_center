@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_22_181725) do
+ActiveRecord::Schema.define(version: 2018_11_28_163053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,9 @@ ActiveRecord::Schema.define(version: 2018_11_22_181725) do
     t.string "name", null: false
   end
 
+  create_table "examinees", force: :cascade do |t|
+  end
+
   create_table "questions", force: :cascade do |t|
     t.string "text_en", null: false
     t.text "comment"
@@ -67,13 +70,10 @@ ActiveRecord::Schema.define(version: 2018_11_22_181725) do
   end
 
   create_table "tests", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.integer "examinee_id", null: false
     t.datetime "start", null: false
     t.datetime "end", null: false
     t.boolean "passed", default: false, null: false
-  end
-
-  create_table "users", force: :cascade do |t|
   end
 
   add_foreign_key "answered_questions", "answers"
@@ -81,5 +81,5 @@ ActiveRecord::Schema.define(version: 2018_11_22_181725) do
   add_foreign_key "answered_questions", "tests"
   add_foreign_key "answers", "questions"
   add_foreign_key "questions", "categories"
-  add_foreign_key "tests", "users"
+  add_foreign_key "tests", "examinees"
 end
