@@ -1,7 +1,7 @@
 <div class="card-header"><%= t '.header' %></div>
 <div class="card-body">
     <ul>
-        <% @test.results.each do |question, answers| %>
+        <% @exam.results.each do |question, answers| %>
             <li><%= question.text_en %>
                 <ul class="answers">
                     <% answers.each do |answer| %>

@@ -1,19 +1,19 @@
-class Test < ApplicationRecord
+class Exam < ApplicationRecord
   belongs_to :examinee
   has_many :answered_questions, dependent: :destroy
 
   class << self
-    def clean_old_tests
-      old_tests.each do |test|
-        test.answered_questions.delete_all
-        yield test
+    def clean_old_exams
+      old_exams.each do |exam|
+        exam.answered_questions.delete_all
+        yield exam
       end
     end
 
     private
 
-    def old_tests
-      days_before_cleaning = Rails.configuration.tests.days_before_cleaning
+    def old_exams
+      days_before_cleaning = Rails.configuration.exams.days_before_cleaning
       where(%{("end" + interval '?' day) < ?}, days_before_cleaning, Time.zone.now)
     end
   end

@@ -1,8 +1,8 @@
 en:
   admin:
-    tests:
+    exams:
       index:
-        header: Tests
+        header: Exams
 
       general:
         header: General

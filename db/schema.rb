@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_28_163053) do
+ActiveRecord::Schema.define(version: 2018_11_28_164335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,13 +36,13 @@ ActiveRecord::Schema.define(version: 2018_11_28_163053) do
   end
 
   create_table "answered_questions", force: :cascade do |t|
-    t.bigint "test_id", null: false
+    t.bigint "exam_id", null: false
     t.bigint "question_id", null: false
     t.bigint "answer_id", null: false
     t.index ["answer_id"], name: "index_answered_questions_on_answer_id"
+    t.index ["exam_id", "question_id", "answer_id"], name: "one_answer_per_test_question", unique: true
+    t.index ["exam_id"], name: "index_answered_questions_on_exam_id"
     t.index ["question_id"], name: "index_answered_questions_on_question_id"
-    t.index ["test_id", "question_id", "answer_id"], name: "one_answer_per_test_question", unique: true
-    t.index ["test_id"], name: "index_answered_questions_on_test_id"
   end
 
   create_table "answers", force: :cascade do |t|
@@ -60,6 +60,13 @@ ActiveRecord::Schema.define(version: 2018_11_28_163053) do
   create_table "examinees", force: :cascade do |t|
   end
 
+  create_table "exams", force: :cascade do |t|
+    t.integer "examinee_id", null: false
+    t.datetime "start", null: false
+    t.datetime "end", null: false
+    t.boolean "passed", default: false, null: false
+  end
+
   create_table "questions", force: :cascade do |t|
     t.string "text_en", null: false
     t.text "comment"
@@ -69,17 +76,10 @@ ActiveRecord::Schema.define(version: 2018_11_28_163053) do
     t.index ["category_id"], name: "index_questions_on_category_id"
   end
 
-  create_table "tests", force: :cascade do |t|
-    t.integer "examinee_id", null: false
-    t.datetime "start", null: false
-    t.datetime "end", null: false
-    t.boolean "passed", default: false, null: false
-  end
-
   add_foreign_key "answered_questions", "answers"
+  add_foreign_key "answered_questions", "exams"
   add_foreign_key "answered_questions", "questions"
-  add_foreign_key "answered_questions", "tests"
   add_foreign_key "answers", "questions"
+  add_foreign_key "exams", "examinees"
   add_foreign_key "questions", "categories"
-  add_foreign_key "tests", "examinees"
 end

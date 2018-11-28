@@ -1,0 +1,12 @@
+<div class="card">
+    <div class="card-header"><%= t '.header' %></div>
+    <div class="card-body">
+        <dl>
+            <dt><%= Exam.human_attribute_name :start %></dt>
+            <dd><%= l @exam.start %></dd>
+
+            <dt><%= Exam.human_attribute_name :end %></dt>
+            <dd><%= l @exam.end %></dd>
+        </dl>
+    </div>
+</div>

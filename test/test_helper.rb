@@ -12,11 +12,11 @@ class ActiveSupport::TestCase
   fixtures :all
 
   setup do
-    @original_tests_config = Rails.configuration.tests
+    @original_exams_config = Rails.configuration.exams
   end
 
   teardown do
-    Rails.configuration.tests = @original_tests_config
+    Rails.configuration.exams = @original_exams_config
   end
 end
 

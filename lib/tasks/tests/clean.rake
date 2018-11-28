@@ -1,13 +1,13 @@
-desc 'Delete the results of old tests'
+desc 'Delete the results of old exams'
 
-namespace :tests do
+namespace :exams do
   task :clean do
-    processed_test_count = 0
+    processed_exam_count = 0
 
-    Test.clean_old_tests do |_test|
-      processed_test_count += 1
+    Exam.clean_old_exams do |_exam|
+      processed_exam_count += 1
     end
 
-    puts "Tests processed: #{processed_test_count}"
+    puts "Exams processed: #{processed_exam_count}"
   end
 end

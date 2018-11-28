@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     end
 
     resources :categories, except: %i[show]
-    resources :tests, only: %i[index show]
+    resources :exams, only: %i[index show]
   end
 
   root 'home#index'
