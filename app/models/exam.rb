@@ -18,14 +18,13 @@ class Exam < ApplicationRecord
     end
   end
 
-  def results
-    results = {}
+  def each
+    question_with_answers = Hash.new { |hash, key| hash[key] = [] }
 
     answered_questions.each do |answered_question|
-      results[answered_question.question] = [] unless results[answered_question.question]
-      results[answered_question.question] << answered_question.answer
+      question_with_answers[answered_question.question] << answered_question.answer
     end
 
-    results
+    question_with_answers.each { |question, answers| yield question, answers }
   end
 end
