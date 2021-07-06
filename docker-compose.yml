@@ -1,0 +1,37 @@
+version: "2"
+
+services:
+  accreditation:
+    image: accreditation
+    build: .
+    ports:
+      - "9000:3000"
+    volumes:
+      - .:/opt/webapps/app
+      - ./shared/ca:/opt/ca
+      - tmp:/opt/webapps/app/tmp/
+    links:
+      - db
+    environment:
+      DATABASE_HOST: ​ database
+      POSTGRES_USER: ​ postgres
+      POSTGRES_PASSWORD: ​ some-long-secure-password
+      POSTGRES_DB: ​ myapp_development
+    command: bash -c "rm -f tmp/pids/server.pid && bundle update --bundler && bundle exec rails server -b 0.0.0.0"
+    restart: always
+
+  db:
+    image: postgres:9.6.21
+    volumes:
+      - pg:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ​ postgres
+      POSTGRES_PASSWORD: ​ some-long-secure-password
+      POSTGRES_DB: ​ myapp_development
+    ports:
+      - "5433:5432"
+    restart: always
+
+volumes:
+  pg:
+  tmp:
