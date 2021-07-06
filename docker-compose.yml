@@ -11,27 +11,27 @@ services:
       - ./shared/ca:/opt/ca
       - tmp:/opt/webapps/app/tmp/
     links:
-      - db
+      - database
     environment:
-      DATABASE_HOST: ​ database
-      POSTGRES_USER: ​ postgres
-      POSTGRES_PASSWORD: ​ some-long-secure-password
-      POSTGRES_DB: ​ myapp_development
+      DATABASE_HOST: database
+      POSTGRES_USER: ​postgres
+      POSTGRES_PASSWORD: some-long-secure-password
+      POSTGRES_DB: db
     command: bash -c "rm -f tmp/pids/server.pid && bundle update --bundler && bundle exec rails server -b 0.0.0.0"
     restart: always
 
-  db:
+  database:
     image: postgres:9.6.21
     volumes:
-      - pg:/var/lib/postgresql/data
+      - db:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: ​ postgres
-      POSTGRES_PASSWORD: ​ some-long-secure-password
-      POSTGRES_DB: ​ myapp_development
-    ports:
-      - "5433:5432"
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: some-long-secure-password
+      POSTGRES_DB: db
+    ports: 
+      - 9091:5432
     restart: always
 
 volumes:
-  pg:
+  db:
   tmp:
