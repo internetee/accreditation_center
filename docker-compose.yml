@@ -21,7 +21,7 @@ services:
     restart: always
 
   database:
-    image: postgres:9.6.21
+    image: postgres:13.2
     volumes:
       - db:/var/lib/postgresql/data
     environment:
