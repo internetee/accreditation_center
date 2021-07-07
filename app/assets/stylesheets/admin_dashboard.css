@@ -2,3 +2,8 @@
   Place all the styles related to the matching controller here.
   They will automatically be included in application.css.
 */
+.item {
+	border: 1px solid rgb(228, 218, 218);
+	padding: 10px;
+	background-color: rgb(201, 238, 238);
+}

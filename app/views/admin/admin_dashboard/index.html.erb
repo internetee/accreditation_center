@@ -1,2 +1,13 @@
-<h1>AdminDashboard#index</h1>
-<p>Find me in app/views/admin_dashboard/index.html.erb</p>
+<h1>Admin Dashboard</h1>
+
+<h2>List of catories:</h2>
+
+<%= form_with do |form| %>
+	<% @categories.each do |category| %>
+		<div class="item">
+			<%= form.label :category, category.name %>
+			<%= form.number_field :category_name_count %>
+		</div>
+	<% end %>
+	<%= form.submit "Save" %>
+<% end %>
