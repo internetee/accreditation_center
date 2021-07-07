@@ -2,6 +2,7 @@ en:
   admin:
     base:
       navbar:
+        dashboard: Dashboard
         questions: Questions
         categories: Categories
         exams: Exams

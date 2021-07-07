@@ -1,21 +1,24 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <%= link_to t('.questions'), admin_questions_path, class: 'nav-link' %>
-            </li>
-            <li class="nav-item">
-                <%= link_to t('.categories'), admin_categories_path, class: 'nav-link' %>
-            </li>
-            <li class="nav-item">
-                <%= link_to t('.exams'), admin_exams_path, class: 'nav-link' %>
-            </li>
-        </ul>
-        <%= current_administrator %>|
-        <%= link_to t('.sign_out'), destroy_administrator_session_path, method: :delete %>
-    </div>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <%= link_to t('.dashboard'), admin_authenticated_root_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item">
+        <%= link_to t('.questions'), admin_questions_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item">
+        <%= link_to t('.categories'), admin_categories_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item">
+        <%= link_to t('.exams'), admin_exams_path, class: 'nav-link' %>
+      </li>
+    </ul>
+    <%= current_administrator %>|
+    <%= link_to t('.sign_out'), destroy_administrator_session_path, method: :delete %>
+  </div>
 </nav>
