@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_28_164335) do
+ActiveRecord::Schema.define(version: 2021_07_12_082015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,10 +76,27 @@ ActiveRecord::Schema.define(version: 2018_11_28_164335) do
     t.index ["category_id"], name: "index_questions_on_category_id"
   end
 
+  create_table "quizzes", force: :cascade do |t|
+    t.string "title"
+    t.boolean "published"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "quizzes_categories", force: :cascade do |t|
+    t.bigint "quiz_id"
+    t.bigint "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_quizzes_categories_on_category_id"
+    t.index ["quiz_id"], name: "index_quizzes_categories_on_quiz_id"
+  end
+
   add_foreign_key "answered_questions", "answers"
   add_foreign_key "answered_questions", "exams"
   add_foreign_key "answered_questions", "questions"
   add_foreign_key "answers", "questions"
   add_foreign_key "exams", "examinees"
   add_foreign_key "questions", "categories"
+  add_foreign_key "quizzes_categories", "categories"
 end
