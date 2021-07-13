@@ -31,6 +31,8 @@ gem 'devise'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'database_cleaner'
+  gem 'factory_bot_rails'
 	gem 'rspec-rails', '~> 5.0.0'
 end
 
@@ -46,6 +48,7 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
+  gem 'faker'
   gem 'simplecov', '0.17.1', require: false # CC last supported v0.17
 end
 
