@@ -2,25 +2,22 @@ version: "2"
 
 services:
   accreditation:
-    tty: true
-    image: ghcr.io/internetee/accreditation_center:RC-a91f87f
-    # build: .
+    image: accreditation
+    build: .
     ports:
       - "9000:3000"
     volumes:
-      #- .:/opt/webapps/app
+      - .:/opt/webapps/app
       - ./shared/ca:/opt/ca
       - tmp:/opt/webapps/app/tmp/
     links:
       - database
     environment:
-      SECRET_KEY_BASE: "FAKEbeebeeeFAKEbee1f295f649dfe816627dbee94a9aFAKEf3d4adbeec42b8ff2c5beed951113d802ae47d840fc6bee59cc4a400dce9a2c334dadeadef11dcbee"
-      RAILS_ENV: staging
       DATABASE_HOST: database
       POSTGRES_USER: ​postgres
       POSTGRES_PASSWORD: some-long-secure-password
       POSTGRES_DB: db
-    command: bash -c "bundle exec rails server -b 0.0.0.0"
+    command: bash -c "rm -f tmp/pids/server.pid && bundle update --bundler && bundle exec rails server -b 0.0.0.0"
     restart: always
 
   database:
