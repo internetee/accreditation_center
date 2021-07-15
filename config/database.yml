@@ -87,3 +87,8 @@ production:
   database: accreditation_center_production
   username: accreditation_center
   password: <%= ENV['ACCREDITATION_CENTER_DATABASE_PASSWORD'] %>
+
+staging:
+  <<: *default
+  database: accreditation_center_staging
+  password: <%= ENV['ACCREDITATION_CENTER_DATABASE_PASSWORD'] %>
