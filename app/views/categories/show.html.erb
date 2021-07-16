@@ -1,0 +1,24 @@
+<h1>Questions</h1>
+
+<% if @questions.any? %>
+
+<%= form_with do |f| %>
+
+<ul>
+  <% @questions.each do |question| %>
+  <li><%= question.title %></li>
+  <hr>
+  <ul>
+    <% if @multiply %>
+    	<%= f.collection_check_boxes :answer_id, Answer.where(question_id: question.id), :id, :title_en %>
+    <% else %>
+    	<%= f.collection_radio_buttons :answer_id, Answer.where(question_id: question.id), :id, :title_en %>
+    <% end %>
+  </ul>
+  <% end %>
+</ul>
+
+<% end %>
+<% else %>
+<p>No any questions</p>
+<% end %>
