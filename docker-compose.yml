@@ -18,7 +18,7 @@ services:
       POSTGRES_PASSWORD: some-long-secure-password
       POSTGRES_DB: db
       ACCREDITATION_CENTER_DATABASE_PASSWORD: some-long-secure-password
-      SECRET_KEY_BASE: 5a1644fba6573a021373273be0ad901ec9b4a82d57efdc69831c0ad94644c42290147672a1b389e13f30251163f3d90b9245ccb2ae46f7f7fe8acb54b2ef76fe
+      SECRET_KEY_BASE: <%= ENV["SECRET_KEY_BASE"] %>
     command: bash -c "rm -f tmp/pids/server.pid && bundle update --bundler && bundle exec rails server -b 0.0.0.0"
     restart: always
 
