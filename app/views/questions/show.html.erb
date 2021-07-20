@@ -1,4 +1,21 @@
-<p id="notice"><%= notice %></p>
+<h1>Question</h1>
 
-<%= link_to 'Edit', edit_question_path(@question) %> |
-<%= link_to 'Back', questions_path %>
+<ul>
+	<li><%= @question.title %></li>
+
+	<%= form_with model: @answer_question do |f| %>
+		<%= f.hidden_field :question_id, value: @question.id %>
+		<%= f.hidden_field :quiz_id, value: params[:quiz_id] %>
+
+		<ul>
+			<%= f.collection_radio_buttons :answer_id, Answer.where(question_id: @question.id), :id, :title_en %>
+		</ul>
+
+		
+
+		<%= button_to "Next", answer_questions_path %>
+	<% end %>
+
+
+</ul>
+

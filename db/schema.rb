@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_16_071248) do
+ActiveRecord::Schema.define(version: 2021_07_20_125031) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "answer_questions", force: :cascade do |t|
+    t.bigint "quiz_id"
+    t.bigint "question_id"
+    t.bigint "answer_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_answer_id"
+    t.index ["answer_id"], name: "index_answer_questions_on_answer_id"
+    t.index ["question_id"], name: "index_answer_questions_on_question_id"
+    t.index ["quiz_id"], name: "index_answer_questions_on_quiz_id"
+    t.index ["user_answer_id"], name: "index_answer_questions_on_user_answer_id"
+  end
 
   create_table "answers", force: :cascade do |t|
     t.string "title_en"
@@ -39,7 +52,9 @@ ActiveRecord::Schema.define(version: 2021_07_16_071248) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "category_id"
+    t.bigint "user_answer_id"
     t.index ["category_id"], name: "index_questions_on_category_id"
+    t.index ["user_answer_id"], name: "index_questions_on_user_answer_id"
   end
 
   create_table "quizzes", force: :cascade do |t|
@@ -48,6 +63,11 @@ ActiveRecord::Schema.define(version: 2021_07_16_071248) do
     t.datetime "updated_at", precision: 6, null: false
     t.jsonb "json_category_state"
     t.index ["json_category_state"], name: "index_quizzes_on_json_category_state", using: :gin
+  end
+
+  create_table "user_answers", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -64,4 +84,7 @@ ActiveRecord::Schema.define(version: 2021_07_16_071248) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "answer_questions", "answers"
+  add_foreign_key "answer_questions", "questions"
+  add_foreign_key "answer_questions", "quizzes"
 end

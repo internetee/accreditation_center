@@ -1,4 +1,5 @@
 class QuizController < ApplicationController
+  before_action :set_user_answer
 
   def show
     @quiz = Quiz.find(params[:id])

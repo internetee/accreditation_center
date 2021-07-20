@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: %i[ show edit update destroy ]
+  before_action :set_user_answer
 
   # GET /questions or /questions.json
   def index
@@ -8,11 +9,17 @@ class QuestionsController < ApplicationController
 
   # GET /questions/1 or /questions/1.json
   def show
+    @question = Question.find(params[:id])
+    @answers = Answer.where(question_id: params[:id])
+    @answer_question = AnswerQuestion.new
+
+    @category = @question.category
   end
 
   # GET /questions/new
   def new
     @question = Question.new
+    @answer_question = AnswerQuestion.new
   end
 
   # GET /questions/1/edit
@@ -21,15 +28,14 @@ class QuestionsController < ApplicationController
 
   # POST /questions or /questions.json
   def create
-    @question = Question.new(question_params)
+    # @question = Question.new(question_params)
+    @answer_question = AnswerQuestion.new(quiz_id: params[:quiz_id], answer_id: params[:answer_id], question_id: params[:question_id])
 
     respond_to do |format|
-      if @question.save
-        format.html { redirect_to @question, notice: "Question was successfully created." }
-        format.json { render :show, status: :created, location: @question }
+      if @answer_question.save
+        format.html { redirect_to quiz_path(params[:quiz_id]), notice: "Question was successfully created." }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @question.errors, status: :unprocessable_entity }
+        redirect_to root_path
       end
     end
   end
