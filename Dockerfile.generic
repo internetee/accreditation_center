@@ -9,4 +9,7 @@ ENV SECRET_KEY_BASE "$SECRET_KEY_BASE"
 RUN mkdir -p /opt/webapps/app/tmp/pids
 WORKDIR /opt/webapps/app
 COPY . .
-RUN gem install bundler && bundle update --bundler && bundle config set without 'development test' && bundle install
+RUN gem install bundler && bundle update --bundler && bundle install
+RUN yarn install --check-files
+RUN bundle exec rails webpacker:install
+RUN bundle exec rails assets:precompile
