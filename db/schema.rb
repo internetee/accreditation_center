@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_20_125031) do
+ActiveRecord::Schema.define(version: 2021_07_21_091715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,7 +35,9 @@ ActiveRecord::Schema.define(version: 2021_07_20_125031) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "question_id"
+    t.bigint "user_answer_id"
     t.index ["question_id"], name: "index_answers_on_question_id"
+    t.index ["user_answer_id"], name: "index_answers_on_user_answer_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -52,9 +54,7 @@ ActiveRecord::Schema.define(version: 2021_07_20_125031) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "category_id"
-    t.bigint "user_answer_id"
     t.index ["category_id"], name: "index_questions_on_category_id"
-    t.index ["user_answer_id"], name: "index_questions_on_user_answer_id"
   end
 
   create_table "quizzes", force: :cascade do |t|
@@ -68,6 +68,8 @@ ActiveRecord::Schema.define(version: 2021_07_20_125031) do
   create_table "user_answers", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_user_answers_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

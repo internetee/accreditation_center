@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 	def set_user_answer
 		@user_answer = UserAnswer.find(session[:user_answer_id])
 	rescue ActiveRecord::RecordNotFound
-		@user_answer = UserAnswer.create
+		@user_answer = UserAnswer.create(user: current_user)
 		session[:user_answer_id] = @user_answer.id
 	end
 end
