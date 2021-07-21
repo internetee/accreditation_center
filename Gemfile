@@ -60,6 +60,7 @@ group :test do
   gem 'faker'
   gem 'simplecov', '0.17.1', require: false # CC last supported v0.17
   gem 'webdrivers'
+  gem 'rails-controller-testing'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

@@ -6,11 +6,8 @@ class CategoriesController < ApplicationController
 
     questions = Question.where(category_id: params[:id])
 
+    return false if questions.size < 1
+
     @start_id = questions.first.id
-  end
-
-  private
-
-  def random_question_id
   end
 end
