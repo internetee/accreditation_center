@@ -6,8 +6,8 @@
 	<ul>
 		<% @categories.each do |category| %>
 			<li>
-			<%= link_to category_path(category) do %>
-				<%= category.title %>
+				<%= link_to quiz_category_path(quiz_id: params[:id], id: category.id) do %>
+					<%= category.title %>
 				<% end %>
 			</li>
 		<% end %>

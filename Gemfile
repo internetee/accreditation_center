@@ -49,6 +49,7 @@ group :development do
   gem 'rack-mini-profiler', '~> 2.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'pry'
 end
 
 group :test do
@@ -59,6 +60,7 @@ group :test do
   gem 'faker'
   gem 'simplecov', '0.17.1', require: false # CC last supported v0.17
   gem 'webdrivers'
+  gem 'rails-controller-testing'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
