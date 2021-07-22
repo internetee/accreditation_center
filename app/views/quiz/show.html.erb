@@ -1,17 +1,32 @@
-<h1>
-	Choose your category
-</h1>
+	<div class="container">
 
-<% if @categories.any? %>
-	<ul>
-		<% @categories.each do |category| %>
-			<li>
-				<%= link_to quiz_category_path(quiz_id: params[:id], id: category.id) do %>
-					<%= category.title %>
+		<h2>Your categories:</h2>
+		<% if @categories.any? %>
+
+			<table class="table-custom">
+				<thead>
+					<th>ID</th>
+					<th>Title</th>
+					<th>Status</th>
+					<th>Type</th>
+					<th>Challenges</th>
+					<th>Actions</th>
+				</thead>
+				<tbody>
+				
+				<% @categories.each do |category| %>
+					<tr>
+						<td><%= category.id %></td>
+						<td><%= category.title %></td>
+						<td>Status</td>
+						<td>Type</td>
+						<td>Challenges</td>
+						<td><%= link_to "Start", quiz_category_path(category), class: 'actions' %></td>
+					</tr>
 				<% end %>
-			</li>
+				</tbody>
+			</table>
+		<% else %>
+			<p>No any categories</p>
 		<% end %>
-	</ul>
-<% else %>
-	<p>No Any Categories</p>
-<% end %>
+
