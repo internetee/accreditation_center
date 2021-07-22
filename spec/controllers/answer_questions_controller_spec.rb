@@ -4,7 +4,7 @@ require_relative "../support/devise"
 RSpec.describe AnswerQuestionsController, type: :controller do
   let(:quiz) { build(:quiz, id: 1) }
 	let(:question) { build(:question, id: 1) }
-  let(:answer) { create(:answer, id: 1) }
+  let(:answer) { create(:answer, id: 1, title_ee: "Title", title_en: "Title") }
 
 	login_user
 
