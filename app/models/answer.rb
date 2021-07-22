@@ -1,6 +1,6 @@
 class Answer < ApplicationRecord
 	belongs_to :question
-	# belongs_to :user_answer
+	belongs_to :user_answer, optional: true
 
 	has_many :answer_questions, dependent: :destroy
 
