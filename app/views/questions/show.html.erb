@@ -11,8 +11,6 @@
 			<%= f.collection_radio_buttons :answer_id, Answer.where(question_id: @question.id), :id, :title_en %>
 		</ul>
 
-		
-
 		<%= button_to "Next", answer_questions_path %>
 	<% end %>
 

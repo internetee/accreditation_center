@@ -6,5 +6,5 @@ class Question < ApplicationRecord
 
   validates :title, presence: true
 
-  enum question_type: { single_choice: 0, multiple_choice: 1, long_answer: 2 }
+  enum question_type: { "single choice": 0, "multiple choice": 1, "long answer": 2 }
 end
