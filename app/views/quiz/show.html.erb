@@ -21,7 +21,7 @@
 						<td>Status</td>
 						<td>Type</td>
 						<td>Challenges</td>
-						<td><%= link_to "Start", quiz_category_path(category), class: 'actions' %></td>
+						<td><%= link_to "Start", quiz_category_path(quiz_id: params[:id], id: category.id), class: 'actions' %></td>
 					</tr>
 				<% end %>
 				</tbody>

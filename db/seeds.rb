@@ -23,7 +23,8 @@ quiz = Quiz.create(title: Faker::Lorem.words(rand(1..4)).join(' '))
         3.times do
             Answer.create!(title_en: Faker::Lorem.words(rand(2..10)).join(' '),
                           title_ee: Faker::Lorem.words(rand(2..10)).join(' '),
-                          question_id: question.id )   
+                          question_id: question.id,
+                          correct: false )   
         end
         Answer.create!(title_en: Faker::Lorem.words(rand(2..10)).join(' '),
                           title_ee: Faker::Lorem.words(rand(2..10)).join(' '),

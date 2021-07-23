@@ -1,0 +1,17 @@
+<div class="questions-description">
+		<h2 class="box-title"><%= @total_answered_questions + 1 %>. <%= @question.title %></h2>
+			<%= form_with model: @answer_question do |f| %>
+				<%= f.hidden_field :question_id, value: @question.id %>
+				<%= f.hidden_field :quiz_id, value: params[:quiz_id] %>
+
+					<%= f.collection_check_boxes :answer_id, Answer.where(question_id: @question.id), :id, :title_en do |r| %>
+						<div class="checkbox-form-wrapper">
+							<%= r.check_box %>
+							<%= r.label %> <br>
+						</div>
+					<% end %>
+					<div class="question-action-button-wrapper">
+						<%= button_to "Next", answer_questions_path, class: 'actions' %>
+					</div>
+			<% end %>
+	</div>

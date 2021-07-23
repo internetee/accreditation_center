@@ -1,19 +1,29 @@
-<h1>Question</h1>
+<div class="flex-centrilize-two-boxes two-boxes">
 
-<ul>
-	<li><%= @question.title %></li>
+	<div class="questions-list">
+		<p class="count-of-questions">
+		<b><%= @total_answered_questions %>/<%= @total_category_questions %> </b> 
+		küsimusele vastatud
+		</p>
 
-	<%= form_with model: @answer_question do |f| %>
-		<%= f.hidden_field :question_id, value: @question.id %>
-		<%= f.hidden_field :quiz_id, value: params[:quiz_id] %>
+		<p>
+			<ul class="question-number-list">
+				<% @category.questions.each_with_index do |question, index| %>
+					<li class="<%= 'active-question' if index+1 == @total_answered_questions + 1 %>
+										<%= 'answered' if question.answered?(current_user) %>
+										<%= ' green' if question.answered_was_correct?(current_user) %>
+					">
+					<%= index+1 %>. Question</li>
+				<% end %>
+			</ul>
+		</p>
 
-		<ul>
-			<%= f.collection_radio_buttons :answer_id, Answer.where(question_id: @question.id), :id, :title_en %>
-		</ul>
+	</div>
 
-		<%= button_to "Next", answer_questions_path %>
+	<% if @question.question_type == 'multiple choice' %>
+		<%= render partial: 'checkbox_question' %>
+	<% else %>
+		<%= render partial: 'radiobutton_question' %>
 	<% end %>
-
-
-</ul>
+</div>
 

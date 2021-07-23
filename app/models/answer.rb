@@ -5,4 +5,8 @@ class Answer < ApplicationRecord
 	has_many :answer_questions, dependent: :destroy
 
   validates :title_en, :title_ee, presence: true
+
+	def correct_answer?
+		correct
+	end
 end

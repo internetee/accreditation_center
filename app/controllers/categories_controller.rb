@@ -17,13 +17,7 @@ class CategoriesController < ApplicationController
   private
 
   def questions_answered?(user_id)
-    user_questions = current_user.user_answers.last.question_ids
-
-    quest = Question.where(id: user_questions)
-    
-    res = quest.select { |q| q.category_id == @category.id }
-    
-    res.count
+    res = category_questions_answered(current_user, @category)
     
     res.count == @question_category_ids.count
   end

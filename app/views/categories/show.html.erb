@@ -4,8 +4,7 @@
 <% else %>
 	<div class="flex-centrilize">
 		<div class="category-description">
-			<h2>Sertifitseerimise test</h2>
-
+			<h2 class="box-title">Sertifitseerimise test</h2>
 			<ul>
 				<li>Testi läbimiseks on sul 45 minutit</li>
 				<li>Küsimusi on 5</li>
@@ -21,6 +20,6 @@
 				<%= link_to "Get started", quiz_question_path(quiz_id: params[:quiz_id], id: @start_id), class: 'actions' %>
 				<%= link_to "Cancel", root_path, class: 'actions-red' %>
 			</div>
-<% end %>
 		</div>
 	</div>
+<% end %>

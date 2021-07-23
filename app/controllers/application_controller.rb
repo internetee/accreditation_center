@@ -12,4 +12,13 @@ class ApplicationController < ActionController::Base
 		@user_answer = UserAnswer.create(user: current_user)
 		session[:user_answer_id] = @user_answer.id
 	end
+
+	def category_questions_answered(current_user, category)
+		return [] if current_user.user_answers.last.nil?
+
+		user_questions = current_user.user_answers.last.question_ids
+    quest = Question.where(id: user_questions)
+
+    quest.select { |q| q.category_id == category.id }
+	end
 end

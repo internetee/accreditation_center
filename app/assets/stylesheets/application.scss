@@ -213,7 +213,7 @@ $red: #b63e35;
 	color: $baner-color;
 }
 
-.regular-checkbox {
+.checkbox-form-wrapper input{
 	-webkit-appearance: none;
 	background-color: #fafafa;
 	border: 1px solid $baner-color;
@@ -224,18 +224,18 @@ $red: #b63e35;
 	position: relative;
 }
 
-.regular-checkbox:active, .regular-checkbox:checked:active {
+.checkbox-form-wrapper input:active, .checkbox-form-wrapper input:checked:active {
 	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
 }
 
-.regular-checkbox:checked {
+.checkbox-form-wrapper input:checked {
 	background-color: $baner-color;
 	border: 1px solid #adb8c0;
 	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
 	color: wheat;
 }
 
-.regular-checkbox:checked:after {
+.checkbox-form-wrapper input:checked:after {
 	content: '\2714';
 	font-size: 14px;
 	position: absolute;
@@ -246,19 +246,28 @@ $red: #b63e35;
 
 
 
-// Radio button ========= 
+// Radio button =========
+
 .regular-radio {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin-bottom: .5em;
+}
+
+.regular-radio input {
 	-webkit-appearance: none;
 	background-color: #fafafa;
-	border: 1px solid #cacece;
+	border: 1px solid $baner-color;
 	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
 	padding: 9px;
 	border-radius: 50px;
 	display: inline-block;
 	position: relative;
+	margin-right: 1em;
 }
 
-.regular-radio:checked:after {
+.regular-radio input:checked:after {
 	content: ' ';
 	width: 12px;
 	height: 12px;
@@ -272,22 +281,22 @@ $red: #b63e35;
 	font-size: 32px;
 }
 
-.regular-radio:checked {
+.regular-radio input:checked {
 	background-color: #e9ecee;
 	color: #99a1a7;
 	border: 1px solid #adb8c0;
 	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1), inset 0px 0px 10px rgba(0,0,0,0.1);
 }
 
-.regular-radio:active, .regular-radio:checked:active {
+.regular-radio input:active, .regular-radio input:checked:active {
 	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
 }
 
-.big-radio {
+.big-radio input {
 	padding: 16px;
 }
 
-.big-radio:checked:after {
+.big-radio input:checked:after {
 	width: 24px;
 	height: 24px;
 	left: 4px;
@@ -297,19 +306,45 @@ $red: #b63e35;
 // ==========================================LAYOUTS ===================================
 // ==== BOXES
 
+.two-boxes {
+	display: flex;
+	flex-direction: row;
+}
+
+.flex-centrilize-two-boxes {
+	margin-left: -600px;
+}
+
 .flex-centrilize {
+	margin-left: -300px;
+}
+
+.flex-centrilize-two-boxes, .flex-centrilize  {
 	position: absolute;
 	left: 50%;
-	top: 30%;
-	margin-left: -300px;
+	top: 36%;
+}
+
+
+.questions-list {
+	padding: .2em 1em 1em 1em;
+	width: 300px;
+	margin-right: 2em;
+}
+
+.questions-description {
+	width: 800px;
 }
 
 .category-description {
 	width: 600px;
+}
+
+.questions-description, .category-description {
 	background-color: white;
 	padding: 2em;
 	box-shadow: 0 0 25px 1px rgb(122, 120, 120);
-
+	font-size: 18px;
 }
 
 .category-description ul li {
@@ -322,3 +357,44 @@ $red: #b63e35;
 	justify-content: space-around;
 }
 
+.radio-button-layout {
+	margin-top: 1em;
+}
+
+// ==== BOXES TEXT
+.box-title {
+	margin-top: 0;
+}
+
+.count-of-questions {
+	color: white;
+	font-size: 20px;
+}
+
+.question-number-list {
+	font-size: 20px;
+}
+
+.question-number-list li {
+	padding-top: .5em;
+	list-style-type: circle;
+}
+
+.answered {
+	list-style-type: disc;
+	color: red;
+}
+
+.green {
+	color: green !important;
+}
+
+.question-number-list .active-question {
+	font-weight: bold;
+}
+
+.question-action-button-wrapper {
+	margin-top: 2em;
+	display: flex;
+	justify-content: flex-end;
+}
