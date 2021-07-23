@@ -27,4 +27,26 @@ class Question < ApplicationRecord
 
     answer.correct_answer?
   end
+
+  def multiple_answers_were_correct?(current_user)
+    return false if current_user.user_answers.last.nil?
+
+    user_answers = current_user.user_answers.last
+    answer_questions = user_answers.answer_questions.where(question_id: id)
+    return false if answer_questions.nil?
+
+    answers_for_this_question = Answer.where(question_id: id)
+    correct_answers = answers_for_this_question.select { |answer| answer.correct_answer?} 
+
+    count = 0
+    answer_questions.each do |item|
+      answer = Answer.find(item.answer_id)
+      return false unless answer.correct_answer?
+      count += 1
+    end
+    
+
+    
+    correct_answers.count == count
+  end
 end
