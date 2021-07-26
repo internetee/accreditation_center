@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_22_081502) do
+ActiveRecord::Schema.define(version: 2021_07_26_063208) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,7 +62,9 @@ ActiveRecord::Schema.define(version: 2021_07_22_081502) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.jsonb "json_category_state"
+    t.bigint "user_id"
     t.index ["json_category_state"], name: "index_quizzes_on_json_category_state", using: :gin
+    t.index ["user_id"], name: "index_quizzes_on_user_id"
   end
 
   create_table "user_answers", force: :cascade do |t|

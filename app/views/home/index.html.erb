@@ -14,7 +14,7 @@
 				</thead>
 				<tbody>
 				
-				<% @quizzes.each do |quiz| %>
+				<% current_user.quizzes.each do |quiz| %>
 					<tr>
 						<td><%= quiz.id %></td>
 						<td><%= quiz.title %></td>

@@ -2,8 +2,7 @@ class Quiz < ApplicationRecord
 	has_many :categories
 	has_many :answer_questions, dependent: :destroy
 
-  validates :title, presence: true
+	belongs_to :user
 
-	# TODO
-	# Создать ассоциации с юзером
+  validates :title, presence: true
 end
