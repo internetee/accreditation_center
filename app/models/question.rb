@@ -12,7 +12,10 @@ class Question < ApplicationRecord
     return false if current_user.user_answers.last.nil?
 
     user_answers = current_user.user_answers.last
-    user_answers.answer_questions.find_by(question_id: id)
+
+    return true if user_answers.answer_questions.find_by(question_id: id)
+  
+    false
   end
 
   def answered_was_correct?(current_user)

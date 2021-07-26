@@ -1,4 +1,4 @@
 module Actions
-  class BaseAction < ActiveInteraction::Base
+  class BaseAction
   end
 end
