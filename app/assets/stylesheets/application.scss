@@ -1,0 +1,400 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+$violet: rgb(161, 161, 228);
+$blue: rgb(135, 135, 243);
+$baner-color: #903F00;
+$red: #b63e35;
+
+ *, *:before, *:after {
+  box-sizing: border-box;
+}
+
+.body {
+	font-family: 'Lato', sans-serif;
+}
+ 
+ .banner {
+		width: 95%;
+		height: 400px;
+		background: url("hero-orange.jpg") no-repeat;
+		background-position: center;
+		background-size: cover;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin: 0 auto;
+ }
+
+// NAVBAR ======
+
+ .navbar-custom {
+    position: absolute;
+    display: flex;
+    justify-content:flex-end;
+    width: 100%;
+    top: 2em;
+		right: 5em;
+
+ }
+
+ .nav-link {
+	 margin: 0 1em;
+	 color: wheat;
+	 text-decoration: none;
+	 font-size: 18px;
+	 text-transform: uppercase;
+	 font-weight: bold;
+ }
+
+  .nav-link:hover {
+		color: white;
+	}
+
+	.nav-span {
+		font-size: 16px;
+		color: wheat;
+	}
+
+//  HEADER ====
+
+ .h1-header {
+	 color: wheat;
+	 font-weight: bold;
+ }
+
+//  TABLE ===========
+
+.container {
+	width: 90%;
+	margin: 0 auto;
+}
+
+.table-custom {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.table-custom td {
+	border-bottom: 1px dotted $baner-color;
+	padding: 1em;
+	text-align: center;
+	padding-top: 3em;
+}
+
+.table-custom th {
+	border-bottom: 1px solid $baner-color;
+	text-align: center;
+	padding: 1em;
+}
+
+.actions {
+		padding: .5em 2em;
+		width: 200px;
+		border: 1px solid $baner-color;
+		color: $baner-color;
+		background-color: white;
+		cursor: pointer;
+		font-size: 20px;
+		text-decoration: none;
+		}
+
+		.actions:hover {
+		background-color: $baner-color;
+		border: 1px solid $baner-color;
+		color: wheat;
+		}
+
+.actions-red {
+		padding: .5em 2em;
+		width: 200px;
+		border: 1px solid $red;
+		color: $red;
+		background-color: white;
+		cursor: pointer;
+		font-size: 20px;
+		text-decoration: none;
+		}
+
+		.actions-red:hover {
+		background-color: $red;
+		border: 1px solid $red;
+		color: wheat;
+		}	
+
+//  FORM =========
+
+.login-wrapper {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	font-size: 20px;
+}
+
+.login-wrapper form {
+	padding: 4em 8em;
+	// border: 1px solid black;
+	margin: 2em;
+	box-shadow: 0 0 25px 4px #ccc;
+
+	.field {
+		margin-bottom: 2em;
+
+		input {
+			padding: 1em 1em .3em .4em;
+			border: none;
+			border-bottom: 1px solid $baner-color;
+			font-size: 20px;
+			color: $baner-color;
+
+		}
+
+		input:focus {
+			outline:none !important;
+			border-bottom: 3px solid $baner-color;
+		}
+
+		input::placeholder {
+			color: $baner-color;
+			font-size: 20px;
+		}
+	}
+
+}
+
+// FORM BUTTON 
+
+.login-wrapper .actions {
+	width: 100%;
+	text-align: center;
+	
+
+	input {
+		padding: .5em;
+		width: 300px;
+		border: 1px solid $baner-color;
+		color: $baner-color;
+		background-color: white;
+		cursor: pointer;
+		font-size: 20px;
+	}
+
+	input:hover {
+		background-color: $baner-color;
+		border: 1px solid $baner-color;
+		color: wheat;
+	}
+}
+
+//  CHECKBOXES ==========
+
+.checkbox-form-wrapper {
+	display: flex;
+	align-items: center;
+	margin-bottom: 1em;
+}
+
+.checkbox-form-wrapper label {
+	margin-left: 1em;
+	color: $baner-color;
+}
+
+.checkbox-form-wrapper input{
+	-webkit-appearance: none;
+	background-color: #fafafa;
+	border: 1px solid $baner-color;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+	padding: 12px;
+	border-radius: 5px;
+	display: inline-block;
+	position: relative;
+}
+
+.checkbox-form-wrapper input:active, .checkbox-form-wrapper input:checked:active {
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+
+.checkbox-form-wrapper input:checked {
+	background-color: $baner-color;
+	border: 1px solid #adb8c0;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+	color: wheat;
+}
+
+.checkbox-form-wrapper input:checked:after {
+	content: '\2714';
+	font-size: 14px;
+	position: absolute;
+	top: 3px;
+	left: 6px;
+	color: wheat;
+}
+
+
+
+// Radio button =========
+
+.regular-radio {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin-bottom: .5em;
+}
+
+.regular-radio input {
+	-webkit-appearance: none;
+	background-color: #fafafa;
+	border: 1px solid $baner-color;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+	padding: 9px;
+	border-radius: 50px;
+	display: inline-block;
+	position: relative;
+	margin-right: 1em;
+}
+
+.regular-radio input:checked:after {
+	content: ' ';
+	width: 12px;
+	height: 12px;
+	border-radius: 50px;
+	position: absolute;
+	top: 3px;
+	background: #99a1a7;
+	box-shadow: inset 0px 0px 10px rgba(0,0,0,0.3);
+	text-shadow: 0px;
+	left: 3px;
+	font-size: 32px;
+}
+
+.regular-radio input:checked {
+	background-color: #e9ecee;
+	color: #99a1a7;
+	border: 1px solid #adb8c0;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1), inset 0px 0px 10px rgba(0,0,0,0.1);
+}
+
+.regular-radio input:active, .regular-radio input:checked:active {
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+
+.big-radio input {
+	padding: 16px;
+}
+
+.big-radio input:checked:after {
+	width: 24px;
+	height: 24px;
+	left: 4px;
+	top: 4px;
+}
+
+// ==========================================LAYOUTS ===================================
+// ==== BOXES
+
+.two-boxes {
+	display: flex;
+	flex-direction: row;
+}
+
+.flex-centrilize-two-boxes {
+	margin-left: -600px;
+}
+
+.flex-centrilize {
+	margin-left: -300px;
+}
+
+.flex-centrilize-two-boxes, .flex-centrilize  {
+	position: absolute;
+	left: 50%;
+	top: 36%;
+}
+
+
+.questions-list {
+	padding: .2em 1em 1em 1em;
+	width: 300px;
+	margin-right: 2em;
+}
+
+.questions-description {
+	width: 800px;
+}
+
+.category-description {
+	width: 600px;
+}
+
+.questions-description, .category-description {
+	background-color: white;
+	padding: 2em;
+	box-shadow: 0 0 25px 1px rgb(122, 120, 120);
+	font-size: 18px;
+}
+
+.category-description ul li {
+	padding-top: .5em;
+}
+
+.box-button-wrapper {
+	margin-top: 2em;
+	display: flex;
+	justify-content: space-around;
+}
+
+.radio-button-layout {
+	margin-top: 1em;
+}
+
+// ==== BOXES TEXT
+.box-title {
+	margin-top: 0;
+}
+
+.count-of-questions {
+	color: white;
+	font-size: 20px;
+}
+
+.question-number-list {
+	font-size: 20px;
+}
+
+.question-number-list li {
+	padding-top: .5em;
+	list-style-type: circle;
+}
+
+.answered {
+	list-style-type: disc;
+	color: red;
+}
+
+.green {
+	color: green !important;
+}
+
+.question-number-list .active-question {
+	font-weight: bold;
+}
+
+.question-action-button-wrapper {
+	margin-top: 2em;
+	display: flex;
+	justify-content: flex-end;
+}

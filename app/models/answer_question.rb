@@ -1,7 +1,6 @@
 class AnswerQuestion < ApplicationRecord
-	belongs_to :quiz
-  belongs_to :question
-  belongs_to :answer
-
-  # has_many :answer_questions, dependent: :destroy
+	belongs_to :quiz, optional: true
+  belongs_to :question, optional: true
+  belongs_to :answer, optional: true
+  belongs_to :user_answer, optional: true
 end

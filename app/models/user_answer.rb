@@ -1,7 +1,7 @@
 class UserAnswer < ApplicationRecord
 	has_many :answer_questions, dependent: :destroy
 	has_many :questions, through: :answer_questions
-	has_many :answers, through: :answer_question
+	# has_many :answers, through: :answer_question
 
 	belongs_to :user
 
