@@ -8,19 +8,22 @@ Answer.destroy_all
 
 
 admin = User.create! do |u|
-        u.email     = 'super@admin.ee'
+        u.email = 'super@admin.ee'
+        u.username     = 'superadmin'
         u.password  = 'password'
         u.superadmin_role = true
     end
 
 user_one = User.create! do |u|
-        u.email     = 'user@one.ee'
+        u.email = 'user@one.ee'
+        u.username     = 'user_one'
         u.password  = 'password'
         u.superadmin_role = false
     end
 
 user_two = User.create! do |u|
-        u.email     = 'user@two.ee'
+        u.email = 'user@two.ee'
+        u.username     = 'user_two'
         u.password  = 'password'
         u.superadmin_role = false
     end
