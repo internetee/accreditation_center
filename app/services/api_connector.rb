@@ -3,7 +3,7 @@ require 'faraday'
 class ApiConnector
   attr_reader :auth_token
 
-	POLL_MESSAGE_ENDPOINT = "http://registry:3000/repp/v1/registrar/login"
+	POLL_MESSAGE_ENDPOINT = "http://registry:3000/repp/v1/registrar/accreditation_info"
 
   def initialize(username:, password:)
     @auth_token = generate_token(username: username, password: password)
