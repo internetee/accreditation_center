@@ -4,6 +4,10 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
   
+  # scope :api, defaults: { format: json } do
+  #   devise_for :users
+  # end
+
   resources :answer_questions, only: [ :create ]
   
   resources :quiz, only: [ :show ] do
