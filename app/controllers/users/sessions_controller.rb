@@ -46,10 +46,12 @@ class Users::SessionsController < Devise::SessionsController
           superadmin_role: false)
         
         sign_in new_user
+        Rails.logger.info "#{user.username} sign in"
       end
    
     else
       Rails.logger.info "Fails to sign in"
+      # p "Fails to sign in"
     end
   end
 end
