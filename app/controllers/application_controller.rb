@@ -17,6 +17,12 @@ class ApplicationController < ActionController::Base
 
 	private
 
+	def set_quiz
+		if session[:quiz_id] == nil
+      session[:quiz_id] = current_user.quizzes.first.id
+    end
+	end
+
 	def set_user_answer
 		@user_answer = UserAnswer.find(session[:user_answer_id])
 	rescue ActiveRecord::RecordNotFound

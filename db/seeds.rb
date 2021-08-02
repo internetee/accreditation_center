@@ -39,11 +39,13 @@ quiz_one = Quiz.create(title: Faker::Lorem.words(rand(1..4)).join(' '), user: us
             Answer.create!(title_en: Faker::Lorem.words(rand(2..10)).join(' '),
                           title_ee: Faker::Lorem.words(rand(2..10)).join(' '),
                           question_id: question.id,
+                          category_id: category.id,
                           correct: false )
         end
         Answer.create!(title_en: Faker::Lorem.words(rand(2..10)).join(' '),
                           title_ee: Faker::Lorem.words(rand(2..10)).join(' '),
                           question_id: question.id,
+                          category_id: category.id,
                           correct: true )
     end
 end
@@ -58,11 +60,13 @@ quiz_two = Quiz.create(title: Faker::Lorem.words(rand(1..4)).join(' '), user: us
         3.times do
             Answer.create!(title_en: Faker::Lorem.words(rand(2..10)).join(' '),
                           title_ee: Faker::Lorem.words(rand(2..10)).join(' '),
+                          category_id: category.id,
                           question_id: question.id,
                           correct: false )
         end
         Answer.create!(title_en: Faker::Lorem.words(rand(2..10)).join(' '),
                           title_ee: Faker::Lorem.words(rand(2..10)).join(' '),
+                          category_id: category.id,
                           question_id: question.id,
                           correct: true )
     end
@@ -78,11 +82,13 @@ quiz_three = Quiz.create(title: Faker::Lorem.words(rand(1..4)).join(' '), user: 
         3.times do
             Answer.create!(title_en: Faker::Lorem.words(rand(2..10)).join(' '),
                           title_ee: Faker::Lorem.words(rand(2..10)).join(' '),
+                          category_id: category.id,
                           question_id: question.id,
                           correct: false )
         end
         Answer.create!(title_en: Faker::Lorem.words(rand(2..10)).join(' '),
                           title_ee: Faker::Lorem.words(rand(2..10)).join(' '),
+                          category_id: category.id,
                           question_id: question.id,
                           correct: true )
     end

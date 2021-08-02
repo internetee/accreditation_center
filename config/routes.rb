@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'results/index'
   root 'home#index'
   devise_for :users, controllers: {
     sessions: 'users/sessions'
@@ -13,6 +14,10 @@ Rails.application.routes.draw do
   resources :quiz, only: [ :show ] do
     resources :categories, only: [ :show ]
     resources :questions, only: [ :show ]
+  end
+
+  resources :categories, only: [ :show ] do
+    resources :results, only: [ :show ]
   end
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

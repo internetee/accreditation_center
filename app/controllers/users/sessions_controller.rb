@@ -27,7 +27,7 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def login_request
-    user_request = ApiConnector.new(username: params[:user][:username], password: params[:user][:password])
+    user_request = SignIn.new(username: params[:user][:username], password: params[:user][:password])
     result = user_request.sign_in
 
     checking_username(result)
@@ -41,12 +41,18 @@ class Users::SessionsController < Devise::SessionsController
       if user.present?
         sign_in user
       else
+        # Here you need to implement a random selection of quizzes
+        quiz = Quiz.first
+
         new_user = User.create!(
           username: username,
-          superadmin_role: false)
-        
+          superadmin_role: false,
+        )
+
+        new_user.quizzes << quiz
+
         sign_in new_user
-        Rails.logger.info "#{user.username} sign in"
+        Rails.logger.info "#{new_user.username} sign in"
       end
    
     else
