@@ -32,11 +32,8 @@ RSpec.describe AnswerQuestionsController, type: :controller do
 			answer_question.save
 
 			a = user_answer.answer_questions.last
-			p a.answer.correct?
 
 			result = GenerateResult.process(user_answer: user_answer, category_id: question.category_id)
-
-			p result
 		end
 
 		it 'generate answer' do
