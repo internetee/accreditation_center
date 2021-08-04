@@ -15,7 +15,8 @@ class ResultsController < ApplicationController
     answers_ids = @user_answer.answer_questions.pluck(:answer_id)
     answers = Answer.where(id: answers_ids, category_id: params[:category_id]).includes(:question)
 
-    @resulting = send_results # Test request
+    # @resulting = send_results # Test request
+    @resulting = nil
     answers
   end
 
