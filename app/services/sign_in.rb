@@ -6,8 +6,6 @@ class SignIn < ApiConnector
 	end
 
 	def sign_in(params: nil)
-    request = faraday_request(url: POLL_MESSAGE_ENDPOINT, params: params)
-    response = request.send(:get)
-    JSON.parse(response.body)
+		request(url: POLL_MESSAGE_ENDPOINT, method: 'get')
   end
 end

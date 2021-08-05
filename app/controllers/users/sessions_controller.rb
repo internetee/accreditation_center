@@ -2,7 +2,6 @@
 
 class Users::SessionsController < Devise::SessionsController
   before_action :configure_sign_in_params, only: [:create]
-  before_action :login_request, only: [:create]
 
   # GET /resource/sign_in
   def new
@@ -11,6 +10,8 @@ class Users::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   def create
+    login_request
+
     super
   end
 
@@ -57,7 +58,6 @@ class Users::SessionsController < Devise::SessionsController
    
     else
       Rails.logger.info "Fails to sign in"
-      # p "Fails to sign in"
     end
   end
 end

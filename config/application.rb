@@ -12,6 +12,7 @@ module AccreditationCenterV2
     config.load_defaults 6.1
     config.autoloader = :classic
     config.autoload_paths += Dir[Rails.root.join('app', 'controllers', 'interactions', '**/')]
+    config.autoload_paths += %W(#{config.root}/lib)
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

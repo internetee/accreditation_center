@@ -9,6 +9,12 @@ class ApiConnector
 
   private
 
+  def request(url:, method:, params: nil)
+    request = faraday_request(url: url, params: params)
+    response = request.send(method)
+    JSON.parse(response.body)
+  end
+
   def generate_token(username:, password:)
     Base64.urlsafe_encode64("#{username}:#{password}")
   end
