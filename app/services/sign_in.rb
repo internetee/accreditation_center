@@ -5,7 +5,11 @@ class SignIn < ApiConnector
 		super
 	end
 
+	def headers
+		 { 'Authorization' => "Basic #{@auth_token}" }
+	end
+
 	def sign_in(params: nil)
-		request(url: POLL_MESSAGE_ENDPOINT, method: 'get')
+		request(url: POLL_MESSAGE_ENDPOINT, headers: headers, method: 'get')
   end
 end

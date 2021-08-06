@@ -12,6 +12,14 @@ class User < ApplicationRecord
 
   attr_writer :login
 
+  def user_categories(quiz_id)
+    quizzes.find(quiz_id).categories
+  end
+
+  # def user_results
+  #   resutls.count
+  # end
+
   def email_required?
     false
   end
