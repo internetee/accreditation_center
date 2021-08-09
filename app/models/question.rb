@@ -29,6 +29,7 @@ class Question < ApplicationRecord
     answer_question = user_answers.answer_questions.find_by(question_id: id)
 
     return false if answer_question.nil?
+    return false if answer_question.answer_id.nil?
     
     answer = Answer.find(answer_question.answer_id)
 

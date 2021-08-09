@@ -5,4 +5,8 @@ class Category < ApplicationRecord
 	belongs_to :quiz
 
   validates :title, presence: true
+
+	def has_results?
+		results.present?
+	end
 end

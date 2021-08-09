@@ -30,6 +30,16 @@ class ApplicationController < ActionController::Base
 		session[:user_answer_id] = @user_answer.id
 	end
 
+	# def set_user_answer
+	# 	unless UserAnswer.find_by(user: current_user)
+	# 		@user_answer = UserAnswer.create(user: current_user)
+	# 		session[:user_answer_id] = @user_answer.id
+	# 	else
+	# 		@user_answer = current_user.user_answers.last
+	# 		session[:user_answer_id] = @user_answer.id
+	# 	end
+	# end
+
 	def category_questions_answered(current_user, category)
 		return [] if current_user.user_answers.last.nil?
 

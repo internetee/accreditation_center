@@ -9,8 +9,8 @@ class ResultsController < ApplicationController
 
   def show
     @output = generate_result_output
-    @resulting = generate_user_categories_count
-    @resulting_count = generate_user_results_count
+    # @resulting = generate_user_categories_count
+    # @resulting_count = generate_user_results_count
     
     # SendResult.process(user: current_user) # Test request
   end
@@ -32,14 +32,24 @@ class ResultsController < ApplicationController
 	# 	}
 	# ]
 
-  def generate_user_categories_count
-    r = current_user.user_categories(quiz_id)
-    r.count
-  end
+  # def generate_user_categories(quiz_id)
+  #   current_user.user_categories(quiz_id)
+  # end
 
-  def generate_user_results_count
-    current_user.results.count
-  end
+  # def compare_categories_and_results(quiz_id)
+  #   current_user.user_categories(quiz_id).count == generate_user_results_count(quiz_id)
+  # end
+
+  # def generate_user_results_count(quiz_id)
+  #   categories = genegenerate_user_categories(quiz_id)
+  #   count = 0
+
+  #   categories.each do |cat|
+  #     count += cat.results.count
+  #   end
+
+  #   count
+  # end
 
   def quiz_id
     c = Category.find(params[:category_id])

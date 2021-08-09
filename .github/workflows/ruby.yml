@@ -65,6 +65,7 @@ jobs:
         run: |
           cp config/database_ci.yml config/database.yml
           bundle exec rake db:create
+          bundle exec rake db:migrate
           bundle exec rake db:schema:load
           bundle exec rake db:seed
           bundle exec rspec spec
