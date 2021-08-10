@@ -2,14 +2,16 @@ FROM internetee/ruby:3.0-buster
 LABEL org.opencontainers.image.source=https://github.com/internetee/accreditation_center
 ARG RAILS_ENV
 ARG SECRET_KEY_BASE
+ARG YARN_VER=1.22.10
 
 ENV RAILS_ENV "$RAILS_ENV"
 ENV SECRET_KEY_BASE "$SECRET_KEY_BASE"
 
 RUN mkdir -p /opt/webapps/app/tmp/pids
 WORKDIR /opt/webapps/app
+RUN npm install -g yarn@${YARN_VER}
 COPY . .
-RUN gem install bundler && bundle update --bundler && bundle install
+RUN gem install bundler && bundle update --bundler && bundle config set without 'development test' && bundle install
+COPY package.json yarn.lock ./
 RUN yarn install --check-files
-RUN bundle exec rails webpacker:install
 RUN bundle exec rails assets:precompile
