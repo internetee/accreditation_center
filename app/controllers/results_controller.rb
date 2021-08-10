@@ -3,8 +3,6 @@ class ResultsController < ApplicationController
   before_action :set_result
   before_action :restriction_for_other_candidates
 
-  TEMPARY_SECRET_KEY = 'tempary-secret-key'
-
   def index; end
 
   def show
