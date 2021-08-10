@@ -30,6 +30,7 @@ jobs:
         run: |
           SHORT_SHA=$(echo $GITHUB_SHA | cut -c 1-7) #pr-s test commit of merged state
           echo "TAG=ghcr.io/internetee/accreditation_center:RC-$SHORT_SHA" >> $GITHUB_ENV
+          echo "STATIC_TAG=ghcr.io/internetee/accreditation_center:STATIC_RC-$SHORT_SHA" >> $GITHUB_ENV
           echo "SHORT_TAG=RC-$SHORT_SHA" >> $GITHUB_ENV
 
       - name: Set config files for build
@@ -43,12 +44,19 @@ jobs:
         run: |
           docker build -t $TAG --build-arg RAILS_ENV=staging --build-arg SECRET_KEY_BASE="$KEY_BASE" -f Dockerfile.generic .
 
+      - name: Build static content image
+        run: |
+          docker create -ti --name rails $TAG bash
+          docker cp rails:/opt/webapps/app/public/ ./public/
+          docker build -t $STATIC_TAG -f Dockerfile.generic-static .
+
       - name: Push Docker images to gh container registry
         env:
           PASSWORD: ${{ secrets.GHCR }}
         run: |
           echo $PASSWORD | docker login ghcr.io -u eisbot --password-stdin
           docker push $TAG
+          docker push $STATIC_TAG
 
       - name: Get pull request reference number
         run: |
