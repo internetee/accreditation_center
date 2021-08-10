@@ -1,5 +1,7 @@
-RailsAdmin.config do |config|
+Rails.application.eager_load!
 
+RailsAdmin.config do |config|
+  config.main_app_name = Proc.new { |controller| [ "EIS", "Accreditation Admin Panel - #{controller.params[:action].try(:titleize)}" ] }
   ### Popular gems integration
 
   ## == Devise ==
@@ -23,7 +25,54 @@ RailsAdmin.config do |config|
   ## To disable Gravatar integration in Navigation Bar set to false
   # config.show_gravatar = true
 
+  # MODELS
+
+  Answer.class_eval do
+    def custom_label_method
+      "Answer: #{self.title_en}"
+    end
+  end
+
+  Question.class_eval do
+    def custom_label_method
+      "Question: #{self.title}"
+    end
+  end
+
+  # =========================
+
+  config.model 'UserAnswer' do
+    visible false
+  end
+
+  config.model 'Question' do
+    object_label_method do
+      :custom_label_method
+    end
+
+    edit do
+      field :title
+      field :category
+      field :question_type
+      field :answers
+    end
+  end
+
   config.model 'Answer' do
+    parent Question
+
+    object_label_method do
+      :custom_label_method
+    end
+
+    
+    edit do
+      field :title_en
+      field :title_ee
+      field :correct
+      field :question
+    end
+
     list do
       field :title_en
       field :title_ee
