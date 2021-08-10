@@ -1,6 +1,6 @@
-<% if @questions_answered %>
+<% unless @start_id %>
 	<p>Questions was answered</p>
-	<%= link_to "To Dashboard", root_path %>
+	<%= controller.redirect_to category_result_path(category_id: params[:id], id: @result) %>
 <% else %>
 	<div class="flex-centrilize">
 		<div class="category-description">
@@ -18,7 +18,7 @@
 	
 			<div class="box-button-wrapper">
 				<%= link_to "Get started", quiz_question_path(quiz_id: params[:quiz_id], id: @start_id), class: 'actions' %>
-				<%= link_to "Cancel", root_path, class: 'actions-red' %>
+				<%= link_to "Cancel", quiz_path(session[:quiz_id]), class: 'actions-red' %>
 			</div>
 		</div>
 	</div>

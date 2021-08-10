@@ -19,18 +19,13 @@
   <%= render 'shared/navbar' %>
   <div class="banner">
 	  <h1 class="h1-header">QUUUUIZZZ</h1>
+    <% if user_signed_in? %>
+        <h1 class="h1-header"><%= current_user.username %></h1>
+    <% end %>
   </div>
 
   <%= yield %>
-
-    <% unless flash.empty? %>
-  <script type="text/javascript">
-    <% flash.each do |f | %>
-        <% type = f[0].to_s.gsub('alert', 'error').gsub('notice', 'info') %>
-        toastr['<%= type %>']('<%= f[1] %>'); 
-        <% end %>
-  </script>
-  <% end %>
+  <%= toastr_flash %>
 </body>
 
 </html>

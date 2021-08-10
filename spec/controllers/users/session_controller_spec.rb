@@ -1,20 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe Users::RegistrationsController, type: :controller do
+RSpec.describe Users::SessionsController, type: :controller do
 
-  describe "POST #create" do
-    let(:valid_attributes) { FactoryBot.attributes_for(:user) }
-		let(:user) { create(:user, id: 1) }
-
-    let(:valid_session) { {} }
-
-    # Help Devise map routes from the test back to the original controller.
-    # See http://stackoverflow.com/questions/6659555/how-to-write-controller-tests-when-you-override-devise-registration-controller
-    before :each do
-      request.env['devise.mapping'] = Devise.mappings[:user]
-    end
-
-		login_user
+  context "shpuld be sign in with exist user" do
+		before do
+			@request.env["devise.mapping"] = Devise.mappings[:user]
+			sign_in FactoryBot.create(:user)
+		end
 
 		it 'login with existing user should be successful' do
 			expect(response).to have_http_status(:ok)

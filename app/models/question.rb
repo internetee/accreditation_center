@@ -8,6 +8,10 @@ class Question < ApplicationRecord
 
   enum question_type: { "single choice": 0, "multiple choice": 1, "long answer": 2 }
 
+  def correct_answers
+    answers.where(correct: true)
+  end
+
   def answered?(current_user)
     return false if current_user.user_answers.last.nil?
 
@@ -25,6 +29,7 @@ class Question < ApplicationRecord
     answer_question = user_answers.answer_questions.find_by(question_id: id)
 
     return false if answer_question.nil?
+    return false if answer_question.answer_id.nil?
     
     answer = Answer.find(answer_question.answer_id)
 

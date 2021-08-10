@@ -1,0 +1,47 @@
+<div class="container result-justify-center">
+	<div class="result-description">
+		<h2 class="box-title header-centrilize">Your result is <%= @result.result %></h2>
+			<% unless @result.archived? %>
+				<table class="table-custom">
+					<thead>
+						<th>Question</th>
+						<th>Answer</th>
+						<th>Correct answer/s</th>
+						<th>Result</th>
+					</thead>
+					<tbody>
+						<% @output.each do |answer| %>
+						<tr>
+							<td><%= answer.question.title %></td>
+							<td><%= answer.title_en %></td>
+							<td>
+								<% answer.question.correct_answers.each do |answer| %>
+									<div><%= answer.title_en %></div>
+								<% end %>
+							</td>
+							<td><%= answer.correct? %></td>
+						</tr>
+						<% end %>
+					</tbody>
+				</table>
+
+			<% if @resulting %>
+				This is just testing send request to http://registry:3000/repp/v1/registrar/accreditation/push_results
+				<%= @resulting %>
+				<%= @resulting_count %>
+			<% end %>
+		<% else %>
+			You pass tests at <%= @result.created_at %> and you 
+			<% if @result.result %>
+				passed
+			<% else %>
+				failed
+			<% end %>
+		<% end %>
+
+		<div class="box-button-wrapper">
+			<%= link_to "Back to dashboard", quiz_path(session[:quiz_id]), class: 'actions' %>
+		</div>
+	</div>
+</div>
+

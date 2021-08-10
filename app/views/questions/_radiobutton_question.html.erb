@@ -12,7 +12,13 @@
 						</div>
 					<% end %>
 					<div class="question-action-button-wrapper">
-						<%= button_to "Next", answer_questions_path, class: 'actions' %>
+						<%= button_to "Next", answer_questions_path, class: 'actions', id: 'next', disabled: true %>
 					</div>
 			<% end %>
 	</div>
+
+	<script>
+$('input[type="radio"]').click(function() {
+    $('#next').removeAttr('disabled');
+});
+	</script>

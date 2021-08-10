@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_28_121505) do
+ActiveRecord::Schema.define(version: 2021_07_30_122744) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(version: 2021_07_28_121505) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "question_id"
     t.bigint "user_answer_id"
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_answers_on_category_id"
     t.index ["question_id"], name: "index_answers_on_question_id"
     t.index ["user_answer_id"], name: "index_answers_on_user_answer_id"
   end
@@ -67,6 +69,18 @@ ActiveRecord::Schema.define(version: 2021_07_28_121505) do
     t.index ["user_id"], name: "index_quizzes_on_user_id"
   end
 
+  create_table "results", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "category_id"
+    t.bigint "user_answer_id"
+    t.boolean "result"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_results_on_category_id"
+    t.index ["user_answer_id"], name: "index_results_on_user_answer_id"
+    t.index ["user_id"], name: "index_results_on_user_id"
+  end
+
   create_table "user_answers", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -93,4 +107,8 @@ ActiveRecord::Schema.define(version: 2021_07_28_121505) do
   add_foreign_key "answer_questions", "answers"
   add_foreign_key "answer_questions", "questions"
   add_foreign_key "answer_questions", "quizzes"
+  add_foreign_key "answers", "categories"
+  add_foreign_key "results", "categories"
+  add_foreign_key "results", "user_answers"
+  add_foreign_key "results", "users"
 end

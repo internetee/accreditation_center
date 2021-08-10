@@ -10,7 +10,6 @@ class QuestionsController < ApplicationController
 
     @total_answered_questions = total_answered_questions
     @total_category_questions = total_category_questions
-
   end
 
   private

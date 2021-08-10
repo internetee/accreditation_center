@@ -6,8 +6,5 @@ class HomeController < ApplicationController
 
   def index
     @quizzes = Quiz.all
-
-    # test_request = ApiConnector.new(username: "oleghasjanov", password: "123456")
-    # @result = test_request.get_pull_message(method: :get)
   end
 end
