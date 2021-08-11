@@ -37,11 +37,6 @@ jobs:
           echo "REGISTRY_TAG=ghcr.io/internetee/accreditation_center:REGISTRY_RC-$SHORT_SHA" >> $GITHUB_ENV
           echo "SHORT_TAG=RC-$SHORT_SHA" >> $GITHUB_ENV
 
-      - name: Clone registry project
-        run: |
-          git clone https://github.com/internetee/registry.git
-          ls -l
-
       # - name: Set config files for build
       #   run: |
       #     cp config/database.yml.sample config/database.yml
@@ -58,6 +53,17 @@ jobs:
       #     docker create -ti --name rails $TAG bash
       #     docker cp rails:/opt/webapps/app/public/ ./public/
       #     docker build -t $STATIC_TAG -f Dockerfile.generic-static .
+
+      - name: Clone registry project
+        run: |
+          git clone https://github.com/internetee/registry.git
+
+      - name: Build registry image
+        env:
+          KEY_BASE: ${{ secrets.KEY_BASE}}
+        run: |
+          cd registry
+          docker build -t $REGISTRY_TAG --build-arg RAILS_ENV=staging --build-arg SECRET_KEY_BASE="$KEY_BASE" -f Dockerfile.generic .
 
       # - name: Push Docker images to gh container registry
       #   env:
