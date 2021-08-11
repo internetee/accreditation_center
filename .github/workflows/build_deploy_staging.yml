@@ -63,6 +63,7 @@ jobs:
           KEY_BASE: ${{ secrets.KEY_BASE}}
         run: |
           cd registry
+          cp config/database.yml.sample config/database.yml
           docker build -t $REGISTRY_TAG --build-arg RAILS_ENV=staging --build-arg SECRET_KEY_BASE="$KEY_BASE" -f Dockerfile.generic .
 
       # - name: Push Docker images to gh container registry
