@@ -40,7 +40,7 @@ jobs:
       - name: Clone registry project
         run: |
           git clone git@github.com:internetee/registry.git
-          ls - l
+          ls -l
 
       # - name: Set config files for build
       #   run: |
