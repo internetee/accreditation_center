@@ -13,6 +13,8 @@ class ResultsJob < ApplicationJob
     p "==================="
     p "==================="
     p "==================="
+
+    @res
 	end
 
 	private

@@ -1,19 +1,6 @@
 module GenerateQuestion
 	extend self
 
-	# def process(user)
-	# 	quiz_theory = Quiz.create(title: "Theory", user: user)
-	# end
-
-	# def add_categories_to_theory_quiz
-	# 	while quiz_theory.count < 5
-	# 		offset = rand(Category.count)
- 	# 		rand_record = Catetgory.offset(offset).first
-	# 		quiz_theory.categories << rand_record unless quiz_theory.categories.include? rand_record
-	# 	end
-	# end
-
-
 	def process(user)
 		quiz_theory = Quiz.create(title: "Theory", user: user)
 
