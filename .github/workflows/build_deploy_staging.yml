@@ -67,6 +67,7 @@ jobs:
           mkdir log
           echo $ST_APP | base64 -di > config/application.yml
           cp config/database.yml.sample config/database.yml
+          sed -i -e 's/LABEL org.opencontainers.image.source=https:\/\/github.com\/internetee\/registry/LABEL org.opencontainers.image.source=https:\/\/github.com\/internetee\/accreditation_center,/' Dockerfile.generic
           docker build -t $REGISTRY_TAG --build-arg RAILS_ENV=staging --build-arg SECRET_KEY_BASE="$KEY_BASE" -f Dockerfile.generic .
 
       # - name: Push Docker images to gh container registry
