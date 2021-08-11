@@ -5,6 +5,9 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @category = @question.category
     
+    question_ids = current_user.user_questions.where(category_id: @category.id).pluck(:question_id)
+    @questions = Question.where(id: question_ids)
+    
     @answers = Answer.where(question_id: params[:id])
     @answer_question = AnswerQuestion.new
 

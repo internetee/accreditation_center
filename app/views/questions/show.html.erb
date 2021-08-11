@@ -8,7 +8,7 @@
 
 		<% if @question.question_type == 'multiple choice' %>
 			<ul class="question-number-list">
-				<% @category.questions.each_with_index do |question, index| %>
+				<% @questions.each_with_index do |question, index| %>
 					<li class="<%= 'active-question' if index+1 == @total_answered_questions + 1 %>
 										<%= 'answered' if question.answered?(current_user) %>
 										<%= ' green' if question.multiple_answers_were_correct?(current_user) %>
@@ -21,7 +21,7 @@
 
 		<p>
 			<ul class="question-number-list">
-				<% @category.questions.each_with_index do |question, index| %>
+				<% @questions.each_with_index do |question, index| %>
 					<li class="<%= 'active-question' if index+1 == @total_answered_questions + 1 %>
 										<%= 'answered' if question.answered?(current_user) %>
 										<%= ' green' if question.answered_was_correct?(current_user) %>

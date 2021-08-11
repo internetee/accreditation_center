@@ -5,7 +5,10 @@ module QuestionId
 		question = Question.find(question_id)
 		category = question.category
 
-		results = Question.where(category_id: category.id)
+		user = user_answer.user
+		# results = Question.where(category_id: category.id)
+		questions_ids = user.user_questions.where(category_id: category.id).pluck(:question_id)
+    results = Question.where(id: questions_ids)
 
 		actual_questions = results.reject { |r| user_answer.question_ids.include? r.id }
 

@@ -33,11 +33,11 @@ RailsAdmin.config do |config|
     end
   end
 
-  Question.class_eval do
-    def custom_label_method
-      "Question: #{self.title}"
-    end
-  end
+  # Question.class_eval do
+  #   def custom_label_method
+  #     "Question: #{self.title}"
+  #   end
+  # end
 
   # =========================
 
@@ -46,9 +46,9 @@ RailsAdmin.config do |config|
   end
 
   config.model 'Question' do
-    object_label_method do
-      :custom_label_method
-    end
+    # object_label_method do
+    #   :custom_label_method
+    # end
 
     edit do
       field :title
