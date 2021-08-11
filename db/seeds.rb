@@ -28,10 +28,10 @@ user_two = User.create! do |u|
         u.superadmin_role = false
     end
 
-quiz_one = Quiz.create(title: Faker::Lorem.words(rand(1..4)).join(' '), user: user_one)
+quiz_one = Quiz.create(title: Faker::Lorem.words(rand(1..4)).join(' '))
 
 3.times do |i|
-    category = Category.create(title: Faker::Lorem.words(rand(1..2)).join(' '), quiz_id: quiz_one.id)
+    category = Category.create(title: Faker::Lorem.words(rand(1..2)).join(' '))
     question_type = i 
     6.times do
         question = Question.create!(title: (Faker::Lorem.words(rand(2..10)) << '?').join(' '), category_id: category.id, question_type: question_type)
@@ -50,10 +50,10 @@ quiz_one = Quiz.create(title: Faker::Lorem.words(rand(1..4)).join(' '), user: us
     end
 end
 
-quiz_two = Quiz.create(title: Faker::Lorem.words(rand(1..4)).join(' '), user: user_one)
+quiz_two = Quiz.create(title: Faker::Lorem.words(rand(1..4)).join(' '))
 
 3.times do |i|
-    category = Category.create(title: Faker::Lorem.words(rand(1..2)).join(' '), quiz_id: quiz_two.id)
+    category = Category.create(title: Faker::Lorem.words(rand(1..2)).join(' '))
     question_type = i 
     6.times do
         question = Question.create!(title: (Faker::Lorem.words(rand(2..10)) << '?').join(' '), category_id: category.id, question_type: question_type)
@@ -72,10 +72,10 @@ quiz_two = Quiz.create(title: Faker::Lorem.words(rand(1..4)).join(' '), user: us
     end
 end
 
-quiz_three = Quiz.create(title: Faker::Lorem.words(rand(1..4)).join(' '), user: user_two)
+quiz_three = Quiz.create(title: Faker::Lorem.words(rand(1..4)).join(' '))
 
 3.times do |i|
-    category = Category.create(title: Faker::Lorem.words(rand(1..2)).join(' '), quiz_id: quiz_three.id)
+    category = Category.create(title: Faker::Lorem.words(rand(1..2)).join(' '))
     question_type = i 
     6.times do
         question = Question.create!(title: (Faker::Lorem.words(rand(2..10)) << '?').join(' '), category_id: category.id, question_type: question_type)
@@ -92,4 +92,16 @@ quiz_three = Quiz.create(title: Faker::Lorem.words(rand(1..4)).join(' '), user: 
                           question_id: question.id,
                           correct: true )
     end
+end
+
+20.times do
+    offset = rand(Question.count)
+    rand_record = Question.offset(offset).first
+
+    user_question = UserQuestion.new
+    user_question.user = user_two
+    user_question.question = rand_record
+    user_question.category = rand_record.category
+    user_question.quiz = quiz_two
+    user_question.save
 end

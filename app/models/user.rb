@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :quizzes
   has_many :user_answers
   has_many :results
+  has_many :user_questions
 
   validates :email, presence: false
 

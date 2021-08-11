@@ -3,7 +3,10 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.find(params[:id])
-    @questions = Question.where(category_id: params[:id])
+    # @questions = Question.where(category_id: params[:id])
+    
+    questions_ids = current_user.user_questions.where(category_id: params[:id]).pluck(:question_id)
+    @questions = Question.where(id: questions_ids)
     
     redirect_to root_path if @questions.size < 1
 

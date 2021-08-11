@@ -50,7 +50,8 @@ class Users::SessionsController < Devise::SessionsController
           superadmin_role: false,
         )
 
-        new_user.quizzes << quiz
+        # new_user.quizzes << quiz
+        GenerateQuestion.process(new_user)
 
         sign_in new_user
         Rails.logger.info "#{new_user.username} sign in"
