@@ -61,8 +61,11 @@ jobs:
       - name: Build registry image
         env:
           KEY_BASE: ${{ secrets.KEY_BASE}}
+          ST_APP: ${{ secrets.ST_REGISTRY_APPLICATION_YML}}
         run: |
           cd registry
+          mkdir log
+          echo $ST_APP | base64 -di > config/application.yml
           cp config/database.yml.sample config/database.yml
           docker build -t $REGISTRY_TAG --build-arg RAILS_ENV=staging --build-arg SECRET_KEY_BASE="$KEY_BASE" -f Dockerfile.generic .
 
