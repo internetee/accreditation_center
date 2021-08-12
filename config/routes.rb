@@ -17,9 +17,10 @@ Rails.application.routes.draw do
     resources :questions, only: [ :show ]
   end
 
-  resources :categories, only: [ :show ] do
-    resources :results, only: [ :show ]
-  end
+  get '/quiz_prepare/:id', to: 'quiz#prepare', as: 'quiz_prepare'
+
+  resources :results, only: [ :show ]
+
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   

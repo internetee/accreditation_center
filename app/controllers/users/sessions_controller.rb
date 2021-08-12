@@ -42,16 +42,12 @@ class Users::SessionsController < Devise::SessionsController
       if user.present?
         sign_in user
       else
-        # Here you need to implement a random selection of quizzes
-        quiz = Quiz.first
-
         new_user = User.create!(
           username: username,
           superadmin_role: false,
         )
 
-        # new_user.quizzes << quiz
-        GenerateQuestion.process(new_user)
+        quiz = Quiz.create!(title: "Theory 1", user: new_user, theory: true)
 
         sign_in new_user
         Rails.logger.info "#{new_user.username} sign in"

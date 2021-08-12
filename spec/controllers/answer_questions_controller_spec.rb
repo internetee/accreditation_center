@@ -30,10 +30,11 @@ RSpec.describe AnswerQuestionsController, type: :controller do
 
 			user_answer.save
 			answer_question.save
+			quiz.save
 
 			a = user_answer.answer_questions.last
 
-			result = GenerateResult.process(user_answer: user_answer, category_id: question.category_id)
+			result = GenerateResult.process(user_answer: user_answer, quiz_id: quiz.id)
 		end
 
 		it 'generate answer' do

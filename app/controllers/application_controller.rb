@@ -40,12 +40,9 @@ class ApplicationController < ActionController::Base
 	# 	end
 	# end
 
-	def category_questions_answered(current_user, category)
+	def category_questions_answered(current_user)
 		return [] if current_user.user_answers.last.nil?
 
-		user_questions = current_user.user_answers.last.question_ids
-    quest = Question.where(id: user_questions)
-
-    quest.select { |q| q.category_id == category.id }
+		user_questions = current_user.user_answers
 	end
 end

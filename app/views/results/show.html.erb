@@ -5,21 +5,48 @@
 				<table class="table-custom">
 					<thead>
 						<th>Question</th>
-						<th>Answer</th>
-						<th>Correct answer/s</th>
+						<th>Answer/s</th>
 						<th>Result</th>
+						<th>Correct answer/s</th>
 					</thead>
 					<tbody>
-						<% @output.each do |answer| %>
+						<% @output.each do |question| %>
 						<tr>
-							<td><%= answer.question.title %></td>
-							<td><%= answer.title_en %></td>
+							<td><%= question.title %></td>
+
 							<td>
-								<% answer.question.correct_answers.each do |answer| %>
+							<ul>
+								<% @answer_ids = @user_answer.answer_questions.where(question: question).pluck(:answer_id) %>
+								<% @col = Answer.where(id: @answer_ids) %>
+								<% @col.each do |answer| %>
+									
+								<li><%= answer.title_en %></li>
+									
+								<% end %>
+								</ul>
+							</td>
+
+							<td>
+								<% @answer_ids = @user_answer.answer_questions.where(question: question).pluck(:answer_id) %>
+								<% @col = Answer.where(id: @answer_ids) %>
+								<% @flag = true %>
+								<% @col.each do |answer| %>
+									<% @flag = false unless answer.correct? %>
+								<% end %>
+
+									<% if @flag %>
+										<span class="green">Correct</span>
+									<% else %>
+										<span class="answered">Failed</span>
+									<% end %>
+							</td> 
+
+							<td>
+								<% question.correct_answers.each do |answer| %>
 									<div><%= answer.title_en %></div>
 								<% end %>
 							</td>
-							<td><%= answer.correct? %></td>
+
 						</tr>
 						<% end %>
 					</tbody>
@@ -40,7 +67,7 @@
 		<% end %>
 
 		<div class="box-button-wrapper">
-			<%= link_to "Back to dashboard", quiz_path(session[:quiz_id]), class: 'actions' %>
+			<%= link_to "Back to dashboard", root_path, class: 'actions' %>
 		</div>
 	</div>
 </div>

@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative "../../support/devise"
 
-RSpec.describe GenerateQuestion do
+RSpec.describe GenerateQuestions do
 	login_user
 
 	let(:category) { build(:category) }
@@ -15,7 +15,7 @@ RSpec.describe GenerateQuestion do
 		question.save
 		quiz.save
 
-		GenerateQuestion.process(@user)
+		GenerateQuestions.process(user: @user, quiz: quiz)
 
 		expect(@user.user_questions.count).to eq(20)
 	end

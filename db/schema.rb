@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_10_132207) do
+ActiveRecord::Schema.define(version: 2021_08_12_115325) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,20 +65,33 @@ ActiveRecord::Schema.define(version: 2021_08_10_132207) do
     t.datetime "updated_at", precision: 6, null: false
     t.jsonb "json_category_state"
     t.bigint "user_id"
+    t.bigint "result_id"
+    t.boolean "theory"
     t.index ["json_category_state"], name: "index_quizzes_on_json_category_state", using: :gin
+    t.index ["result_id"], name: "index_quizzes_on_result_id"
     t.index ["user_id"], name: "index_quizzes_on_user_id"
   end
 
   create_table "results", force: :cascade do |t|
     t.bigint "user_id"
-    t.bigint "category_id"
     t.bigint "user_answer_id"
     t.boolean "result"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["category_id"], name: "index_results_on_category_id"
+    t.bigint "quiz_id", null: false
+    t.decimal "percent"
+    t.index ["quiz_id"], name: "index_results_on_quiz_id"
     t.index ["user_answer_id"], name: "index_results_on_user_answer_id"
     t.index ["user_id"], name: "index_results_on_user_id"
+  end
+
+  create_table "template_setting_displays", force: :cascade do |t|
+    t.bigint "category_id"
+    t.boolean "display"
+    t.integer "count"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_template_setting_displays_on_category_id"
   end
 
   create_table "user_answers", force: :cascade do |t|
@@ -121,9 +134,11 @@ ActiveRecord::Schema.define(version: 2021_08_10_132207) do
   add_foreign_key "answer_questions", "questions"
   add_foreign_key "answer_questions", "quizzes"
   add_foreign_key "answers", "categories"
-  add_foreign_key "results", "categories"
+  add_foreign_key "quizzes", "results"
+  add_foreign_key "results", "quizzes"
   add_foreign_key "results", "user_answers"
   add_foreign_key "results", "users"
+  add_foreign_key "template_setting_displays", "categories"
   add_foreign_key "user_questions", "categories"
   add_foreign_key "user_questions", "questions"
   add_foreign_key "user_questions", "quizzes"

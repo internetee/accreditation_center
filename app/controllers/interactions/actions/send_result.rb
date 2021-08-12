@@ -15,18 +15,6 @@ module SendResult
     sender.push_results(user: user, result: result)
   end
 
-	# Example how should result params looks like
-	# result_params: [
-	# 	{
-	# 		category_id: 3,
-	# 		result: true
-	# 	},
-	# 	{
-	# 		category_id: 5,
-	# 		result: false
-	# 	}
-	# ]
-
 	def proccess_result_paramas(result_params)
 		result_params.each do |param|
 
