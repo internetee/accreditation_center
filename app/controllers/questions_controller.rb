@@ -5,7 +5,7 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @category = @question.category
     
-    question_ids = current_user.user_questions.where(category_id: @category.id).pluck(:question_id)
+    question_ids = current_user.user_questions.pluck(:question_id)
     @questions = Question.where(id: question_ids)
     
     @answers = Answer.where(question_id: params[:id])
@@ -18,10 +18,12 @@ class QuestionsController < ApplicationController
   private
 
   def total_answered_questions
-    category_questions_answered(current_user, @category).count
+    user_answer = current_user.user_answers.last
+    uniques = user_answer.answer_questions.distinct.pluck(:question_id)
+    uniques.count
   end
 
   def total_category_questions
-    @category.questions.count
+    current_user.user_questions.count
   end
 end

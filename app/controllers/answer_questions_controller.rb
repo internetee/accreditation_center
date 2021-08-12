@@ -10,8 +10,8 @@ class AnswerQuestionsController < ApplicationController
     if next_question_id
       redirect_to quiz_question_path(quiz_id: answer_question_params[:quiz_id], id: next_question_id), notice: 'Question was answered.'
     else
-      result = GenerateResult.process(user_answer: @user_answer, category_id: question.category_id)
-      redirect_to category_result_path(category_id: question.category_id, id: result)
+      result = GenerateResult.process(user_answer: @user_answer, quiz_id: params[:answer_question][:quiz_id])
+      redirect_to result_path(id: result.id)
     end
   end
 

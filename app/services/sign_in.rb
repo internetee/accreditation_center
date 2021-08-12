@@ -1,8 +1,11 @@
 class SignIn < ApiConnector
-	POLL_MESSAGE_ENDPOINT = "http://registry:3000/repp/v1/registrar/accreditation/get_info"
 
 	def initialize(username:, password:)
 		super
+	end
+
+	def signin_endpoint
+		ENV['BASE_URL'] + ENV['GET_INFO'] 
 	end
 
 	def headers
@@ -10,6 +13,9 @@ class SignIn < ApiConnector
 	end
 
 	def sign_in(params: nil)
-		request(url: POLL_MESSAGE_ENDPOINT, headers: headers, method: 'get')
+		p "=============="
+		p signin_endpoint
+		p "=============="
+		request(url: signin_endpoint, headers: headers, method: 'get')
   end
 end

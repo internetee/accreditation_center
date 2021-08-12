@@ -1,0 +1,10 @@
+# Add configuration values here, as shown below.
+
+# Temporary secret key for registry
+TEMPORARY_SECRET_KEY: "temporary-secret-key"
+BASE_URL: "http://registry:3000"
+
+PUSH_RESULT: "/repp/v1/registrar/accreditation/push_results"
+GET_INFO: "/repp/v1/registrar/accreditation/get_info"
+
+ 

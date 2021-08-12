@@ -20,7 +20,7 @@ RSpec.describe ResultsController, type: :controller do
 			result.user = @user
 			result.save
 
-			get :show, params: { id: result.id, category_id: category }
+			get :show, params: { id: result.id}
 			expect(response).to have_http_status(:ok)
 		end
 
@@ -31,7 +31,7 @@ RSpec.describe ResultsController, type: :controller do
 			result.user = another_user
 			result.save
 
-			get :show, params: { id: result.id, category_id: category }
+			get :show, params: { id: result.id}
 			expect(response).to have_http_status(:redirect)
 		end
 
@@ -45,7 +45,7 @@ RSpec.describe ResultsController, type: :controller do
 			@user.superadmin_role = true
 			@user.save
 
-			get :show, params: { id: result.id, category_id: category }
+			get :show, params: { id: result.id}
 			expect(response).to have_http_status(:ok)
 		end
 	end

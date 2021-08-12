@@ -28,7 +28,7 @@ user_two = User.create! do |u|
         u.superadmin_role = false
     end
 
-quiz_one = Quiz.create(title: Faker::Lorem.words(rand(1..4)).join(' '))
+quiz_one = Quiz.create(title: Faker::Lorem.words(rand(1..4)).join(' '), theory: true)
 
 3.times do |i|
     category = Category.create(title: Faker::Lorem.words(rand(1..2)).join(' '))
@@ -50,7 +50,7 @@ quiz_one = Quiz.create(title: Faker::Lorem.words(rand(1..4)).join(' '))
     end
 end
 
-quiz_two = Quiz.create(title: Faker::Lorem.words(rand(1..4)).join(' '))
+quiz_two = Quiz.create(title: Faker::Lorem.words(rand(1..4)).join(' '), theory: true)
 
 3.times do |i|
     category = Category.create(title: Faker::Lorem.words(rand(1..2)).join(' '))
@@ -72,7 +72,7 @@ quiz_two = Quiz.create(title: Faker::Lorem.words(rand(1..4)).join(' '))
     end
 end
 
-quiz_three = Quiz.create(title: Faker::Lorem.words(rand(1..4)).join(' '))
+quiz_three = Quiz.create(title: Faker::Lorem.words(rand(1..4)).join(' '), theory: true)
 
 3.times do |i|
     category = Category.create(title: Faker::Lorem.words(rand(1..2)).join(' '))
@@ -104,4 +104,13 @@ end
     user_question.category = rand_record.category
     user_question.quiz = quiz_two
     user_question.save
+end
+
+Category.all.each do |category|
+    rand_num = rand(1..6)
+    TemplateSettingDisplay.create(
+        category: category,
+        display: [true, false].sample,
+        count: rand_num
+    )
 end

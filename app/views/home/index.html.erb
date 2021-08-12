@@ -12,7 +12,6 @@
 					<th>Title</th>
 					<th>Status</th>
 					<th>Type</th>
-					<th>Challenges</th>
 					<th>Actions</th>
 				</thead>
 				<tbody>
@@ -21,10 +20,27 @@
 					<tr>
 						<td><%= quiz.id %></td>
 						<td><%= quiz.title %></td>
-						<td>Status</td>
-						<td>Type</td>
-						<td>Challenges</td>
-						<td><%= link_to "Start", quiz_path(quiz), class: 'actions' %></td>
+						<td>
+							<% if quiz.result %>
+								
+								<% if quiz.result.result %>
+									<span class='green'>Success</span>
+								<% else %>
+									<span class='answered'>Failed</span>
+								<% end %>
+
+							<% else %>
+								Waiting for chellenge
+							<% end %>
+						</td>
+						<td>
+							<% if quiz.theory %>
+								Theory
+							<% else %>
+								Practice
+							<% end %>
+						</td>
+						<td><%= link_to "Start", quiz_prepare_path(quiz), class: 'actions' %></td>
 					</tr>
 				<% end %>
 				</tbody>

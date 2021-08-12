@@ -1,8 +1,13 @@
 class Results < ApiConnector
-	PUSH_RESULT_ENDPOINT = "http://registry:3000/repp/v1/registrar/accreditation/push_results"
-	TEMPORARY_SECRET_KEY = 'temporary-secret-key-secret-key'
 
 	def initialize; end
+
+	def push_endpoint
+		base_url = ENV['BASE_URL']
+		endpoint = ENV['PUSH_RESULT'] 
+
+		base_url + endpoint
+	end
 
 	def headers
 		 { 'Authorization' => "Basic #{ENV['TEMPORARY_SECRET_KEY']}" }
@@ -18,6 +23,6 @@ class Results < ApiConnector
 	end
 
 	def push_results(params: nil)
-    	request(url: PUSH_RESULT_ENDPOINT, headers: headers, method: :post, params: post_params)
+    	request(url: push_endpoint, headers: headers, method: :post, params: post_params)
   end
 end
