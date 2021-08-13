@@ -5,19 +5,11 @@ module GenerateResult
 		result = Result.find_by(user: user_answer.user)
 		return result.id if result.present?
 
-		# @quiz = Quiz.find(quiz_id)
-
-		# answers_ids = user_answer.answer_questions.pluck(:answer_id)
-		# answers = Answer.where(id: answers_ids)
-
-		# flag = check_result(answers)
-		# result = create_result(flag: flag, user_answer: user_answer)
-		# result
-		result = new_some(user_answer: user_answer, quiz_id: quiz_id)
+		result = result_generator(user_answer: user_answer, quiz_id: quiz_id)
 		result
 	end
 
-	def new_some(user_answer: , quiz_id:)
+	def result_generator(user_answer: , quiz_id:)
 
 		quiz = Quiz.find(quiz_id)
 		
@@ -25,37 +17,43 @@ module GenerateResult
 
 		questions_count = questions.count
 
-		count = 0
-		questions.each do |question|
-			answer_ids = user_answer.answer_questions.where(question: question).pluck(:answer_id) 
-
-			answers = Answer.where(id: @answer_ids)
-			flag = true
-
-			answers.each do |answer|
-				flag = false unless answer.correct?
-			end
-
-			count += 1 if flag
-		end
-
-		per = (count.to_f / questions_count.to_f) * 100
 		
-		p "====================="
-		p "count"
-		p count
-		p count.to_f
-		p "================="
-		p "questions_count"
-		p questions_count
-		p questions_count.to_f
-		p "============="
-		p "percenteges"
-		p per
-		p "==================="
+		correctly_answers_count = correctly_answer_iterator(questions: questions, user_answer: user_answer)
 
+		percent = percent_counter(correctly_answers_count: correctly_answers_count, questions_count: questions_count)
+
+		result = create_result(percent: percent, quiz: quiz, user_answer: user_answer)
+		result
+	end
+
+	def correctly_answer_iterator(questions:, user_answer:)
+			correctly_answers_count = 0
+
+			questions.each do |question|
+				answer_ids = user_answer.answer_questions.where(question: question).pluck(:answer_id) 
+
+				answers = Answer.where(id: answer_ids)
+				flag = true
+
+				answers.each do |answer|
+					flag = false unless answer.correct?
+				end
+
+				correctly_answers_count += 1 if flag
+			end
+		correctly_answers_count
+	end
+
+	def percent_counter(correctly_answers_count:, questions_count:)
+		percent = (correctly_answers_count.to_f / questions_count.to_f) * 100
+
+		percent.round(2)
+	end
+
+	def create_result(percent:, quiz:, user_answer:)
 		res = nil
-		if per >= 70
+		
+		if percent >= 70
 			res = true
 		else
 			res = false
@@ -64,9 +62,9 @@ module GenerateResult
 		result = Result.create!(
 			user_id: user_answer.user_id,
 			user_answer: user_answer,
-			quiz_id: quiz_id,
+			quiz: quiz,
 			result: res,
-			percent: per
+			percent: percent
 		)
 
 
@@ -75,28 +73,4 @@ module GenerateResult
 
 		result
 	end
-
-	# def check_result(answers)
-	# 	flag = true
-
-	# 	answers.each do |answer|
-	# 		flag = false unless answer.correct?
-	# 	end
-
-	# 	flag
-	# end
-
-	# def create_result(flag:, user_answer:)
-	# 	result = Result.create!(
-	# 		user_id: user_answer.user_id,
-	# 		user_answer: user_answer,
-	# 		quiz: @quiz,
-	# 		result: flag
-	# 	)
-
-	# 	@quiz.result = result
-	# 	@quiz.save
-
-	# 	result
-	# end
 end

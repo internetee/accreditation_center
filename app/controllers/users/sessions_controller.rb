@@ -28,10 +28,16 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def login_request
-    user_request = SignIn.new(username: params[:user][:username], password: params[:user][:password])
-    result = user_request.sign_in
+    username = User.find_by(username: params[:user][:username])
+    
+    if username.password == params[:user][:password] && username.superadmin_role
+      sign_in username
+    else
+      user_request = SignIn.new(username: params[:user][:username], password: params[:user][:password])
+      result = user_request.sign_in
 
-    checking_username(result)
+      checking_username(result)
+    end
   end
 
   def checking_username(result)

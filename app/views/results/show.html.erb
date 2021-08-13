@@ -1,6 +1,9 @@
 <div class="container result-justify-center">
 	<div class="result-description">
 		<h2 class="box-title header-centrilize">Your result is <%= @result.result %></h2>
+		<h3 class="header-centrilize <%= @result.percent > 70 ? ' green' : ' answered' %>">
+		<%= @result.percent.round(2) %>%
+		</h3>
 			<% unless @result.archived? %>
 				<table class="table-custom">
 					<thead>
