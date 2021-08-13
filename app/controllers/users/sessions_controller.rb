@@ -30,7 +30,7 @@ class Users::SessionsController < Devise::SessionsController
   def login_request
     username = User.find_by(username: params[:user][:username])
     
-    if username.password == params[:user][:password] && username.superadmin_role
+    if username.valid_password?(params[:user][:password]) && username.superadmin_role
       sign_in username
     else
       user_request = SignIn.new(username: params[:user][:username], password: params[:user][:password])
