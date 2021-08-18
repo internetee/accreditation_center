@@ -9,7 +9,7 @@ class QuizController < ApplicationController
   def show
     @start_id = generate_start_id
 
-    if @start_id
+    if @start_id && @quiz.practice
       redirect_to quiz_question_path(quiz_id: @quiz.id, id: @start_id)
     else
       res = @quiz.result
@@ -32,6 +32,6 @@ class QuizController < ApplicationController
   end
 
   def start_generate_questions
-    GenerateQuestions.process(user: current_user, quiz: @quiz) if current_user.user_questions.empty?
+    GenerateQuestions.process(user: current_user, quiz: @quiz) if current_user.user_questions.empty? && @quiz.theory
   end
 end

@@ -6,9 +6,6 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
   
-  # scope :api, defaults: { format: json } do
-  #   devise_for :users
-  # end
 
   resources :answer_questions, only: [ :create ]
   
@@ -18,6 +15,10 @@ Rails.application.routes.draw do
   end
 
   get '/quiz_prepare/:id', to: 'quiz#prepare', as: 'quiz_prepare'
+
+  # practice endpoints
+  get 'practice/index'
+  get 'practice/contact'
 
   resources :results, only: [ :show ]
 

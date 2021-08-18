@@ -28,10 +28,12 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def login_request
+    session[:auth_token] = generate_token(username: params[:user][:username], password: params[:user][:password])
     username = User.find_by(username: params[:user][:username])
     
-    if username.valid_password?(params[:user][:password]) && username.superadmin_role
+    if username && username.valid_password?(params[:user][:password]) && username.superadmin_role
       sign_in username
+      
     else
       user_request = SignIn.new(username: params[:user][:username], password: params[:user][:password])
       result = user_request.sign_in
@@ -54,6 +56,7 @@ class Users::SessionsController < Devise::SessionsController
         )
 
         quiz = Quiz.create!(title: "Theory 1", user: new_user, theory: true)
+        quiz_practice = Quiz.create!(title: "Practice 1", user: new_user, theory: false)
 
         sign_in new_user
         Rails.logger.info "#{new_user.username} sign in"
@@ -62,5 +65,9 @@ class Users::SessionsController < Devise::SessionsController
     else
       Rails.logger.info "Fails to sign in"
     end
+  end
+
+  def generate_token(username: , password:)
+    Base64.urlsafe_encode64("#{username}:#{password}")
   end
 end
