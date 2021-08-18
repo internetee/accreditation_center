@@ -11,7 +11,7 @@ RUN mkdir -p /opt/webapps/app/tmp/pids
 WORKDIR /opt/webapps/app
 RUN npm install -g yarn@${YARN_VER}
 COPY . .
-RUN gem install bundler && bundle update --bundler && bundle config set without 'development test' && bundle install
+RUN gem install bundler && bundle update --bundler && bundle install
 COPY package.json yarn.lock ./
 RUN yarn install --check-files
 RUN bundle exec rails assets:precompile
