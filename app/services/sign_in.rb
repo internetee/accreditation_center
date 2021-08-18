@@ -13,9 +13,6 @@ class SignIn < ApiConnector
 	end
 
 	def sign_in(params: nil)
-		p "=============="
-		p signin_endpoint
-		p "=============="
 		request(url: signin_endpoint, headers: headers, method: 'get')
   end
 end
