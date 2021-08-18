@@ -9,7 +9,7 @@ class QuizController < ApplicationController
   def show
     @start_id = generate_start_id
 
-    if @start_id && @quiz.practice
+    if @start_id && @quiz.theory
       redirect_to quiz_question_path(quiz_id: @quiz.id, id: @start_id)
     else
       res = @quiz.result
