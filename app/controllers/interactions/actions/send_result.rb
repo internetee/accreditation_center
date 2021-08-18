@@ -2,7 +2,6 @@ module SendResult
 	extend self
 
 	def process(user:, result_params:)
-
 		result = proccess_result_paramas(result_params)
 
 		send_results(user: user, result: result)
