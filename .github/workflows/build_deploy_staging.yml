@@ -60,6 +60,7 @@ jobs:
       - name: Clone registry project
         run: |
           git clone https://github.com/internetee/registry.git
+          git checkout implement-api-endpoint-for-login-info
 
       - name: Build registry image
         env:
