@@ -69,7 +69,7 @@ module GenerateResult
 
 
 		quiz.result = result
-		quiz.save
+		quiz.save!
 
 		result
 	end
