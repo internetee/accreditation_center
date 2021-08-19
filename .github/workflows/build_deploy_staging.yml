@@ -61,8 +61,6 @@ jobs:
         run: |
           git clone https://github.com/internetee/registry.git
           cd registry
-          pwd
-          ls -l
           git checkout implement-api-endpoint-for-login-info
 
       - name: Build registry image
@@ -70,13 +68,8 @@ jobs:
           KEY_BASE: ${{ secrets.KEY_BASE}}
           ST_APP: ${{ secrets.ST_REGISTRY_APPLICATION_YML}}
         run: |
-          pwd
-          ls -l
           cd registry
-          pwd
-          git log -1
           mkdir log
-          ls -l
           echo $ST_APP | base64 -di > config/application.yml
           cp config/database.yml.sample config/database.yml
           sed -i -e 's/LABEL org.opencontainers.image.source=https:\/\/github.com\/internetee\/registry/LABEL org.opencontainers.image.source=https:\/\/github.com\/internetee\/accreditation_center/' Dockerfile.generic
