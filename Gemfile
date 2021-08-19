@@ -28,6 +28,7 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise'
+gem 'faker'
 gem 'rails_admin', '~> 2.2'
 gem 'cancancan'
 gem 'rexml', '~> 3.2', '>= 3.2.4'
@@ -60,7 +61,6 @@ group :test do
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
-  gem 'faker'
   gem 'simplecov', '0.17.1', require: false # CC last supported v0.17
   gem 'webdrivers'
   gem 'rails-controller-testing'
