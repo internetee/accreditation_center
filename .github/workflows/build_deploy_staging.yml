@@ -5,8 +5,6 @@ on:
     paths-ignore:
     - 'CHANGELOG.md'
     - 'README.md'
-    - 'yarn.lock'
-    - 'package.json'
     branches: [master]
     types:
       - opened
@@ -133,7 +131,7 @@ jobs:
           export KUBECONFIG=./kubeconfig
           helm repo add eisrepo https://internetee.github.io/helm-charts/
           helm repo update
-          # helm upgrade --install accreditation-st-"$PR_REF" --set image.tag="$SHORT_TAG",reference="$PR_REF" eisrepo/accreditation -n accreditation-staging
+          helm upgrade --install accreditation-st-"$PR_REF" --set image.tag="$SHORT_TAG",reference="$PR_REF" eisrepo/accreditation -n accreditation-staging
           rm kubeconfig
           echo "server obs.tld.ee
           zone pilv.tld.ee
