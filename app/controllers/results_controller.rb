@@ -23,6 +23,7 @@ class ResultsController < ApplicationController
   end
 
   def set_result
-    @result = Result.find(params[:id])
+    result = Result.find(params[:id])
+    @result = ResultPresenter.new(result)
   end
 end

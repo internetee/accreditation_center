@@ -24,21 +24,16 @@ class ApplicationController < ActionController::Base
 	end
 
 	def set_user_answer
-		@user_answer = UserAnswer.find(session[:user_answer_id])
-	rescue ActiveRecord::RecordNotFound
-		@user_answer = UserAnswer.create(user: current_user)
-		session[:user_answer_id] = @user_answer.id
-	end
+		@user_answer = nil
+		@user_answer = current_user.user_answers.last unless current_user.nil?
 
-	# def set_user_answer
-	# 	unless UserAnswer.find_by(user: current_user)
-	# 		@user_answer = UserAnswer.create(user: current_user)
-	# 		session[:user_answer_id] = @user_answer.id
-	# 	else
-	# 		@user_answer = current_user.user_answers.last
-	# 		session[:user_answer_id] = @user_answer.id
-	# 	end
-	# end
+		if @user_answer.nil?
+			@user_answer = UserAnswer.create(user: current_user)
+			session[:user_answer_id] = @user_answer.id
+		else
+			session[:user_answer_id] = @user_answer.id
+		end
+	end
 
 	def category_questions_answered(current_user)
 		return [] if current_user.user_answers.last.nil?

@@ -23,7 +23,7 @@ def generate_questions_by_template
 end
 
 def generate_category_questions(category)
-	category_instance = Category.find(category.id)
+	category_instance = Category.find(category.category_id)
 
 	category.count.times do
 		user_question = UserQuestion.new

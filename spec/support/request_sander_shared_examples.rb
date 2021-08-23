@@ -6,13 +6,6 @@ def result
   { code: 1000 }
 end
 
-# def args
-#   {
-#     url: '/get_info',
-#     method: :get,
-#   }
-# end
-
 def new_class_attrs
   {
     username: Faker::Lorem.word,

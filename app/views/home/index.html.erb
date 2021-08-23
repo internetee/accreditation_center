@@ -40,7 +40,11 @@
 								Practice
 							<% end %>
 						</td>
-						<td><%= link_to "Start", quiz_prepare_path(quiz), class: 'actions' %></td>
+						<% if quiz.theory %>
+							<td><%= link_to "Start", quiz_prepare_path(quiz), class: 'actions' %></td>
+						<% else %>
+							<td><%= link_to "Start", practice_index_path, class: 'actions' %></td>
+						<% end %>
 					</tr>
 				<% end %>
 				</tbody>
