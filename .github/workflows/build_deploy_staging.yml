@@ -69,7 +69,7 @@ jobs:
         id: check_files
         uses: andstor/file-existence-action@87d74d4732ddb824259d80c8a508c0124bf1c673
         with:
-          files: "(cat $REGISTRY_VERSION_FILE)"
+          files: "(echo $REGISTRY_VERSION_FILE)"
 
       - name: Checkout specific registry
         if: steps.check_files.outputs.files_exists == 'true'
