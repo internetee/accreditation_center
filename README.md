@@ -22,3 +22,5 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+If specific version of registry is needed in staging environment update `staging_registry_version` file accordingly. Or remove it if latest from the main branch is desired.
