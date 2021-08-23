@@ -24,6 +24,10 @@ jobs:
 
       - uses: actions/checkout@v2
 
+      - name: Set variables
+        run: |
+          echo "REGISTRY_VERSION_FILE=staging_registry_version" >> $GITHUB_ENV
+
       - name: Set image tag
         run: |
           SHORT_SHA=$(echo $GITHUB_SHA | cut -c 1-7) #pr-s test commit of merged state
@@ -60,8 +64,19 @@ jobs:
       - name: Clone registry project
         run: |
           git clone https://github.com/internetee/registry.git
+
+      - name: Check registry version file
+        id: check_files
+        uses: andstor/file-existence-action@87d74d4732ddb824259d80c8a508c0124bf1c673
+        with:
+          files: "staging_registry_version"
+
+      - name: Checkout specific registry
+        if: steps.check_files.outputs.files_exists == 'true'
+        run: |
+          REGISTRY_VERSION=`(cat $REGISTRY_VERSION_FILE)`
           cd registry
-          git checkout implement-api-endpoint-for-login-info
+          git checkout $REGISTRY_VERSION
 
       - name: Build registry image
         env:
