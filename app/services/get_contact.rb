@@ -16,6 +16,6 @@ class GetContact < ApiConnector
 	end
 
 	def get_contact(contact_id)
-    	request(url: contact_endpoint + contact_id, headers: headers, method: :get, params: nil)
+    	request(url: contact_endpoint + contact_id.gsub(/\s+/, ""), headers: headers, method: :get, params: nil)
   end
 end
