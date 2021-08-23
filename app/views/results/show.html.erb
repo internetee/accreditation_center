@@ -18,30 +18,13 @@
 							<td><%= question.title %></td>
 
 							<td>
-							<ul>
-								<% @answer_ids = @user_answer.answer_questions.where(question: question).pluck(:answer_id) %>
-								<% @col = Answer.where(id: @answer_ids) %>
-								<% @col.each do |answer| %>
-									
-								<li><%= answer.title_en %></li>
-									
-								<% end %>
+								<ul>
+									<%= raw @result.user_answer_questions(user_answer: @user_answer, question: question) %>
 								</ul>
 							</td>
 
 							<td>
-								<% @answer_ids = @user_answer.answer_questions.where(question: question).pluck(:answer_id) %>
-								<% @col = Answer.where(id: @answer_ids) %>
-								<% @flag = true %>
-								<% @col.each do |answer| %>
-									<% @flag = false unless answer.correct? %>
-								<% end %>
-
-									<% if @flag %>
-										<span class="green">Correct</span>
-									<% else %>
-										<span class="answered">Failed</span>
-									<% end %>
+								<%= raw @result.answer_result(user_answer: @user_answer, question: question) %>
 							</td> 
 
 							<td>
