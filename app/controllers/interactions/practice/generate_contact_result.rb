@@ -1,6 +1,11 @@
 module GenerateContactResult
 	extend self
 
+  PHONE_PRIV_NUMBER = "+372.51234567".freeze
+  PHONE_ORG_NUMBER = "+372.51200167".freeze
+  PRIV_IDENT_CODE = "49708260212".freeze
+  ORG_BUSSINESS_CODE = "12345678".freeze
+
 	def checking_data(hash)
 		result = nil
 
@@ -13,8 +18,8 @@ module GenerateContactResult
     @priv_name = hash[:priv_name]
     @org_name = hash[:org_name]
 
-		result = check_private_contact(priv_contact_id)
-    result = check_org_contact(org_contact_id) if result
+		result = check_contact(cont_id: priv_contact_id, is_priv: true)
+    result = check_contact(cont_id: org_contact_id, is_priv: false) if result
 
 		create_result if result
 
@@ -23,28 +28,28 @@ module GenerateContactResult
 
   private
 
-  def compare_data_of_priv_contact(response)
+  def compare_data_of_contact(response:, is_priv:) 
     flag_counter = 0
 
-    flag_counter +=1 if response["data"]["name"] == @priv_name
-    flag_counter +=1 if response["data"]["email"] == "#{@priv_name}@eesti.ee" 
-    flag_counter +=1 if response["data"]["phone"] == "+372.51234567" 
-    flag_counter +=1 if response["data"]["ident"]["type"] == "priv" 
-    flag_counter +=1 if response["data"]["ident"]["code"] == "49708260212" 
+    flag_counter +=1 if response["data"]["name"] == (is_priv ? @priv_name : @org_name)
+    flag_counter +=1 if response["data"]["email"] == (is_priv ? "#{@priv_name}@eesti.ee" : "#{@org_name}@eesti.ee") 
+    flag_counter +=1 if response["data"]["phone"] == (is_priv ? PHONE_PRIV_NUMBER : PHONE_ORG_NUMBER) 
+    flag_counter +=1 if response["data"]["ident"]["type"] == (is_priv ? "priv" : "org") 
+    flag_counter +=1 if response["data"]["ident"]["code"] == (is_priv ? PRIV_IDENT_CODE : ORG_BUSSINESS_CODE)
 
     return flag_counter == 5
   end
 
-  def compare_data_of_org_contact(response)
-    flag_counter = 0
+  def check_contact(cont_id:, is_priv:)
+    result = nil
+    unless cont_id.nil?
+      response = @api_connector.get_contact(cont_id)
 
-    flag_counter +=1 if response["data"]["name"] == @org_name
-    flag_counter +=1 if response["data"]["email"] == "#{@org_name}@eesti.ee" 
-    flag_counter +=1 if response["data"]["phone"] == "+372.51200167" 
-    flag_counter +=1 if response["data"]["ident"]["type"] == "org" 
-    flag_counter +=1 if response["data"]["ident"]["code"] == "12345678" 
+      return result = compare_data_of_contact(response: response, is_priv: is_priv) if response["code"] == 1000
+      return false
+    end
 
-    return flag_counter == 5
+    result
   end
 
   def create_result
@@ -54,28 +59,5 @@ module GenerateContactResult
     p.action_name = @action
 
     p.save!
-  end
-
-  def check_private_contact(priv_id)
-    result = nil
-    unless priv_id.nil?
-      response = @api_connector.get_contact(priv_id)
-
-      return result = compare_data_of_priv_contact(response) if response["code"] == 1000
-      return false
-    end
-
-    result
-  end
-
-  def check_org_contact(org_id)
-    result = nil
-    unless org_id.nil?
-      response = @api_connector.get_contact(org_id)
-
-      return result = compare_data_of_org_contact(response) if response["code"] == 1000
-      return false
-    end
-    result
   end
 end
