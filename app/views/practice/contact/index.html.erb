@@ -1,0 +1,44 @@
+<div class="flex-centrilize">
+	<div class="category-description <%= @result.nil? ? "" : @result ? "green-border" : "red-border" %>">
+		<%= form_with method: :get do |f| %>
+			<h2 class="box-title center">Contact test</h2>
+			<h4 class="center <%= @result.nil? ? "" : @result ? "green" : "answered" %>">
+				<%= @result.nil? ? "" : @result ? "Success" : "Failed" %>
+			</h4>
+			<ul>
+				<h5>Create two contacts priv and org.</h5>
+
+				<li>For priv contact name is: <b><%= @priv_name %></b> </li>
+				<li>Her personal id nr is <b>49708260212.</b></li>
+				<li>Her email address is <b><%= @priv_name %>@eesti.ee</b> and phone nr is <b>51234567</b></li>
+			</ul>
+
+			<ul>
+				<li>For org contact name is: <b><%= @org_name %></b> </li>
+				<li>Her personal id nr is <b>12345678.</b></li>
+				<li>Her email address is <b><%= @org_name %>@eesti.ee</b> and phone nr is <b>51200167</b></li>
+			</ul>
+
+				<h5>Please insert the contact object id in the cell below:</h5>
+				<div style="margin-bottom: 1em">
+					<%= f.label "Priv Contact ID:" %>
+					<%= f.text_field :priv_contact_id, disabled: @result %>
+				</div>
+
+				<div>
+					<%= f.label "Org Contact ID:" %>
+					<%= f.text_field :org_contact_id, disabled: @result %>
+				</div>
+
+			<div class="loggin-wrapper box-button-wrapper">
+				<% if @result.nil? or !@result %>
+					<%= f.submit "Submit", class: 'actions' %>
+				<% else %>
+					<%= link_to "Next", root_path, class: 'actions' %>
+				<% end %>
+
+				<%= link_to "Cancel", root_path, class: 'actions-red' %>
+			</div>
+		<% end %>
+	</div>
+</div>
