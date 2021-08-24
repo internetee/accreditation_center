@@ -20,7 +20,7 @@ module GenerateDomainResult
 		result = check_domain(domain_name: @domain_one, is_first_domain: true)
     result = check_domain(domain_name: @domain_two, is_first_domain: false) if result
 
-		# create_result if result
+		create_result if result
 
     result
 	end
