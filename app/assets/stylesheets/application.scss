@@ -373,6 +373,8 @@ $red: #b63e35;
 
 .category-description {
 	width: 600px;
+	box-sizing: content-box;
+	word-break:break-all;
 }
 
 .questions-description, .category-description, .result-description {

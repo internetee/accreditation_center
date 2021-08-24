@@ -7,4 +7,6 @@ BASE_URL: "http://registry:3000"
 PUSH_RESULT: "/repp/v1/registrar/accreditation/push_results"
 GET_INFO: "/repp/v1/registrar/accreditation/get_info"
 
- 
+# REPP REQUESTS
+GET_CONTACT: "/repp/v1/contacts/"
+GET_DOMAIN: "/repp/v1/domains/"

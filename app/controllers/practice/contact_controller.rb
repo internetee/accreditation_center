@@ -1,13 +1,13 @@
 class Practice
   class ContactController < ApplicationController
     before_action :set_api_connector
-    before_action :set_sessions
+    before_action :set_cache
 
     ACTION = "contact".freeze
 
     def index
-      @priv_name = session[:priv_name]
-      @org_name = session[:org_name]
+      @priv_name = Rails.cache.read('priv_name')
+      @org_name = Rails.cache.read('org_name')
 
       practice = Practice.find_by(user: current_user, action_name: ACTION)
 
@@ -32,9 +32,9 @@ class Practice
       }
     end
 
-    def set_sessions
-      session[:priv_name] = (0...8).map { (65 + rand(26)).chr }.join if session[:priv_name].nil?
-      session[:org_name] = (0...8).map { (65 + rand(26)).chr }.join if session[:org_name].nil?
+    def set_cache
+      Rails.cache.write('priv_name', (0...8).map { (65 + rand(26)).chr }.join) if Rails.cache.read('priv_name').nil?
+      Rails.cache.write('org_name', (0...8).map { (65 + rand(26)).chr }.join) if Rails.cache.read('org_name').nil?
     end
 
     def set_api_connector

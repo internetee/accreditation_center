@@ -17,11 +17,11 @@ Rails.application.routes.draw do
   get '/quiz_prepare/:id', to: 'quiz#prepare', as: 'quiz_prepare'
   
   resources :results, only: [ :show ]
-
   resources :practice, only: [ :index ]
 
   namespace :practice do
     resources :contact, only: [ :index ]
+    resources :domains, only: [ :index ]
   end
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
