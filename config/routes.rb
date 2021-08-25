@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   namespace :practice do
     resources :contact, only: [ :index ]
     resources :domains, only: [ :index ]
+    resources :nameserver, only: [ :index ]
   end
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

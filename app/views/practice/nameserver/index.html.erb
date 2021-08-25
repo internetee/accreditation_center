@@ -1,0 +1,50 @@
+<div class="flex-centrilize">
+	<div class="category-description <%= @result.nil? ? "" : @result ? "green-border" : "red-border" %>">
+		<%= form_with method: :get do |f| %>
+			<h2 class="box-title center">Nameserver test</h2>
+			<h4 class="center <%= @result.nil? ? "" : @result ? "green" : "answered" %>">
+				<%= @result.nil? ? "" : @result ? "Success" : "Failed" %>
+			</h4>
+				<h4>add/update nameservers of the domains created in previous step. Again the data should be provided in the test.</h4>
+
+				<hr>
+
+				<ul>
+					<b>For <%= @domain_one %> update nameserver for:</b>
+					<li>Hostname: From <b>ns1.<%= @random_nameserver %></b> to <b>ns1.<%= @random_nameserver_one %></b></li>
+					<li>IPV4: <b>0.0.0.1</b></li>
+				</ul>
+
+				<hr>
+
+				<ol>
+				<b>For <%= @domain_two %> update nameserver for:</b>
+					<li>
+						<ul>
+							<li>Hostname: <b>n2.<%= @random_nameserver_two %></b></li>
+							<li>IPV6: <b>2001:DB8::1</b></li>
+						</ul>
+					</li>
+
+					<li>
+						<ul>
+						<li>Hostname: <b>n3.<%= @domain_two %></b></li>
+						<li>IPV4: <b>0.54.0.62</b></li>
+						</ul>
+					</li>
+				</ol>
+		
+				<h5>When will be ready, press Submit</h5>
+
+			<div class="loggin-wrapper box-button-wrapper">
+				<% if @result.nil? or !@result %>
+					<%= f.submit "Submit", class: 'actions' %>
+				<% else %>
+					<%= link_to "Next", practice_nameserver_index_path, class: 'actions' %>
+				<% end %>
+
+				<%= link_to "Cancel", root_path, class: 'actions-red' %>
+			</div>
+		<% end %>
+	</div>
+</div>
