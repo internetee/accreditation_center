@@ -29,15 +29,6 @@ class Practice
     end
 
     def set_cache_memory
-      domain_one = (0...8).map { (65 + rand(26)).chr }.join
-      Rails.cache.write('domain_one', domain_one.to_s + ".ee") unless Rails.cache.exist?('domain_one')
-
-      domain_two = (0...8).map { (65 + rand(20)).chr }.join
-      Rails.cache.write('domain_two', domain_two.to_s + ".ee") unless Rails.cache.exist?('domain_two')
-
-      random_nameserver = (0...8).map { (65 + rand(26)).chr }.join
-      Rails.cache.write('random_nameserver', random_nameserver.to_s + ".ee") unless Rails.cache.exist?('random_nameserver')
-
       @domain_one = Rails.cache.read('domain_one')
       @domain_two = Rails.cache.read('domain_two')
       @random_nameserver = Rails.cache.read('random_nameserver')

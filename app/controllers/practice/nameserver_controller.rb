@@ -36,14 +36,8 @@ class Practice
       @domain_one = Rails.cache.read('domain_one')
       @domain_two = Rails.cache.read('domain_two')
 
-      random_nameserver_one = (0...8).map { (65 + rand(26)).chr }.join
-      Rails.cache.write('random_nameserver_one', random_nameserver_one.to_s + ".ee") unless Rails.cache.exist?('random_nameserver_one')
       @random_nameserver_one = Rails.cache.read('random_nameserver_one')
-
-      random_nameserver_two = (0...8).map { (65 + rand(26)).chr }.join
-      Rails.cache.write('random_nameserver_two', random_nameserver_two.to_s + ".ee") unless Rails.cache.exist?('random_nameserver_two')
       @random_nameserver_two = Rails.cache.read('random_nameserver_two')
-
       @random_nameserver = Rails.cache.read('random_nameserver')
 
     end
