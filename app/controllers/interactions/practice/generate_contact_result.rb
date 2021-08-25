@@ -37,6 +37,9 @@ module GenerateContactResult
     flag_counter +=1 if response["data"]["ident"]["type"] == (is_priv ? "priv" : "org") 
     flag_counter +=1 if response["data"]["ident"]["code"] == (is_priv ? PRIV_IDENT_CODE : ORG_BUSSINESS_CODE)
 
+    Rails.cache.write('priv_contact_id', response["data"]["id"]) if is_priv
+    Rails.cache.write('org_contact_id', response["data"]["id"]) unless is_priv
+
     return flag_counter == 5
   end
 

@@ -1,5 +1,4 @@
 class GetContact < ApiConnector
-
 	def initialize(token)
 		@token = token
 	end

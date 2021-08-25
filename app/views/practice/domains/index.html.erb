@@ -1,0 +1,59 @@
+<div class="flex-centrilize">
+	<div class="category-description <%= @result.nil? ? "" : @result ? "green-border" : "red-border" %>">
+		<%= form_with method: :get do |f| %>
+			<h2 class="box-title center">Contact test</h2>
+			<h4 class="center <%= @result.nil? ? "" : @result ? "green" : "answered" %>">
+				<%= @result.nil? ? "" : @result ? "Success" : "Failed" %>
+			</h4>
+				<h5>Register 2 domains for 3 months and 1 year. Use the contact objects created in previous step.</h5>
+
+			<hr>
+			<ul>
+				<li>Domain name: <b><%= @domain_one %></b> </li>
+				<li>Registrant, admin, tech contacts should be private contact from previous task:
+					<ul>
+						<li>Private contact name: <b> <%= Rails.cache.read('priv_name') %> </b></li>
+					</ul>
+				</li>
+				<li>Nameserver should be: <b>ns1.<%= @domain_one %></b></li>
+				<li>IPV4 should be: <b>127.0.0.1</b></li>
+				<li>IPV6 should be: <b>::FFFF:192.0.2.1, 2001:DB8::1</b></li>
+				<li>Nameserver should be: <b>ns2.<%= @random_nameserver %></b></li>
+				<li><b>IPV4 and IPV6 leave empty</b></li>
+				<li>DNSKey should be: 
+					<ul>
+					<li>Flags: <b>0</b></li>
+					<li>Protocol: <b>3</b></li>
+					<li>Algorithm: <b>3</b></li>
+					<li>Public key:<b>AwEAAddt2AkLfYGKgiEZB5SmIF8EvrjxNMH6HtxWEA4RJ9Ao6LCWheg8</b></li>
+					</ul>
+				</li>
+			</ul>
+
+			<hr>
+
+			<ul>
+				<li>Domain name: <b><%= @domain_two %></b> </li>
+				<li>Registrant, tech contacts should be organization contact from previous task.
+				Admin should be private contact from previous task</li>
+				<ul>
+					<li>Private contact name: <b> <%= Rails.cache.read('priv_name') %> </b></li>
+					<li>Org contact name: <b> <%= Rails.cache.read('org_name') %> </b></li>
+				</ul>
+				<li><b>DNSKEY and nameserves leave empty</b></li>
+			</ul>
+
+				<h5>When will be ready, press Submit</h5>
+
+			<div class="loggin-wrapper box-button-wrapper">
+				<% if @result.nil? or !@result %>
+					<%= f.submit "Submit", class: 'actions' %>
+				<% else %>
+					<%= link_to "Next", practice_domains_path, class: 'actions' %>
+				<% end %>
+
+				<%= link_to "Cancel", root_path, class: 'actions-red' %>
+			</div>
+		<% end %>
+	</div>
+</div>
