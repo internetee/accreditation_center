@@ -34,13 +34,13 @@ class Practice
 
     def set_sessions
       domain_one = (0...8).map { (65 + rand(26)).chr }.join
-      Rails.cache.write('domain_one', domain_one.to_s + ".ee") if Rails.cache.read('domain_one').nil?
+      Rails.cache.write('domain_one', domain_one.to_s + ".ee") unless Rails.cache.exist?('domain_one')
 
       domain_two = (0...8).map { (65 + rand(26)).chr }.join
-      Rails.cache.write('domain_two', domain_one.to_s + ".ee") if Rails.cache.read('domain_two').nil?
+      Rails.cache.write('domain_two', domain_one.to_s + ".ee") unless Rails.cache.exist?('domain_two')
 
       random_nameserver = (0...8).map { (65 + rand(26)).chr }.join
-      Rails.cache.write('random_nameserver', random_nameserver.to_s + ".ee") if Rails.cache.read('random_nameserver').nil?
+      Rails.cache.write('random_nameserver', random_nameserver.to_s + ".ee") unless Rails.cache.exist?('random_nameserver')
     end
 
     def set_api_connector

@@ -6,8 +6,8 @@ class Practice
     ACTION = "contact".freeze
 
     def index
-      @priv_name = Rails.cache.read('priv_name')
-      @org_name = Rails.cache.read('org_name')
+      @priv_name = Rails.cache.fetch('priv_name')
+      @org_name = Rails.cache.fetch('org_name')
 
       practice = Practice.find_by(user: current_user, action_name: ACTION)
 
@@ -33,8 +33,8 @@ class Practice
     end
 
     def set_cache
-      Rails.cache.write('priv_name', (0...8).map { (65 + rand(26)).chr }.join) if Rails.cache.read('priv_name').nil?
-      Rails.cache.write('org_name', (0...8).map { (65 + rand(26)).chr }.join) if Rails.cache.read('org_name').nil?
+      Rails.cache.write('priv_name', (0...8).map { (65 + rand(26)).chr }.join) unless Rails.cache.exist?('priv_name')
+      Rails.cache.write('org_name', (0...8).map { (65 + rand(26)).chr }.join) unless Rails.cache.exist?('org_name')
     end
 
     def set_api_connector
