@@ -61,10 +61,10 @@ module GenerateNameserverResult
       "ipv6"=>[]
     }
 
-    flag_counter +=1 if response["data"]["domain"]["nameservers"].include? nameserver_hash_one if is_first_domain
+    flag_counter +=1 if response["domain"]["nameservers"].include? nameserver_hash_one if is_first_domain
 
-    flag_counter +=1 if response["data"]["domain"]["nameservers"].include? nameserver_hash_two unless is_first_domain
-    flag_counter +=1 if response["data"]["domain"]["nameservers"].include? nameserver_hash_three unless is_first_domain
+    flag_counter +=1 if response["domain"]["nameservers"].include? nameserver_hash_two unless is_first_domain
+    flag_counter +=1 if response["domain"]["nameservers"].include? nameserver_hash_three unless is_first_domain
 
     return flag_counter == 1 if is_first_domain
     return flag_counter == 2

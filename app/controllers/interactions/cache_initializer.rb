@@ -1,4 +1,4 @@
-module InitializeCache
+module CacheInitializer
 	extend self
 
 	def generate_values

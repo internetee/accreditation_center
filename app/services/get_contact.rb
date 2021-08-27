@@ -7,7 +7,7 @@ class GetContact < ApiConnector
 		base_url = ENV['BASE_URL']
 		endpoint = ENV['GET_CONTACT'] 
 
-		base_url + endpoint
+		base_url + endpoint + '?id='
 	end
 
 	def headers
@@ -15,6 +15,6 @@ class GetContact < ApiConnector
 	end
 
 	def get_contact(contact_id)
-    	request(url: contact_endpoint + contact_id.gsub(/\s+/, ""), headers: headers, method: :get, params: nil)
+    request(url: contact_endpoint + contact_id.gsub(/\s+/, ""), headers: headers, method: :get, params: nil)
   end
 end

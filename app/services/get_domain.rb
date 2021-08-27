@@ -7,7 +7,7 @@ class GetDomain < ApiConnector
 		base_url = ENV['BASE_URL']
 		endpoint = ENV['GET_DOMAIN'] 
 
-		base_url + endpoint
+		base_url + endpoint + '?name='
 	end
 
 	def headers

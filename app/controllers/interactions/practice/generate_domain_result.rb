@@ -68,18 +68,18 @@ module GenerateDomainResult
         {"code"=>"#{org_contact_id}", "type"=>"TechDomainContact"}
       ]
 
-    flag_counter +=1 if response["data"]["domain"]["name"] == (is_first_domain ? @domain_one : @domain_two)
-    flag_counter +=1 if response["data"]["domain"]["registrant"] == (is_first_domain ? private_contact_id : org_contact_id)
+    flag_counter +=1 if response["domain"]["name"] == (is_first_domain ? @domain_one : @domain_two)
+    flag_counter +=1 if response["domain"]["registrant"] == (is_first_domain ? private_contact_id : org_contact_id)
 
     if is_first_domain
-      flag_counter +=1 if response["data"]["domain"]["contacts"] == contact_private_hash
+      flag_counter +=1 if response["domain"]["contacts"] == contact_private_hash
     else
-      flag_counter +=1 if response["data"]["domain"]["contacts"] == contact_org_hash
+      flag_counter +=1 if response["domain"]["contacts"] == contact_org_hash
     end
 
-    flag_counter +=1 if response["data"]["domain"]["nameservers"].include? nameserver_hash_one if is_first_domain
-    flag_counter +=1 if response["data"]["domain"]["nameservers"].include? nameserver_hash_two if is_first_domain
-    flag_counter +=1 if response["data"]["domain"]["dnssec_keys"].include? dnskey_hash if is_first_domain
+    flag_counter +=1 if response["domain"]["nameservers"].include? nameserver_hash_one if is_first_domain
+    flag_counter +=1 if response["domain"]["nameservers"].include? nameserver_hash_two if is_first_domain
+    flag_counter +=1 if response["domain"]["dnssec_keys"].include? dnskey_hash if is_first_domain
 
     return flag_counter == 6 if is_first_domain
     return flag_counter == 3

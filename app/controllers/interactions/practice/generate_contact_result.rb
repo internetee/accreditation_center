@@ -31,14 +31,14 @@ module GenerateContactResult
   def compare_data_of_contact(response:, is_priv:) 
     flag_counter = 0
 
-    flag_counter +=1 if response["data"]["name"] == (is_priv ? @priv_name : @org_name)
-    flag_counter +=1 if response["data"]["email"] == (is_priv ? "#{@priv_name}@eesti.ee" : "#{@org_name}@eesti.ee") 
-    flag_counter +=1 if response["data"]["phone"] == (is_priv ? PHONE_PRIV_NUMBER : PHONE_ORG_NUMBER) 
-    flag_counter +=1 if response["data"]["ident"]["type"] == (is_priv ? "priv" : "org") 
-    flag_counter +=1 if response["data"]["ident"]["code"] == (is_priv ? PRIV_IDENT_CODE : ORG_BUSSINESS_CODE)
+    flag_counter +=1 if response["contact"]["name"] == (is_priv ? @priv_name : @org_name)
+    flag_counter +=1 if response["contact"]["email"] == (is_priv ? "#{@priv_name}@eesti.ee" : "#{@org_name}@eesti.ee") 
+    flag_counter +=1 if response["contact"]["phone"] == (is_priv ? PHONE_PRIV_NUMBER : PHONE_ORG_NUMBER) 
+    flag_counter +=1 if response["contact"]["ident"]["type"] == (is_priv ? "priv" : "org") 
+    flag_counter +=1 if response["contact"]["ident"]["code"] == (is_priv ? PRIV_IDENT_CODE : ORG_BUSSINESS_CODE)
 
-    Rails.cache.write('priv_contact_id', response["data"]["id"]) if is_priv
-    Rails.cache.write('org_contact_id', response["data"]["id"]) unless is_priv
+    Rails.cache.write('priv_contact_id', response["contact"]["id"]) if is_priv
+    Rails.cache.write('org_contact_id', response["contact"]["id"]) unless is_priv
 
     return flag_counter == 5
   end

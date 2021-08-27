@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
 	private
 
 	def initialize_сache_values
-		InitializeCache.generate_values
+		CacheInitializer.generate_values
 	end
 
 	def set_quiz
