@@ -20,7 +20,7 @@ module GenerateDomainResult
 		result = check_domain(domain_name: @domain_one, is_first_domain: true)
     result = check_domain(domain_name: @domain_two, is_first_domain: false) if result
 
-		create_result if result
+		create_result(result)
 
     result
 	end
@@ -77,29 +77,38 @@ module GenerateDomainResult
     flag_counter +=1 if response["domain"]["nameservers"].include? nameserver_hash_two if is_first_domain
     flag_counter +=1 if response["domain"]["dnssec_keys"].include? dnskey_hash if is_first_domain
 
+
+
     return flag_counter == 6 if is_first_domain
     return flag_counter == 3
   end
 
   def check_domain(domain_name:, is_first_domain:)
-    result = nil
+    result = false
 
     unless domain_name.nil?
       response = @api_connector.get_domain(domain_name)
 
       return result = compare_data_of_domain(response: response, is_first_domain: is_first_domain) if response["code"] == 1000
-      return false
     end
 
     result
   end
 
-  def create_result
-    p = Practice.new
-    p.user = @user
-    p.result = true
-    p.action_name = @action
+  def create_result(result)
+    p = Practice.find_by(user: @user, action_name: @action)
 
-    p.save!
+    if p.nil?
+      p = Practice.new
+      p.user = @user
+      p.result = result
+      p.action_name = @action
+
+      return p.save!
+    end
+
+    return if p.result
+
+    p.update(result: result)
   end
 end

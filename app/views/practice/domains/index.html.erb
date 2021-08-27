@@ -1,7 +1,7 @@
 <div class="flex-centrilize">
 	<div class="category-description <%= @result.nil? ? "" : @result ? "green-border" : "red-border" %>">
-		<%= form_with method: :get do |f| %>
-			<h2 class="box-title center">Contact test</h2>
+		<%= form_with action: @result do |f| %>
+			<h2 class="box-title center">Domain test</h2>
 			<h4 class="center <%= @result.nil? ? "" : @result ? "green" : "answered" %>">
 				<%= @result.nil? ? "" : @result ? "Success" : "Failed" %>
 			</h4>

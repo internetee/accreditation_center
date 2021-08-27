@@ -1,6 +1,6 @@
 <div class="flex-centrilize">
 	<div class="category-description <%= @result.nil? ? "" : @result ? "green-border" : "red-border" %>">
-		<%= form_with method: :get do |f| %>
+		<%= form_with action: @result do |f| %>
 			<h2 class="box-title center">Nameserver test</h2>
 			<h4 class="center <%= @result.nil? ? "" : @result ? "green" : "answered" %>">
 				<%= @result.nil? ? "" : @result ? "Success" : "Failed" %>
@@ -11,7 +11,7 @@
 
 				<ul>
 					<b>For <%= @domain_one %> update nameserver for:</b>
-					<li>Hostname: From <b><%= @random_nameserver %></b> to <b>ns1.<%= @random_nameserver_one %></b></li>
+					<li>Hostname: From <b><%= @random_nameserver %></b> to <b><%= @random_nameserver_one %></b></li>
 					<li>IPV4: <b>0.0.0.1</b></li>
 				</ul>
 
@@ -28,7 +28,7 @@
 
 					<li>
 						<ul>
-						<li>Hostname: <b><%= @domain_two %></b></li>
+						<li>Hostname: <b>ns3.<%= @domain_two %></b></li>
 						<li>IPV4: <b>0.54.0.62</b></li>
 						</ul>
 					</li>

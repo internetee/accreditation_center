@@ -2,17 +2,24 @@ class Practice
   class NameserverController < ApplicationController
     before_action :set_cache_memory
     before_action :set_api_connector
+    before_action :set_practice
     
     ACTION = "nameserver".freeze
 
     def index
-      practice = Practice.find_by(user: current_user, action_name: ACTION)
+      @result = @practice.result unless @practice.nil?
+    end
 
-      if practice.nil?
-        @result = GenerateNameserverResult.checking_data complete_data
-      else
-        @result = practice.result
-      end
+    def create
+      @result = GenerateNameserverResult.checking_data complete_data
+
+      redirect_to practice_nameserver_index_path 
+    end
+
+    private
+
+    def set_practice
+      @practice = Practice.find_by(user: current_user, action_name: ACTION)
     end
 
     def complete_data
