@@ -12,12 +12,12 @@ module CacheInitializer
 		Rails.cache.write('domain_two', domain_two.to_s + ".ee") unless Rails.cache.exist?('domain_two')
 
 		random_nameserver = (0...8).map { (65 + rand(26)).chr }.join
-		Rails.cache.write('random_nameserver', random_nameserver.to_s + ".ee") unless Rails.cache.exist?('random_nameserver')
+		Rails.cache.write('random_nameserver', "ns1." + random_nameserver.to_s + ".ee") unless Rails.cache.exist?('random_nameserver')
 
 		random_nameserver_one = (0...8).map { (65 + rand(26)).chr }.join
-		Rails.cache.write('random_nameserver_one', random_nameserver_one.to_s + ".ee") unless Rails.cache.exist?('random_nameserver_one')
+		Rails.cache.write('random_nameserver_one', "ns1." + random_nameserver_one.to_s + ".ee") unless Rails.cache.exist?('random_nameserver_one')
 
 		random_nameserver_two = (0...8).map { (65 + rand(26)).chr }.join
-		Rails.cache.write('random_nameserver_two', random_nameserver_two.to_s + ".ee") unless Rails.cache.exist?('random_nameserver_two')
+		Rails.cache.write('random_nameserver_two', "ns1." + random_nameserver_two.to_s + ".ee") unless Rails.cache.exist?('random_nameserver_two')
 	end
 end

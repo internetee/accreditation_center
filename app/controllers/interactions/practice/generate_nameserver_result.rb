@@ -40,23 +40,20 @@ module GenerateNameserverResult
   def compare_data_of_domain(response:, is_first_domain:)
     flag_counter = 0
 
-    private_contact_id = Rails.cache.read('priv_contact_id')
-    org_contact_id = Rails.cache.read('org_contact_id')
-
     nameserver_hash_one = {
-      "hostname"=>"ns1.#{@random_nameserver_one}", 
+      "hostname"=>"#{@random_nameserver_one}", 
       "ipv4"=>["0.0.0.1"],
       "ipv6"=>[]
     }
 
     nameserver_hash_two = {
-      "hostname"=>"ns2.#{@random_nameserver_two}", 
+      "hostname"=>"#{@random_nameserver_two}", 
       "ipv4"=>[],
       "ipv6"=>["2001:DB8::1"]
     }
 
     nameserver_hash_three = {
-      "hostname"=>"ns3.#{@domain_two}", 
+      "hostname"=>"#{@domain_two}", 
       "ipv4"=>["0.54.0.62"],
       "ipv6"=>[]
     }
