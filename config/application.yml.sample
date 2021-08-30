@@ -5,8 +5,9 @@ TEMPORARY_SECRET_KEY: "temporary-secret-key"
 BASE_URL: "http://registry:3000"
 
 PUSH_RESULT: "/repp/v1/registrar/accreditation/push_results"
-GET_INFO: "/repp/v1/registrar/accreditation/get_info"
+GET_INFO: "/api/v1/accreditation_center/auth"
 
 # REPP REQUESTS
-GET_CONTACT: "/repp/v1/contacts/"
-GET_DOMAIN: "/repp/v1/domains/"
+GET_CONTACT: "/api/v1/accreditation_center/contacts/"
+GET_DOMAIN: "/api/v1/accreditation_center/domains/"
+ 

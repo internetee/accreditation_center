@@ -1,5 +1,5 @@
 require 'rails_helper'
-require_relative "../../support/devise"
+require_relative "../../../support/devise"
 
 RSpec.describe GenerateQuestions do
 	login_user

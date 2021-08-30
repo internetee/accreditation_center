@@ -14,5 +14,5 @@ COPY . .
 RUN gem install bundler && bundle update --bundler && bundle config set without 'development test' && bundle install
 COPY package.json yarn.lock ./
 RUN yarn install --check-files
-# RUN bundle exec rails assets:clobber
-# RUN bundle exec rails assets:precompile
+RUN bundle exec rails assets:clobber
+RUN bundle exec rails assets:precompile
