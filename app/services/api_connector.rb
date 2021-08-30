@@ -19,7 +19,6 @@ class ApiConnector
     Base64.urlsafe_encode64("#{username}:#{password}")
   end
 
-  # { 'Authorization' => "Basic #{@auth_token}" }
   def faraday_request(url:, headers:, params: {})
     Faraday.new(
       url: url,

@@ -4,6 +4,21 @@ require_relative "../support/devise"
 RSpec.describe HomeController, type: :controller do
 	login_user
 
+	# transfer_code = result["data"]["domain"]["transfer_code"]
+    # transfer_domain_name = result["data"]["domain"]["name"]
+	before(:each) do
+		hash = {
+			"data" => {
+				"domain" => {
+					"transfer_code": "asddsfsf32",
+					"name": "awesome.test"
+				}
+			}
+		}
+
+		allow(GenerateTransferCode).to receive(:process).and_return(hash)
+	end
+
 	context 'actions' do
 		it 'get index action' do
 			get :index

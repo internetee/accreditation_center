@@ -40,7 +40,7 @@
 				<% if @result.nil? or !@result %>
 					<%= f.submit "Submit", class: 'actions' %>
 				<% else %>
-					<%= link_to "Next", practice_nameserver_index_path, class: 'actions' %>
+					<%= link_to "Next", practice_transfer_index_path, class: 'actions' %>
 				<% end %>
 
 				<%= link_to "Cancel", root_path, class: 'actions-red' %>

@@ -7,7 +7,12 @@ BASE_URL: "http://registry:3000"
 PUSH_RESULT: "/repp/v1/registrar/accreditation/push_results"
 GET_INFO: "/api/v1/accreditation_center/auth"
 
-# REPP REQUESTS
+# API REQUESTS
 GET_CONTACT: "/api/v1/accreditation_center/contacts/"
 GET_DOMAIN: "/api/v1/accreditation_center/domains/"
  
+#ACCR_BOT DATA
+ACCR_USERNAME: "accr_bot"
+ACCR_PASSWORD: "123456"
+ACCR_CONTACT_CODE: "1234567890:6CACDC59"
+ACCR_REGISTRAR_NAME: "ACCREDITATION EIS"
