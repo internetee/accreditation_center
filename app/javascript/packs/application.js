@@ -13,6 +13,14 @@ global.toastr = require("toastr")
 
 Rails.start()
 Turbolinks.start()
+
+document.addEventListener("DOMContentLoaded", () => {
+	// The default of 500ms is too long and
+	// users can lose the causal link between clicking
+	// a link and seeing the browser respond
+	Turbolinks.setProgressBarDelay(100)
+})
+
 ActiveStorage.start()
 
 global.$ = jQuery
