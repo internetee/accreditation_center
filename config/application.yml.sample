@@ -10,6 +10,9 @@ GET_INFO: "/api/v1/accreditation_center/auth"
 # API REQUESTS
 GET_CONTACT: "/api/v1/accreditation_center/contacts/"
 GET_DOMAIN: "/api/v1/accreditation_center/domains/"
+
+# REPP REQUESTS
+CREATE_DOMAIN: "/repp/v1/domains/"
  
 #ACCR_BOT DATA
 ACCR_USERNAME: "accr_bot"
