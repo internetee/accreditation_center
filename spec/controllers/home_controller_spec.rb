@@ -4,8 +4,6 @@ require_relative "../support/devise"
 RSpec.describe HomeController, type: :controller do
 	login_user
 
-	# transfer_code = result["data"]["domain"]["transfer_code"]
-    # transfer_domain_name = result["data"]["domain"]["name"]
 	before(:each) do
 		hash = {
 			"data" => {

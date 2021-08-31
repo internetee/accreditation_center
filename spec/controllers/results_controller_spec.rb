@@ -11,10 +11,22 @@ RSpec.describe ResultsController, type: :controller do
 	let(:question) { build(:question) }
 	let(:answer) { build(:answer) }
 
-	context 'results prohibitted' do
-	# login happens by another user, which instance is @user
 	login_user
+	
+	before(:each) do
+		hash = {
+			"data" => {
+				"domain" => {
+					"transfer_code": "asddsfsf32",
+					"name": "awesome.test"
+				}
+			}
+		}
 
+		allow(GenerateTransferCode).to receive(:process).and_return(hash)
+	end
+
+	context 'results prohibitted' do
 		it 'only user can see his own results' do
 			category.save
 			result.user = @user

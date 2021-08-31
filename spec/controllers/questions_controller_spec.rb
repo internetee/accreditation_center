@@ -7,6 +7,19 @@ RSpec.describe QuestionsController, type: :controller do
 	let(:quiz) { build(:quiz, id: 1) }
 	let(:question) { create(:question, id: 1) }
 
+	before(:each) do
+		hash = {
+			"data" => {
+				"domain" => {
+					"transfer_code": "asddsfsf32",
+					"name": "awesome.test"
+				}
+			}
+		}
+
+		allow(GenerateTransferCode).to receive(:process).and_return(hash)
+	end
+
 	context 'actions' do
 		it 'get show action' do
 			get :show, params: { id: question.id, quiz_id: quiz.id }

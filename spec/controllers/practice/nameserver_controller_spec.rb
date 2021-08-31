@@ -13,9 +13,22 @@ RSpec.describe Practice::NameserverController, type: :controller do
 
 	let(:practice) { build(:practice, user: @user) }
 
-	context 'render pages' do
 	login_user
 
+	before(:each) do
+		hash = {
+			"data" => {
+				"domain" => {
+					"transfer_code": "asddsfsf32",
+					"name": "awesome.test"
+				}
+			}
+		}
+
+		allow(GenerateTransferCode).to receive(:process).and_return(hash)
+	end
+
+	context 'render pages' do
 	before(:each) do
 		cache = Rails.cache
 

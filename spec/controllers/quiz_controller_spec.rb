@@ -15,6 +15,19 @@ RSpec.describe QuizController, type: :controller do
 
 	login_user
 
+	before(:each) do
+		hash = {
+			"data" => {
+				"domain" => {
+					"transfer_code": "asddsfsf32",
+					"name": "awesome.test"
+				}
+			}
+		}
+
+		allow(GenerateTransferCode).to receive(:process).and_return(hash)
+	end
+
 	context 'render actions' do
 		it "should render show action if there are start_id and quiz is theory" do
 			question.save
