@@ -2,9 +2,21 @@ require 'rails_helper'
 require_relative "../../support/devise"
 
 RSpec.describe Users::SessionsController, type: :controller do
+	before(:each) do
+		hash = {
+			"data" => {
+				"domain" => {
+					"transfer_code": "asddsfsf32",
+					"name": "awesome.test"
+				}
+			}
+		}
+
+		allow(GenerateTransferCode).to receive(:process).and_return(hash)
+	end
 
   context "shpuld be sign in with exist user" do
-		before do
+		before(:each) do
 			@request.env["devise.mapping"] = Devise.mappings[:user]
 			sign_in FactoryBot.create(:user)
 		end
@@ -44,7 +56,8 @@ RSpec.describe Users::SessionsController, type: :controller do
 			result = {
 				"code" => 1000,
 				"data" => {
-					"username" => "#{username}"
+					"username" => "#{username}",
+					"registrar_email" => "some@email.com"
 				}
 			}
 

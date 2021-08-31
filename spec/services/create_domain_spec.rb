@@ -48,9 +48,10 @@ RSpec.describe CreateDomain do
 
 		it "should return header" do
       token = Base64.urlsafe_encode64("#{ user.username}:#{user.password}")
+      ENV['TEMPORARY_SECRET_KEY'] = "temporary-secret-key"
 
 			api_connector = CreateDomain.new(username: user.username, password: user.password)
-			expect(api_connector.headers).to eq({"Authorization"=>"Basic #{token}"})
+			expect(api_connector.headers).to eq({"Authorization"=>"Basic #{token}", "AccreditationToken"=>"temporary-secret-key"})
 		end
 
     it "should return endpoint" do

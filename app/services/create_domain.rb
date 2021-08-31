@@ -12,7 +12,8 @@ class CreateDomain < ApiConnector
 	end
 
 	def headers
-		 { 'Authorization' => "Basic #{@auth_token}" }
+		 { 'Authorization' => "Basic #{@auth_token}",
+       'AccreditationToken' => ENV['TEMPORARY_SECRET_KEY'] }
 	end
 
 	def create_domain

@@ -3,7 +3,6 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_user!
 	before_action :set_user_answer
-	before_action :initialize_сache_values
 
 	before_action :configure_permitted_parameters, if: :devise_controller?
 
@@ -17,10 +16,6 @@ class ApplicationController < ActionController::Base
   end
 
 	private
-
-	def initialize_сache_values
-		CacheInitializer.generate_values
-	end
 
 	def set_quiz
 		if session[:quiz_id] == nil
