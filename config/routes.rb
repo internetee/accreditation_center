@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'results/index'
   root 'home#index'
   
   devise_for :users, controllers: {
@@ -16,7 +15,7 @@ Rails.application.routes.draw do
 
   get '/quiz_prepare/:id', to: 'quiz#prepare', as: 'quiz_prepare'
   
-  resources :results, only: [ :show ]
+  resources :results, only: [ :index, :show ]
   resources :practice, only: [ :index ]
 
   namespace :practice do
@@ -24,6 +23,7 @@ Rails.application.routes.draw do
     resources :domains, only: [ :index, :create ]
     resources :nameserver, only: [ :index, :create ]
     resources :transfer, only: [ :index, :create ]
+    resources :renew, only: [ :index, :create ]
   end
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

@@ -13,7 +13,7 @@ RSpec.describe GenerateDomainResult do
 					"contacts" => [
 													{"code"=>"AABB", "type"=>"AdminDomainContact"},
 													{"code"=>"AABB", "type"=>"TechDomainContact"}
-												],
+												].sort_by { |hsh| hsh["type"] },
 					"nameservers" => [
 														{
 															"hostname"=>"ns1.some.test", 
@@ -43,7 +43,7 @@ RSpec.describe GenerateDomainResult do
 		@hash = {
 			domain_one: "some.test",
 			domain_two: "some2.test",
-			random_nameserver: "another.test",
+			random_nameserver: "ns2.another.test",
 			api_connector: @api_connector,
 			action: "domain",
 			user: @user

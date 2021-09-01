@@ -5,21 +5,30 @@
 			<h4 class="center <%= @result.nil? ? "" : @result ? "green" : "answered" %>">
 				<%= @result.nil? ? "" : @result ? "Success" : "Failed" %>
 			</h4>
-				<h4>transfer domains from other registrar - domain names and transfer codes are provided in the test.</h4>
+				<h4> renew domains.</h4>
 
 				<hr>
 
 				<ul>		
-					<li>Transfer code: <b><%= @transfer_code %></b></li>
-					<li>Transfer domain name: <b><%= @transfer_domain_name %></b></li>
+					<li>Domain name: <b><%= @domain_one %></b></li>
+					<li>Renew value: <b>3 month</b></li>
+					<li>Current domain expire date: <b><%= @domain_one_expire_date.to_date %></b></li>
+					<li>Expire date should be: <b><%= @domain_one_expire_date.to_date + 3.month %></b></li>
 				</ul>
+
+        <ul>
+          <li>Domain name: <b><%= @domain_two %></b></li>
+					<li>Renew value: <b>5 year and 6 month</b></li>
+					<li>Current domain expire date: <b><%= @domain_two_expire_date.to_date %></b></li>
+						<li>Expire date should be: <b><%= @domain_one_expire_date.to_date + 6.month + 5.years %></b></li>
+        </ul>
 				<h5>When will be ready, press Submit</h5>
 
 			<div class="loggin-wrapper box-button-wrapper">
 				<% if @result.nil? or !@result %>
 					<%= f.submit "Submit", class: 'actions' %>
 				<% else %>
-					<%= link_to "Next", practice_renew_index_path, class: 'actions' %>
+					<%= link_to "Next", root_path, class: 'actions' %>
 				<% end %>
 
 				<%= link_to "Cancel", root_path, class: 'actions-red' %>
