@@ -45,13 +45,17 @@ class Users::SessionsController < Devise::SessionsController
   def checking_username(result)
     if result["code"] == 1000
       username = result["data"]["username"]
+      email = result["data"]["registrar_email"]
       user = User.find_by(username: username)
+
+      initialize_сache_values
 
       if user.present?
         sign_in user
       else
         new_user = User.create!(
           username: username,
+          email: email,
           superadmin_role: false,
         )
 
@@ -61,13 +65,19 @@ class Users::SessionsController < Devise::SessionsController
         sign_in new_user
         Rails.logger.info "#{new_user.username} sign in"
       end
-   
     else
       Rails.logger.info "Fails to sign in"
     end
   end
+  
+  private
 
   def generate_token(username: , password:)
     Base64.urlsafe_encode64("#{username}:#{password}")
   end
+
+
+  def initialize_сache_values
+		CacheInitializer.generate_values
+	end
 end

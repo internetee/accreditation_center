@@ -1,0 +1,29 @@
+<div class="flex-centrilize">
+	<div class="category-description <%= @result.nil? ? "" : @result ? "green-border" : "red-border" %>">
+		<%= form_with action: @result do |f| %>
+			<h2 class="box-title center">Transfer domain test</h2>
+			<h4 class="center <%= @result.nil? ? "" : @result ? "green" : "answered" %>">
+				<%= @result.nil? ? "" : @result ? "Success" : "Failed" %>
+			</h4>
+				<h4>transfer domains from other registrar - domain names and transfer codes are provided in the test.</h4>
+
+				<hr>
+
+				<ul>		
+					<li>Transfer code: <b><%= @transfer_code %></b></li>
+					<li>Transfer domain name: <b><%= @transfer_domain_name %></b></li>
+				</ul>
+				<h5>When will be ready, press Submit</h5>
+
+			<div class="loggin-wrapper box-button-wrapper">
+				<% if @result.nil? or !@result %>
+					<%= f.submit "Submit", class: 'actions' %>
+				<% else %>
+					<%= link_to "Next", root_path, class: 'actions' %>
+				<% end %>
+
+				<%= link_to "Cancel", root_path, class: 'actions-red' %>
+			</div>
+		<% end %>
+	</div>
+</div>

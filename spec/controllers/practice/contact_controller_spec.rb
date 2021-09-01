@@ -13,9 +13,22 @@ RSpec.describe Practice::ContactController, type: :controller do
 
 	let(:practice) { build(:practice, user: @user) }
 
-	context 'render pages' do
 	login_user
 
+	before(:each) do
+		hash = {
+			"data" => {
+				"domain" => {
+					"transfer_code": "asddsfsf32",
+					"name": "awesome.test"
+				}
+			}
+		}
+
+		allow(GenerateTransferCode).to receive(:process).and_return(hash)
+	end
+
+	context 'render pages' do
 		it 'should be successfully contact practice rendered if practice did not found' do
 			get :index
 			expect(response).to have_http_status(:ok)

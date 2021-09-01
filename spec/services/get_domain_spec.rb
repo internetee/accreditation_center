@@ -31,10 +31,12 @@ RSpec.describe GetDomain do
 			expect(api_connector.headers).to eq({"Authorization"=>"Basic some-token"})
 		end
 
-		# it "should return endpoint" do
-		# 	api_connector = GetDomain.new(@token)
+		it "should return endpoint" do
+			ENV['BASE_URL'] = 'https://api.website'
+			ENV['GET_DOMAIN'] = '/api/domains/'
 
-		# 	expect(api_connector.domain_endpoint).to eq(ENV['BASE_URL'] + ENV['GET_DOMAIN'] + '?name=')
-		# end
+			api_connector = GetDomain.new(@token)
+			expect(api_connector.domain_endpoint).to eq("https://api.website/api/domains/?name=")
+		end
 	end
 end

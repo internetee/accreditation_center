@@ -13,38 +13,25 @@ RSpec.describe PracticeController, type: :controller do
 
 	let(:practice) { build(:practice, user: @user) }
 
-	context 'render pages' do
-	# login happens by another user, which instance is @user
 	login_user
 
+	before(:each) do
+		hash = {
+			"data" => {
+				"domain" => {
+					"transfer_code": "asddsfsf32",
+					"name": "awesome.test"
+				}
+			}
+		}
+
+		allow(GenerateTransferCode).to receive(:process).and_return(hash)
+	end
+
+	context 'render pages' do
 		it 'should be successfully index rendered' do
 			get :index
 			expect(response).to have_http_status(:ok)
 		end
-
-		# it 'should be successfully contact rendered if practice did not found' do
-		# 	get :contact
-		# 	expect(response).to have_http_status(:ok)
-		# end
-
-		# it 'should be successfully contact rendered if practice found and result true' do
-		# 	practice.action_name = "contact"
-		# 	practice.result = true
-
-		# 	practice.save
-			
-		# 	get :contact
-		# 	expect(response).to have_http_status(:ok)
-		# end
-
-		# it 'should be successfully contact rendered if practice found and result false' do
-		# 	practice.action_name = "contact"
-		# 	practice.result = false
-
-		# 	practice.save
-			
-		# 	get :contact
-		# 	expect(response).to have_http_status(:ok)
-		# end
 	end
 end

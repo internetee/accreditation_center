@@ -13,6 +13,19 @@ RSpec.describe AnswerQuestionsController, type: :controller do
 
 	login_user
 
+  before(:each) do
+		hash = {
+			"data" => {
+				"domain" => {
+					"transfer_code": "asddsfsf32",
+					"name": "awesome.test"
+				}
+			}
+		}
+
+		allow(GenerateTransferCode).to receive(:process).and_return(hash)
+	end
+
 	context 'actions' do
 		it 'post create action' do
 			post :create, params: { answer_question: {quiz_id: quiz.id, answer_id: answer.id , question_id: question.id } }
