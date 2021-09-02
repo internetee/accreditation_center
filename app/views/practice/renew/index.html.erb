@@ -28,7 +28,7 @@
 				<% if @result.nil? or !@result %>
 					<%= f.submit "Submit", class: 'actions' %>
 				<% else %>
-					<%= link_to "Next", root_path, class: 'actions' %>
+					<%= link_to "Next", practice_change_registrant_email_index_path, class: 'actions' %>
 				<% end %>
 
 				<%= link_to "Cancel", root_path, class: 'actions-red' %>

@@ -24,6 +24,8 @@ Rails.application.routes.draw do
     resources :nameserver, only: [ :index, :create ]
     resources :transfer, only: [ :index, :create ]
     resources :renew, only: [ :index, :create ]
+    resources :change_registrant_email, only: [ :index, :create ]
+    resources :change_registrant_verification, only: [ :index, :create ]
   end
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
