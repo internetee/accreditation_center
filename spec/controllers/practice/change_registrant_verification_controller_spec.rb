@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative "../../support/devise"
 
-RSpec.describe Practice::TransferController, type: :controller do
+RSpec.describe Practice::ChangeRegistrantVerificationController, type: :controller do
 	let(:result) { build(:result) }
 	let(:category) { build(:category) }
 	let(:another_user) { build(:user) }
@@ -35,7 +35,7 @@ RSpec.describe Practice::TransferController, type: :controller do
 		end
 
 		it 'should be successfully nameserver practice rendered if practice found and result true' do
-			practice.action_name = "transfer"
+			practice.action_name = "change_registrant_verification"
 			practice.result = true
 
 			practice.save
@@ -45,7 +45,7 @@ RSpec.describe Practice::TransferController, type: :controller do
 		end
 
 		it 'should be successfully nameserver practice rendered if practice found and result false' do
-			practice.action_name = "transfer"
+			practice.action_name = "change_registrant_verification"
 			practice.result = false
 
 			practice.save
@@ -61,14 +61,15 @@ RSpec.describe Practice::TransferController, type: :controller do
 				{
 					domain_name: "test.com",
 					api_connector: @api_connector, 
-					action: "transfer", 
+					action: "change_registrant_verification", 
 					user: @user,
+					verified: true,
 				}
 			end
 
-			allow_any_instance_of(GenerateTransferCodeResult).to receive(:checking_data).with(complete_data).and_return(true)
+			allow_any_instance_of(GenerateChangeRegistrantEmailResult).to receive(:checking_data).with(complete_data).and_return(true)
 
-			allow_any_instance_of(Practice::TransferController).to receive(:complete_data).and_return(complete_data)
+			allow_any_instance_of(Practice::ChangeRegistrantVerificationController).to receive(:complete_data).and_return(complete_data)
 			
 			post :create
 			expect(response).to have_http_status(:redirect)

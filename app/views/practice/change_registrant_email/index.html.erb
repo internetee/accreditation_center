@@ -1,0 +1,34 @@
+<div class="flex-centrilize">
+	<div class="category-description <%= @result.nil? ? "" : @result ? "green-border" : "red-border" %>">
+		<%= form_with action: @result do |f| %>
+			<h2 class="box-title center">Change registrant test</h2>
+			<h4 class="center <%= @result.nil? ? "" : @result ? "green" : "answered" %>">
+				<%= @result.nil? ? "" : @result ? "Success" : "Failed" %>
+			</h4>
+				<h4> registrant change + verification process via email. <%= @result %> </h4>
+
+				<hr>
+				<b>In order to solve this problem, your first step should be as follows:</b>
+				<p>At the momemnt registrant contact <b><%= @priv_name %></b> has <b><%= @priv_name %>@eesti.ee</b> email.
+					 You should change your mail to your own to receive mail
+				</p>
+				<hr>
+				<b>The second step is to change the registrant of this domain. </b>
+				<p>At the moment, the registrant of your domain <b><%= @domain_one %></b>  should have the following contact with the name, 
+				<b><%= @priv_name %></b>, you should change it to another registrant with the name <b><%= @org_name %></b></p>
+				<p>To change the registrant, you should receive a confirmation letter in the mail</p>
+
+				<h5>When will be ready, press Submit</h5>
+
+			<div class="loggin-wrapper box-button-wrapper">
+				<% if @result.nil? or !@result %>
+					<%= f.submit "Submit", class: 'actions' %>
+				<% else %>
+					<%= link_to "Next", practice_change_registrant_verification_index_path, class: 'actions' %>
+				<% end %>
+
+				<%= link_to "Cancel", root_path, class: 'actions-red' %>
+			</div>
+		<% end %>
+	</div>
+</div>

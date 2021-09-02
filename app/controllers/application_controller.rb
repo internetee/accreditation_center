@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_user!
 	before_action :set_user_answer
+	before_action :initialize_сache_values
 
 	before_action :configure_permitted_parameters, if: :devise_controller?
 
@@ -39,5 +40,9 @@ class ApplicationController < ActionController::Base
 		return [] if current_user.user_answers.last.nil?
 
 		user_questions = current_user.user_answers
+	end
+
+	def initialize_сache_values
+		CacheInitializer.generate_values
 	end
 end
