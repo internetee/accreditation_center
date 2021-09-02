@@ -40,7 +40,7 @@ module GenerateDomainResult
     }
 
     nameserver_hash_two = {
-      "hostname"=>"ns2.#{@random_nameserver}", 
+      "hostname"=>"#{@random_nameserver}", 
       "ipv4"=>[],
       "ipv6"=>[]
     }
@@ -54,30 +54,28 @@ module GenerateDomainResult
 
     contact_private_hash =
       [
-        {"code"=>"#{private_contact_id}", "type"=>"AdminDomainContact"},
-        {"code"=>"#{private_contact_id}", "type"=>"TechDomainContact"}
-      ]
+        {"code"=>"#{private_contact_id}", "type"=>"TechDomainContact"},
+        {"code"=>"#{private_contact_id}", "type"=>"AdminDomainContact"}
+      ].sort_by { |hsh| hsh["type"] }
 
     contact_org_hash =
       [
-        {"code"=>"#{private_contact_id}", "type"=>"AdminDomainContact"},
-        {"code"=>"#{org_contact_id}", "type"=>"TechDomainContact"}
-      ]
+        {"code"=>"#{org_contact_id}", "type"=>"TechDomainContact"},
+        {"code"=>"#{private_contact_id}", "type"=>"AdminDomainContact"}
+      ].sort_by { |hsh| hsh["type"] }
 
     flag_counter +=1 if response["domain"]["name"] == (is_first_domain ? @domain_one : @domain_two)
     flag_counter +=1 if response["domain"]["registrant"] == (is_first_domain ? private_contact_id : org_contact_id)
 
     if is_first_domain
-      flag_counter +=1 if response["domain"]["contacts"] == contact_private_hash
+      flag_counter +=1 if response["domain"]["contacts"].sort_by { |hsh| hsh["type"] } == contact_private_hash
     else
-      flag_counter +=1 if response["domain"]["contacts"] == contact_org_hash
+      flag_counter +=1 if response["domain"]["contacts"].sort_by { |hsh| hsh["type"] } == contact_org_hash
     end
 
     flag_counter +=1 if response["domain"]["nameservers"].include? nameserver_hash_one if is_first_domain
     flag_counter +=1 if response["domain"]["nameservers"].include? nameserver_hash_two if is_first_domain
     flag_counter +=1 if response["domain"]["dnssec_keys"].include? dnskey_hash if is_first_domain
-
-
 
     return flag_counter == 6 if is_first_domain
     return flag_counter == 3

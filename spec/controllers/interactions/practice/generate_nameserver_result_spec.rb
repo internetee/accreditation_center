@@ -131,6 +131,17 @@ context "check contacts" do
 					]
 				},
 			}
+
+			@hash = {
+				domain_one: "some.test",
+				domain_two: "some2.test",
+				random_nameserver_one: "ns1.some.test",
+				random_nameserver_two: "ns2.another.test",
+				random_nameserver: "another.test",
+				api_connector: @api_connector,
+				action: "domain",
+				user: @user
+			}
 		end
 
 		it "should return true if for first domain all results true" do
@@ -141,6 +152,13 @@ context "check contacts" do
 			allow(GenerateNameserverResult).to receive(:check_namespace).with(domain_name: "some2.test", is_first_domain: false).and_return(true)
 
 			result = GenerateNameserverResult.send(:compare_data_of_domain, response: @response, is_first_domain: true)
+			expect(result).to be true
+		end
+
+		it 'should return true if namespaces are correct' do
+			allow_any_instance_of(GetDomain).to receive(:get_domain).and_return(@response)
+
+			result = GenerateNameserverResult.send(:check_namespace, domain_name: "some.test", is_first_domain: true)
 			expect(result).to be true
 		end
 	end

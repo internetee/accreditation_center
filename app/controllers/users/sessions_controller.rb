@@ -33,7 +33,7 @@ class Users::SessionsController < Devise::SessionsController
     
     if username && username.valid_password?(params[:user][:password]) && username.superadmin_role
       sign_in username
-      
+      initialize_сache_values
     else
       user_request = SignIn.new(username: params[:user][:username], password: params[:user][:password])
       result = user_request.sign_in
