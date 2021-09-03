@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'delete/index'
+  get 'delete/create'
   root 'home#index'
   
   devise_for :users, controllers: {
@@ -26,6 +28,7 @@ Rails.application.routes.draw do
     resources :renew, only: [ :index, :create ]
     resources :change_registrant_email, only: [ :index, :create ]
     resources :change_registrant_verification, only: [ :index, :create ]
+    resources :delete, only: [ :index, :create ]
   end
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
