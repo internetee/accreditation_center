@@ -1,20 +1,16 @@
 <div class="flex-centrilize">
 	<div class="category-description <%= @result.nil? ? "" : @result ? "green-border" : "red-border" %>">
 		<%= form_with action: @result do |f| %>
-			<h2 class="box-title center">Change registrant test</h2>
+			<h2 class="box-title center">Delete test</h2>
 			<h4 class="center <%= @result.nil? ? "" : @result ? "green" : "answered" %>">
 				<%= @result.nil? ? "" : @result ? "Success" : "Failed" %>
 			</h4>
-				<h4> registrant change with verified=yes. </h4>
+				<h4> q8: delete the domain with verified=yes </h4>
 
 				<hr>
-			<p> In this task, you need to change the registrant using the "verified" checkbox. 
-          This will help you change registrants without email confirmation.
+			<p> Remove domain <b><%= @domain_one %></b> using verified checkbox
       </p>
       <p>
-      At the moment, the domain <b><%= @domain_two %></b> has the next registrant with the name <b><%= @org_name %></b>, 
-      you need to change to the next registrant with the name <b><%= @priv_name %></b>.
-      </p>
 
 				<h5>When will be ready, press Submit</h5>
 
@@ -22,11 +18,11 @@
 				<% if @result.nil? or !@result %>
 					<%= f.submit "Submit", class: 'actions' %>
 				<% else %>
-					<%= link_to "Next", practice_delete_index_path, class: 'actions' %>
+					<%= link_to "Next", root_path, class: 'actions' %>
 				<% end %>
 
 				<%= link_to "Cancel", root_path, class: 'actions-red' %>
 			</div>
 		<% end %>
 	</div>
-</div>
+</div>s
