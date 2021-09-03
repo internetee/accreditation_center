@@ -21,7 +21,7 @@ module GenerateContactResult
 		result = check_contact(cont_id: priv_contact_id, is_priv: true)
     result = check_contact(cont_id: org_contact_id, is_priv: false) if result
 
-		create_result if result
+		create_result(result) if result
 
     result
 	end
@@ -55,12 +55,20 @@ module GenerateContactResult
     result
   end
 
-  def create_result
-    p = Practice.new
-    p.user = @user
-    p.result = true
-    p.action_name = @action
+  def create_result(result)
+    p = Practice.find_by(user: @user, action_name: @action)
 
-    p.save!
+    if p.nil?
+      p = Practice.new
+      p.user = @user
+      p.result = result
+      p.action_name = @action
+
+      return p.save!
+    end
+
+    return if p.result
+
+    p.update(result: result)
   end
 end

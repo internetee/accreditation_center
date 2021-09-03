@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'invoice/index'
+  get 'invoice/create'
   get 'delete/index'
   get 'delete/create'
   root 'home#index'
@@ -29,6 +31,7 @@ Rails.application.routes.draw do
     resources :change_registrant_email, only: [ :index, :create ]
     resources :change_registrant_verification, only: [ :index, :create ]
     resources :delete, only: [ :index, :create ]
+    resources :invoice, only: [ :index, :create ]
   end
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
