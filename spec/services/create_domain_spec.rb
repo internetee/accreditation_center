@@ -55,7 +55,7 @@ RSpec.describe CreateDomain do
 		end
 
     it "should return endpoint" do
-			ENV['BASE_URL'] = 'https://api.website'
+			ENV['REPP_STAGING_BASE_URL'] = 'https://api.website'
 			ENV['CREATE_DOMAIN'] = '/repp/domains/'
 
 			api_connector = CreateDomain.new(username: user.username, password: user.password)
