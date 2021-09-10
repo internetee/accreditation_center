@@ -1,5 +1,6 @@
 class Practice
   class ChangeRegistrantEmailController < ApplicationController
+    before_action :check_access
     before_action :set_cache_memory
     before_action :set_api_connector
     before_action :set_practice
@@ -16,6 +17,13 @@ class Practice
     end
 
     private
+
+    def check_access
+      renew = Practice.find_by(action_name: "renew", user: current_user, result: true)
+      return unless renew.nil?
+
+      redirect_to practice_renew_index_path, notice: "You need first finish this task"
+    end
 
     def complete_data
       {

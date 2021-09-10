@@ -1,5 +1,6 @@
 class Practice
   class InvoiceController < ApplicationController
+    before_action :check_access
     before_action :set_api_connector
     before_action :set_practice
 
@@ -15,6 +16,13 @@ class Practice
     end
 
     private
+
+    def check_access
+      delete = Practice.find_by(action_name: "delete", user: current_user, result: true)
+      return unless delete.nil?
+
+      redirect_to practice_delete_index_path, notice: "You need first finish this task"
+    end
 
     def complete_data
       {

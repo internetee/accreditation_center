@@ -1,5 +1,6 @@
 class Practice
   class NameserverController < ApplicationController
+    before_action :check_access
     before_action :set_cache_memory
     before_action :set_api_connector
     before_action :set_practice
@@ -17,6 +18,13 @@ class Practice
     end
 
     private
+
+    def check_access
+      domain = Practice.find_by(action_name: "domain", user: current_user, result: true)
+      return unless domain.nil?
+
+      redirect_to practice_domains_path, notice: "You need first finish this task"
+    end
 
     def set_practice
       @practice = Practice.find_by(user: current_user, action_name: ACTION)

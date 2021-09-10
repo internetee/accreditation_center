@@ -1,5 +1,6 @@
 class Practice
   class ChangeRegistrantVerificationController < ApplicationController
+    before_action :check_access
     before_action :set_cache_memory
     before_action :set_api_connector
     before_action :set_practice
@@ -16,6 +17,13 @@ class Practice
     end
 
     private
+
+    def check_access
+      change_registrant_email = Practice.find_by(action_name: "change_registrant_email", user: current_user, result: true)
+      return unless change_registrant_email.nil?
+
+      redirect_to practice_change_registrant_email_index_path, notice: "You need first finish this task"
+    end
 
     def complete_data
       {

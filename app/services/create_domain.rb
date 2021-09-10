@@ -5,7 +5,7 @@ class CreateDomain < ApiConnector
 	end
 
 	def domain_endpoint
-		base_url = ENV['REPP_STAGING_BASE_URL']
+		base_url = ENV['BASE_URL']
 		endpoint = ENV['CREATE_DOMAIN']
 
     base_url + endpoint
