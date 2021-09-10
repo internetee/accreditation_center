@@ -12,6 +12,7 @@ RSpec.describe Practice::NameserverController, type: :controller do
 	let(:answer) { build(:answer) }
 
 	let(:practice) { build(:practice, user: @user) }
+	let(:practice_before) { build(:practice, user: @user) }
 
 	login_user
 
@@ -37,6 +38,11 @@ RSpec.describe Practice::NameserverController, type: :controller do
 		allow(cache).to receive(:read).with('random_nameserver_one').and_return('some.test')
 		allow(cache).to receive(:read).with('random_nameserver_two').and_return('some2.test')
 		allow(cache).to receive(:read).with('random_nameserver').and_return('ns3.another.test')
+
+		practice_before.action_name = "domain"
+		practice_before.result = true
+	
+		practice_before.save
 	end
 
 		it 'should be successfully nameserver practice rendered if practice did not found' do

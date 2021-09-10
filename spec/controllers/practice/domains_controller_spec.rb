@@ -12,6 +12,7 @@ RSpec.describe Practice::DomainsController, type: :controller do
 	let(:answer) { build(:answer) }
 
 	let(:practice) { build(:practice, user: @user) }
+	let(:practice_before) { build(:practice, user: @user) }
 
 	login_user
 
@@ -36,6 +37,11 @@ RSpec.describe Practice::DomainsController, type: :controller do
 		allow(cache).to receive(:read).with('domain_one').and_return('some.test')
 		allow(cache).to receive(:read).with('domain_two').and_return('some2.test')
 		allow(cache).to receive(:read).with('random_nameserver').and_return('ns3.another.test')
+
+		practice_before.action_name = "contact"
+		practice_before.result = true
+	
+		practice_before.save
 	end
 
 		it 'should be successfully domain practice rendered if practice did not found' do

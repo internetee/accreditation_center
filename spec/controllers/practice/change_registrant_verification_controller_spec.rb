@@ -12,6 +12,7 @@ RSpec.describe Practice::ChangeRegistrantVerificationController, type: :controll
 	let(:answer) { build(:answer) }
 
 	let(:practice) { build(:practice, user: @user) }
+	let(:practice_before) { build(:practice, user: @user) }
 
 	login_user
 
@@ -29,6 +30,13 @@ RSpec.describe Practice::ChangeRegistrantVerificationController, type: :controll
 	end
 
 	context 'render pages' do
+		before(:each) do
+			practice_before.action_name = "change_registrant_email"
+			practice_before.result = true
+		
+			practice_before.save
+		end
+
 		it 'should be successfully nameserver practice rendered if practice did not found' do
 			get :index
 			expect(response).to have_http_status(:ok)

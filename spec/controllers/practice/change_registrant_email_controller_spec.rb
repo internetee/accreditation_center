@@ -2,6 +2,8 @@ require 'rails_helper'
 require_relative "../../support/devise"
 
 RSpec.describe Practice::ChangeRegistrantEmailController, type: :controller do
+	login_user
+
 	let(:result) { build(:result) }
 	let(:category) { build(:category) }
 	let(:another_user) { build(:user) }
@@ -13,7 +15,7 @@ RSpec.describe Practice::ChangeRegistrantEmailController, type: :controller do
 
 	let(:practice) { build(:practice, user: @user) }
 
-	login_user
+	let(:practice_before) { build(:practice, user: @user) }
 
 	before(:each) do
 		hash = {
@@ -29,6 +31,13 @@ RSpec.describe Practice::ChangeRegistrantEmailController, type: :controller do
 	end
 
 	context 'render pages' do
+		before(:each) do
+			practice_before.action_name = "renew"
+			practice_before.result = true
+		
+			practice_before.save
+		end
+
 		it 'should be successfully nameserver practice rendered if practice did not found' do
 			get :index
 			expect(response).to have_http_status(:ok)

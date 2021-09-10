@@ -12,6 +12,7 @@ RSpec.describe Practice::RenewController, type: :controller do
 	let(:answer) { build(:answer) }
 
 	let(:practice) { build(:practice, user: @user) }
+	let(:practice_before) { build(:practice, user: @user) }
 
 	login_user
 
@@ -51,6 +52,13 @@ RSpec.describe Practice::RenewController, type: :controller do
 	end
 
 	context 'render pages' do
+		before(:each) do
+			practice_before.action_name = "transfer"
+			practice_before.result = true
+		
+			practice_before.save
+		end
+
 		it 'should be successfully renew practice rendered if practice did not found' do
 			get :index
 			expect(response).to have_http_status(:ok)
