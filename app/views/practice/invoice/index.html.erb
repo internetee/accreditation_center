@@ -1,16 +1,14 @@
 <div class="flex-centrilize">
 	<div class="category-description <%= @result.nil? ? "" : @result ? "green-border" : "red-border" %>">
 		<%= form_with action: @result do |f| %>
-			<h2 class="box-title center">Delete test</h2>
+			<h2 class="box-title center">Invoice test</h2>
 			<h4 class="center <%= @result.nil? ? "" : @result ? "green" : "answered" %>">
 				<%= @result.nil? ? "" : @result ? "Success" : "Failed" %>
 			</h4>
-				<h4> q8: delete the domain with verified=yes </h4>
+				<h4> create and cancel an invoice.  </h4>
 
 				<hr>
-			<p> Remove domain <b><%= @domain_one %></b> using verified checkbox
-      </p>
-      <p>
+			<p>Create a € 20.0 (should be 24.0 with tax) invoice from today's date and cancel this invoice</p>
 
 				<h5>When will be ready, press Submit</h5>
 
@@ -18,7 +16,7 @@
 				<% if @result.nil? or !@result %>
 					<%= f.submit "Submit", class: 'actions' %>
 				<% else %>
-					<%= link_to "Next", practice_invoice_index_path, class: 'actions' %>
+					<%= link_to "Next", root_path, class: 'actions' %>
 				<% end %>
 
 				<%= link_to "Cancel", root_path, class: 'actions-red' %>

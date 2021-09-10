@@ -12,6 +12,7 @@ RSpec.describe Practice::TransferController, type: :controller do
 	let(:answer) { build(:answer) }
 
 	let(:practice) { build(:practice, user: @user) }
+	let(:practice_before) { build(:practice, user: @user) }
 
 	login_user
 
@@ -26,6 +27,11 @@ RSpec.describe Practice::TransferController, type: :controller do
 		}
 
 		allow(GenerateTransferCode).to receive(:process).and_return(hash)
+
+		practice_before.action_name = "nameserver"
+		practice_before.result = true
+	
+		practice_before.save
 	end
 
 	context 'render pages' do

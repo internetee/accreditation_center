@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative "../../support/devise"
 
-RSpec.describe Practice::ChangeRegistrantVerificationController, type: :controller do
+RSpec.describe Practice::InvoiceController, type: :controller do
 	let(:result) { build(:result) }
 	let(:category) { build(:category) }
 	let(:another_user) { build(:user) }
@@ -31,7 +31,7 @@ RSpec.describe Practice::ChangeRegistrantVerificationController, type: :controll
 
 	context 'render pages' do
 		before(:each) do
-			practice_before.action_name = "change_registrant_email"
+			practice_before.action_name = "delete"
 			practice_before.result = true
 		
 			practice_before.save
@@ -43,7 +43,7 @@ RSpec.describe Practice::ChangeRegistrantVerificationController, type: :controll
 		end
 
 		it 'should be successfully nameserver practice rendered if practice found and result true' do
-			practice.action_name = "change_registrant_verification"
+			practice.action_name = "invoice"
 			practice.result = true
 
 			practice.save
@@ -53,7 +53,7 @@ RSpec.describe Practice::ChangeRegistrantVerificationController, type: :controll
 		end
 
 		it 'should be successfully nameserver practice rendered if practice found and result false' do
-			practice.action_name = "change_registrant_verification"
+			practice.action_name = "invoice"
 			practice.result = false
 
 			practice.save
@@ -67,17 +67,15 @@ RSpec.describe Practice::ChangeRegistrantVerificationController, type: :controll
 
   		def complete_data
 				{
-					domain_name: "test.com",
 					api_connector: @api_connector, 
-					action: "change_registrant_verification", 
+					action: "invoice", 
 					user: @user,
-					verified: true,
 				}
 			end
 
-			allow_any_instance_of(GenerateChangeRegistrantEmailResult).to receive(:checking_data).with(complete_data).and_return(true)
+			allow_any_instance_of(GenerateInvoiceResult).to receive(:checking_data).with(complete_data).and_return(true)
 
-			allow_any_instance_of(Practice::ChangeRegistrantVerificationController).to receive(:complete_data).and_return(complete_data)
+			allow_any_instance_of(Practice::InvoiceController).to receive(:complete_data).and_return(complete_data)
 			
 			post :create
 			expect(response).to have_http_status(:redirect)
