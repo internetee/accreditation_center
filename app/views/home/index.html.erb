@@ -21,16 +21,24 @@
 						<td><%= quiz.id %></td>
 						<td><%= quiz.title %></td>
 						<td>
-							<% if quiz.result %>
-								
-								<% if quiz.result.result %>
-									<span class='green'>Success</span>
-								<% else %>
-									<span class='answered'>Failed</span>
-								<% end %>
+							<% if quiz.theory %>
+								<% if quiz.result %>
+									
+									<% if quiz.result.result %>
+										<span class='green'>Success</span>
+									<% else %>
+										<span class='answered'>Failed</span>
+									<% end %>
 
+								<% else %>
+									Waiting for chellenge
+								<% end %>
 							<% else %>
-								Waiting for chellenge
+								<% @practice = PracticeResult.find_by(user: current_user) %>
+								<% unless @practice.nil?%>
+									<%= @practice.result %>
+								<% end %>
+									Waiting for chellenge
 							<% end %>
 						</td>
 						<td>
