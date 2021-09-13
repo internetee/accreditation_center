@@ -6,7 +6,6 @@ BASE_URL: "http://registry:3000"
 REPP_STAGING_BASE_URL: "https://st-repp.infra.tld.ee"
 API_STAGING_BASE_URL: "https://st-api.infra.tld.ee"
 
-PUSH_RESULT: "/repp/v1/registrar/accreditation/push_results"
 GET_INFO: "/api/v1/accreditation_center/auth"
 
 # API REQUESTS
@@ -16,7 +15,8 @@ GET_INVOICES: "/api/v1/accreditation_center/invoice_status/"
 
 # REPP REQUESTS
 CREATE_DOMAIN: "/repp/v1/domains/"
- 
+PUSH_RESULT: "/repp/v1/registrar/accreditation/push_results"
+
 #ACCR_BOT DATA
 ACCR_USERNAME: "accr_bot"
 ACCR_PASSWORD: "123456"

@@ -37,12 +37,6 @@
 						<% end %>
 					</tbody>
 				</table>
-
-			<% if @resulting %>
-				This is just testing send request to http://registry:3000/repp/v1/registrar/accreditation/push_results
-				<%= @resulting %>
-				<%= @resulting_count %>
-			<% end %>
 		<% else %>
 			You pass tests at <%= @result.created_at %> and you 
 			<% if @result.result %>
