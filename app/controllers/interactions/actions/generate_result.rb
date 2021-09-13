@@ -55,6 +55,9 @@ module GenerateResult
 		
 		if percent >= 70
 			res = true
+
+			user = User.find(user_answer.user_id)
+			SendResult.process(user: user)
 		else
 			res = false
 		end
