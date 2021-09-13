@@ -21,25 +21,8 @@
 						<td><%= quiz.id %></td>
 						<td><%= quiz.title %></td>
 						<td>
-							<% if quiz.theory %>
-								<% if quiz.result %>
-									
-									<% if quiz.result.result %>
-										<span class='green'>Success</span>
-									<% else %>
-										<span class='answered'>Failed</span>
-									<% end %>
-
-								<% else %>
-									Waiting for chellenge
-								<% end %>
-							<% else %>
-								<% @practice = PracticeResult.find_by(user: current_user) %>
-								<% unless @practice.nil?%>
-									<%= @practice.result %>
-								<% end %>
-									Waiting for chellenge
-							<% end %>
+							<% quiz_presenter = ResultStatusPresenter.new(quiz: quiz, user: current_user) %>
+							<%= quiz_presenter.status %>
 						</td>
 						<td>
 							<% if quiz.theory %>

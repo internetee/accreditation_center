@@ -11,7 +11,7 @@ module GenerateInvoiceResult
 		result = check_invoice
 
 		create_result(result)
-    start_counting(@user) if result
+    GeneratePracticeResult.start_counting(@user) if result
     
     result
 	end

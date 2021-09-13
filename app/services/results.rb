@@ -1,6 +1,8 @@
 class Results < ApiConnector
 
-	def initialize; end
+	def initialize(username)
+		@username = username
+	end
 
 	def push_endpoint
 		base_url = ENV['BASE_URL']
@@ -16,7 +18,7 @@ class Results < ApiConnector
 	def post_params
 		{
 			accreditation_result: {
-				username: "Oleg",
+				username: "#{@username}",
 				result: "true"
 			}
 		}
