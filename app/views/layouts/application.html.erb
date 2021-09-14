@@ -7,6 +7,8 @@
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
+    <%= stylesheet_link_tag "inter-font", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
@@ -15,14 +17,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet"> 
 </head>
 
-<body>
+<body class="h-screen">
   <%= render 'shared/navbar' %>
-  <div class="banner">
-	  <h1 class="h1-header">QUUUUIZZZ</h1>
-    <% if user_signed_in? %>
-        <h1 class="h1-header"><%= current_user.username %></h1>
-    <% end %>
+
+  <div class="container px-5 py-48" style="background:url('assets/hero-orange.jpg')">
   </div>
+
 
   <%= yield %>
   <%= toastr_flash %>

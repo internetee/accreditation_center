@@ -1,20 +1,32 @@
-<div class="flex-centrilize">
-	<div class="category-description">
-		<h2 class="box-title">Sertifitseerimise test</h2>
-		<ul>
-			<li>Testi läbimiseks on sul 45 minutit</li>
-			<li>Küsimusi on 5</li>
-			<li>Küsimustel võib olla mitu õiget vastust</li>
-			<li>Küsimuste vahel saab liikuda vasakul asuvas menüüs</li>
-			<li>Küsimustele võib vastata ükskõik millises järjekorras</li>
-			<li>Kui oled Kõikidele küsimustele vastanud, vajuta vasakul nuppu "Lõpeta test"</li>
-			<li>Peale lõpetamist saad kohe kokkuvõtte oma testist, kus saad näha oma tulemust ja küsimuste õigeid vastuseid</li>
-			<li>Kui oled valmis vajuta nuppu "alusta test"</li>
-		</ul>
+<div class="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+	<div class="relative py-3 sm:max-w-xl sm:mx-auto">
+		<div
+			class="absolute inset-0 bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl">
+		</div>
+		<div class="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
+			<div class="max-w-md mx-auto">
+				<div>
+					<h1 class="text-2xl font-semibold">Sertifitseerimise test</h1>
+						<ul class="list-disc p-4">
+							<li>Testi läbimiseks on sul 45 minutit</li>
+							<li>Küsimusi on 5</li>
+							<li>Küsimustel võib olla mitu õiget vastust</li>
+							<li>Küsimuste vahel saab liikuda vasakul asuvas menüüs</li>
+							<li>Küsimustele võib vastata ükskõik millises järjekorras</li>
+							<li>Kui oled Kõikidele küsimustele vastanud, vajuta vasakul nuppu "Lõpeta test"</li>
+							<li>Peale lõpetamist saad kohe kokkuvõtte oma testist, kus saad näha oma tulemust ja küsimuste õigeid vastuseid</li>
+							<li>Kui oled valmis vajuta nuppu "alusta test"</li>
+						</ul>
+				</div>
 
-		<div class="box-button-wrapper">
-			<%= link_to "Get started", quiz_path(id: params[:id]), class: 'actions' %>
-			<%= link_to "Cancel", root_path, class: 'actions-red' %>
+						<div class="relative mt-4">
+								<%= link_to "Get started", quiz_path(id: params[:id]), class: 'actions' %>
+								<%= link_to "Cancel", root_path, class: 'actions-red' %>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

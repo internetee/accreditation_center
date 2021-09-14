@@ -281,7 +281,7 @@ GEM
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
     semantic_range (3.0.0)
-    simplecov (0.17.0)
+    simplecov (0.17.1)
       docile (~> 1.1)
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
@@ -294,6 +294,8 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    tailwindcss-rails (0.4.3)
+      rails (>= 6.0.0)
     temple (0.8.2)
     thor (1.1.0)
     tilt (2.0.10)
@@ -353,8 +355,9 @@ DEPENDENCIES
   rspec-rails (~> 5.0.2)
   sass-rails (~> 6.0.0)
   selenium-webdriver
-  simplecov
+  simplecov (= 0.17.1)
   spring
+  tailwindcss-rails (~> 0.4.3)
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 4.1.0)
