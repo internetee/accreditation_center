@@ -150,7 +150,7 @@ jobs:
           helm repo add eisrepo https://internetee.github.io/helm-charts/
           helm repo update
           helm upgrade --install accreditation-st-"$PR_REF" --set image.tag="$SHORT_TAG",reference="$PR_REF" eisrepo/accreditation -n accreditation-staging
-          helm upgrade --install repp-st-"$PR_REF" --set image.tag="$SHORT_REGISTRY_TAG",reference="$PR_REF"-accredit eisrepo/registry-epp -n accreditation-staging
+          helm upgrade --install repp-st-"$PR_REF" --set image.repository="ghcr.io/internetee/accreditation_center",image.tag="$SHORT_REGISTRY_TAG",reference="$PR_REF"-accredit eisrepo/registry-epp -n accreditation-staging
           rm kubeconfig
           echo "server obs.tld.ee
           zone pilv.tld.ee
