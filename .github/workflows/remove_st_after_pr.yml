@@ -76,6 +76,7 @@ jobs:
           helm delete repp-st-"$PR_REF" -n accreditation-staging
           cd ..
           rm -rf "$PR_REF"
+          echo "Removing URLs"
           echo "server obs.tld.ee
           zone pilv.tld.ee
           update delete accreditation-"$PR_REF".pilv.tld.ee.
