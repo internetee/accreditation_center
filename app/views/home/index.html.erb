@@ -1,6 +1,6 @@
 <% if user_signed_in? %>
 
-	<main class="w-full place-content-center flex justify-evenly content-center mt-10 pt-12 h-4/5">
+	<main class="w-full place-content-center flex justify-evenly content-center mt-10 mb-48 pt-12 h-4/5">
 
 		<% if @quizzes.any? %>
 
@@ -9,7 +9,7 @@
 					<div class="bg-gray-100 rounded-lg w-96">
 
 							<div class="px-10 py-6 text-center">
-									<div class="mb-4 text-3xl font-bold text-purple-600 uppercase"><%= quiz.title %></div>
+									<div class="mb-4 text-3xl font-bold text-blue-600 uppercase"><%= quiz.title %></div>
 									<span class="text-sm">
 											Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptate tempore eligendi magnam
 											distinctio molestias. Incidunt at consequuntur consequatur
@@ -25,10 +25,10 @@
 							</div>
 
 							<% if quiz.theory %>
-										<%= button_to "Let's Start", quiz_prepare_path(quiz), method: :get, class: "w-full h-16 text-lg font-extrabold text-gray-100 transition duration-300 bg-purple-600 rounded-b-lg hover:bg-purple-700 cursor-pointer" %>
+										<%= button_to "Let's Start", quiz_prepare_path(quiz), method: :get, class: "w-full h-16 text-lg font-extrabold text-gray-100 transition duration-300 bg-blue-500 rounded-b-lg hover:bg-purple-700 cursor-pointer" %>
 							<% else %>
 
-										<%= button_to "Let's Start", practice_index_path, method: :get, class: "w-full h-16 text-lg font-extrabold text-gray-100 transition duration-300 bg-purple-600 rounded-b-lg hover:bg-purple-700 cursor-pointer" %>
+										<%= button_to "Let's Start", practice_index_path, method: :get, class: "w-full h-16 text-lg font-extrabold text-gray-100 transition duration-300 bg-blue-500 rounded-b-lg hover:bg-purple-700 cursor-pointer" %>
 							<% end %>
 
 					</div>
