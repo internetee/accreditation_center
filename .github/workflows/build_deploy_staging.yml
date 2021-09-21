@@ -35,6 +35,7 @@ jobs:
           echo "STATIC_TAG=ghcr.io/internetee/accreditation_center:STATIC_RC-$SHORT_SHA" >> $GITHUB_ENV
           echo "REGISTRY_TAG=ghcr.io/internetee/accreditation_center:REGISTRY_RC-$SHORT_SHA" >> $GITHUB_ENV
           echo "SHORT_TAG=RC-$SHORT_SHA" >> $GITHUB_ENV
+          echo "SHORT_REGISTRY_TAG=REGISTRY_RC-$SHORT_SHA" >> $GITHUB_ENV
 
       - name: Get pull request reference number
         run: |
@@ -149,10 +150,12 @@ jobs:
           helm repo add eisrepo https://internetee.github.io/helm-charts/
           helm repo update
           helm upgrade --install accreditation-st-"$PR_REF" --set image.tag="$SHORT_TAG",reference="$PR_REF" eisrepo/accreditation -n accreditation-staging
+          helm upgrade --install repp-st-"$PR_REF" --set image.repository="ghcr.io/internetee/accreditation_center",image.tag="$SHORT_REGISTRY_TAG",reference="$PR_REF"-accredit eisrepo/registry-epp -n accreditation-staging
           rm kubeconfig
           echo "server obs.tld.ee
           zone pilv.tld.ee
           update add accreditation-"$PR_REF".pilv.tld.ee. 3600 CNAME riigi.pilv.tld.ee.
+          update add repp-"$PR_REF"-accredit.pilv.tld.ee. 3600 CNAME riigi.pilv.tld.ee.
           send
           " | nsupdate -k ~/Kgh-runner.infra.tld.ee.+165+27011.key
           if [ "$?" -eq "0" ]; then
