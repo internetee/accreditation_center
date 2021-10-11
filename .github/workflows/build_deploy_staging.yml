@@ -47,7 +47,7 @@ jobs:
         run: |
           cp config/database.yml.sample config/database.yml
           cp config/application.yml.sample config/application.yml
-          sed -i -e 's/BASE_URL: "http:\/\/registry:3000"/BASE_URL: "http:\/\/st-'$PR_REF'-accreditation-registry"/' config/application.yml
+          sed -i -e 's/BASE_URL: "http:\/\/registry:3000"/BASE_URL: "https:\/\/reg-api-accreditation-'$PR_REF'.pilv.tld.ee"/' config/application.yml
           ls -l config/
 
       - name: Build rails image
@@ -150,12 +150,14 @@ jobs:
           helm repo add eisrepo https://internetee.github.io/helm-charts/
           helm repo update
           helm upgrade --install accreditation-st-"$PR_REF" --set image.tag="$SHORT_TAG",reference="$PR_REF" eisrepo/accreditation -n accreditation-staging
-          helm upgrade --install repp-st-"$PR_REF" --set image.repository="ghcr.io/internetee/accreditation_center",image.tag="$SHORT_REGISTRY_TAG",reference="$PR_REF"-accredit eisrepo/registry-epp -n accreditation-staging
+          helm upgrade --install reg-repp-"$PR_REF" --set nameOverride="epp-accreditation",image.repository="ghcr.io/internetee/accreditation_center",image.tag="$SHORT_REGISTRY_TAG",reference="$PR_REF" eisrepo/registry-epp -n accreditation-staging
+          helm upgrade --install reg-api-"$PR_REF" --set nameOverride="reg-api-accreditation",image.repository="ghcr.io/internetee/accreditation_center",image.tag="$SHORT_REGISTRY_TAG",reference="$PR_REF" eisrepo/registry-api -n accreditation-staging
           rm kubeconfig
           echo "server obs.tld.ee
           zone pilv.tld.ee
           update add accreditation-"$PR_REF".pilv.tld.ee. 3600 CNAME riigi.pilv.tld.ee.
-          update add repp-"$PR_REF"-accredit.pilv.tld.ee. 3600 CNAME riigi.pilv.tld.ee.
+          update add repp-accreditation-"$PR_REF".pilv.tld.ee. 3600 CNAME riigi.pilv.tld.ee.
+          update add reg-api-accreditation-"$PR_REF".pilv.tld.ee. 3600 CNAME riigi.pilv.tld.ee.
           send
           " | nsupdate -k ~/Kgh-runner.infra.tld.ee.+165+27011.key
           if [ "$?" -eq "0" ]; then
