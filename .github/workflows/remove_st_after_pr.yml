@@ -73,16 +73,16 @@ jobs:
           cd "$REPO"/"$PR_REF"
           export KUBECONFIG=./kubeconfig
           helm delete accreditation-st-"$PR_REF" -n accreditation-staging
-          helm delete repp-st-"$PR_REF" -n accreditation-staging
-          helm delete api-st-"$PR_REF"-n accreditation-staging
+          helm delete reg-repp-"$PR_REF" -n accreditation-staging
+          helm delete reg-api-"$PR_REF" -n accreditation-staging
           cd ..
           rm -rf "$PR_REF"
           echo "Removing URLs"
           echo "server obs.tld.ee
           zone pilv.tld.ee
           update delete accreditation-"$PR_REF".pilv.tld.ee.
-          update delete repp-"$PR_REF"-accredit.pilv.tld.ee.
-          update delete api-"$PR_REF"-accredit.pilv.tld.ee.
+          update delete repp-accreditation-"$PR_REF".pilv.tld.ee.
+          update delete reg-api-accreditation-"$PR_REF".pilv.tld.ee.
           send
           " | nsupdate -k ~/Kgh-runner.infra.tld.ee.+165+27011.key
           if [ "$?" -eq "0" ]; then
