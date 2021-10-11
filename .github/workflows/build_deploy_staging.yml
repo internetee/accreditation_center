@@ -47,7 +47,7 @@ jobs:
         run: |
           cp config/database.yml.sample config/database.yml
           cp config/application.yml.sample config/application.yml
-          sed -i -e 's/BASE_URL: "http:\/\/registry:3000"/BASE_URL: "http:\/\/st-'$PR_REF'-accreditation-registry"/' config/application.yml
+          sed -i -e 's/BASE_URL: "http:\/\/registry:3000"/BASE_URL: "http:\/\/st-'$PR_REF'-accreditation-epp"/' config/application.yml
           ls -l config/
 
       - name: Build rails image
