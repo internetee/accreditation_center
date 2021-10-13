@@ -9,8 +9,8 @@ class ApiConnector
 
   private
 
-  def request(url:, method:, headers:, params: nil)
-    request = faraday_request(url: url, headers: headers, params: params)
+  def request(url:, method:, headers:, params: nil, ssl: nil)
+    request = faraday_request(url: url, headers: headers, params: params, ssl: ssl)
     response = request.send(method)
     JSON.parse(response.body)
   end
@@ -19,12 +19,12 @@ class ApiConnector
     Base64.urlsafe_encode64("#{username}:#{password}")
   end
 
-  def faraday_request(url:, headers:, params: {})
+  def faraday_request(url:, headers:, params: {}, ssl:)
     Faraday.new(
       url: url,
       headers: headers,
       params: params,
-      ssl: { verify: false}
+      ssl: ssl
     )
   end
 end
