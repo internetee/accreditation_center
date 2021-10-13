@@ -11,7 +11,7 @@ RSpec.describe ApiConnector do
       allow(body).to receive(:body).and_return(response)
 
       api_connector = ApiConnector.new(username: "mock", password: "username")
-      allow(api_connector).to receive(:faraday_request).with(url: "https://something", headers: {}, params: {}).and_return(Faraday)
+      allow(api_connector).to receive(:faraday_request).with(url: "https://something", headers: {}, params: {}, ssl: nil).and_return(Faraday)
 
       allow(Faraday).to receive(:send).with(:get).and_return(body)
 

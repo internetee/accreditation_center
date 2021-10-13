@@ -39,7 +39,8 @@ RSpec.describe CreateDomain do
       allow(@api_connector).to receive(:request).with(url: @api_connector.domain_endpoint, 
                                                       headers: @api_connector.headers, 
                                                       method: :post, 
-                                                      params: payload).and_return(@response_successful)
+                                                      params: payload,
+                                                      ssl: nil).and_return(@response_successful)
 
 			response = @api_connector.create_domain
 			expect(response["code"]).to eq("1000")

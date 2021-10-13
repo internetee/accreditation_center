@@ -3,10 +3,14 @@ require 'net/http'
 require 'json'
 
 class CreateDomain < ApiConnector
-  SSL_OPTIONS = {
-    client_cert: OpenSSL::X509::Certificate.new(File.read(ENV['CLIENT_CERTS_PATH'])),
-    client_key:  OpenSSL::PKey::RSA.new(File.read(ENV['CLIENT_KEY_PATH']), ENV['CLIENT_PASSWORD'])
-  }.freeze
+  if Rails.env.test?
+    SSL_OPTIONS = nil.freeze
+  else
+    SSL_OPTIONS = {
+      client_cert: OpenSSL::X509::Certificate.new(File.read(ENV['CLIENT_CERTS_PATH'])),
+      client_key:  OpenSSL::PKey::RSA.new(File.read(ENV['CLIENT_KEY_PATH']), ENV['CLIENT_PASSWORD'])
+    }.freeze
+  end
 
 	def initialize(username:, password:)
     super
