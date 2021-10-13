@@ -1,11 +1,24 @@
+require 'openssl'
+require 'net/http'
+require 'json'
+
 class CreateDomain < ApiConnector
+  if Rails.env.test?
+    SSL_OPTIONS = nil.freeze
+  else
+    SSL_OPTIONS = {
+      client_cert: OpenSSL::X509::Certificate.new(File.read(ENV['CLIENT_CERTS_PATH'])),
+      client_key:  OpenSSL::PKey::RSA.new(File.read(ENV['CLIENT_KEY_PATH']), ENV['CLIENT_PASSWORD'])
+    }.freeze
+  end
+
 	def initialize(username:, password:)
     super
 
 	end
 
 	def domain_endpoint
-		base_url = ENV['BASE_URL']
+		base_url = ENV['BASE_REPP_URL']
 		endpoint = ENV['CREATE_DOMAIN']
 
     base_url + endpoint
@@ -17,7 +30,7 @@ class CreateDomain < ApiConnector
 	end
 
 	def create_domain
-    request(url: domain_endpoint, headers: headers, method: :post, params: payload)
+    request(url: domain_endpoint, headers: headers, method: :post, params: payload, ssl: SSL_OPTIONS)
   end
 
   private
