@@ -3,8 +3,7 @@
 # Temporary secret key for registry
 TEMPORARY_SECRET_KEY: "temporary-secret-key"
 BASE_URL: "http://registry:3000"
-REPP_STAGING_BASE_URL: "https://st-repp.infra.tld.ee"
-API_STAGING_BASE_URL: "https://st-api.infra.tld.ee"
+BASE_REPP_URL: "http://registry:3000"
 
 GET_INFO: "/api/v1/accreditation_center/auth"
 
