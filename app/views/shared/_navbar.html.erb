@@ -29,3 +29,50 @@
     </div>
   </div>
 </nav>
+
+<div class="w-full relative px-5 py-36" style="background-image:url('/assets/hero-orange.jpg'); background-position: center;box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;">
+  <%= image_tag "eis-logo-white.svg", class: "absolute h-3/6", style: "left: 5%; top: 10%;" %>
+  <h1 class="absolute text-white font-bold text-5xl top-2/3 left-1/2 transform -translate-x-1/2 -translate-y-1/4">Akrediteerimiskeskus</h1>
+
+  <div class="flex-1 flex flex-col">
+    <nav class="px-4 flex justify-between h-16">
+
+      <!-- top bar left -->
+      <ul class="flex items-center"></ul>
+
+      <ul class="flex items-center">
+        <!-- add button -->
+        <li class="px-6">
+          <%= link_to do %>
+            <span class="pl-8 lg:pl-0 text-white font-extrabold text-1xl uppercase">Avaleht</span>
+          <% end %>
+        </li>
+        <li class="px-6">
+          <%= link_to do %>
+            <span class="pl-8 lg:pl-0 text-white font-extrabold text-1xl uppercase">Domeeni Registreerimine</span>
+          <% end %>
+        </li>
+        <li class="px-6">
+          <%= link_to do %>
+            <span class="pl-8 lg:pl-0 text-white font-extrabold text-1xl uppercase">Domeenioksjonid</span>
+          <% end %>
+        </li>
+        <li class="px-6">
+          <%= link_to do %>
+            <span class="pl-8 lg:pl-0 text-white font-extrabold text-1xl uppercase">Abi & Info</span>
+          <% end %>
+        </li>
+        <li class="px-6">
+          <%= link_to do %>
+            <span class="pl-8 lg:pl-0 text-white font-extrabold text-1xl uppercase">Eesti Interneti SA</span>
+          <% end %>
+        </li>
+      </ul>
+
+      <!-- to bar right  -->
+      <ul class="flex items-center"></ul>
+
+    </nav>
+  </div>
+
+</div>

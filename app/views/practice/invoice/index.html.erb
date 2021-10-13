@@ -1,5 +1,5 @@
-<div class="flex-centrilize">
-	<div class="category-description <%= @result.nil? ? "" : @result ? "green-border" : "red-border" %>">
+<div class="bg-gray-100 py-6 flex flex-row justify-evenly items-center sm:py-12">
+	<div class="category-description <%= @result.nil? ? "" : @result ? "green-border" : "red-border" %> m-10">
 		<%= form_with action: @result do |f| %>
 			<h2 class="box-title center">Invoice test</h2>
 			<h4 class="center <%= @result.nil? ? "" : @result ? "green" : "answered" %>">

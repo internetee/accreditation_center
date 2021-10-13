@@ -7,7 +7,7 @@ module CacheInitializer
 		Rails.cache.write('priv_name', (0...8).map { (65 + rand(26)).chr }.join) unless Rails.cache.exist?('priv_name')
     Rails.cache.write('org_name', (0...8).map { (65 + rand(26)).chr }.join) unless Rails.cache.exist?('org_name')
   
-    set_transfer_domain_data unless Rails.cache.exist?('transfer_code')
+    # set_transfer_domain_data unless Rails.cache.exist?('transfer_code')
 
 		domain_one = (0...8).map { (65 + rand(26)).chr }.join
 		Rails.cache.write('domain_one', domain_one.to_s + ".ee") unless Rails.cache.exist?('domain_one')
