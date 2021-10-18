@@ -33,6 +33,8 @@ class Users::SessionsController < Devise::SessionsController
     
     if username && username.valid_password?(params[:user][:password]) && username.superadmin_role
       sign_in username
+      # generate_quizzes(username)
+
       initialize_сache_values
     else
       user_request = SignIn.new(username: params[:user][:username], password: params[:user][:password])
@@ -49,8 +51,11 @@ class Users::SessionsController < Devise::SessionsController
       user = User.find_by(username: username)
 
       initialize_сache_values
+      generate_quizzes(user)
 
       if user.present?
+
+
         sign_in user
       else
         new_user = User.create!(
@@ -58,9 +63,6 @@ class Users::SessionsController < Devise::SessionsController
           email: email,
           superadmin_role: false,
         )
-
-        quiz = Quiz.create!(title: "Theory 1", user: new_user, theory: true)
-        quiz_practice = Quiz.create!(title: "Practice 1", user: new_user, theory: false)
 
         sign_in new_user
         Rails.logger.info "#{new_user.username} sign in"
@@ -71,6 +73,14 @@ class Users::SessionsController < Devise::SessionsController
   end
   
   private
+
+  def generate_quizzes(user)
+    theory = Quiz.where(theory: true, user: user)
+    practice = Quiz.where(theory: false, user: user)
+
+    Quiz.create!(title: "Theory 1", user: user, theory: true) if theory.empty?
+    Quiz.create!(title: "Practice 1", user: user, theory: false) if practice.empty?
+  end
 
   def generate_token(username: , password:)
     Base64.urlsafe_encode64("#{username}:#{password}")

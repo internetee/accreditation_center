@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_13_064229) do
+ActiveRecord::Schema.define(version: 2021_10_18_093339) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -149,17 +149,17 @@ ActiveRecord::Schema.define(version: 2021_09_13_064229) do
 
   add_foreign_key "answer_questions", "answers"
   add_foreign_key "answer_questions", "questions"
-  add_foreign_key "answer_questions", "quizzes"
+  add_foreign_key "answer_questions", "quizzes", on_delete: :cascade
   add_foreign_key "answers", "categories"
   add_foreign_key "practice_results", "users"
   add_foreign_key "practices", "users"
-  add_foreign_key "quizzes", "results"
-  add_foreign_key "results", "quizzes"
+  add_foreign_key "quizzes", "results", on_delete: :cascade
+  add_foreign_key "results", "quizzes", on_delete: :cascade
   add_foreign_key "results", "user_answers"
   add_foreign_key "results", "users"
   add_foreign_key "template_setting_displays", "categories"
   add_foreign_key "user_questions", "categories"
   add_foreign_key "user_questions", "questions"
-  add_foreign_key "user_questions", "quizzes"
+  add_foreign_key "user_questions", "quizzes", on_delete: :cascade
   add_foreign_key "user_questions", "users"
 end
