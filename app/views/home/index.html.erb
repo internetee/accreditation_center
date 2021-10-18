@@ -1,49 +1,44 @@
 <% if user_signed_in? %>
-	<div class="container">
 
-		<%= @result %>
+	<main class="w-full place-content-center flex justify-evenly content-center mt-10 mb-48 pt-12 h-4/5">
 
-		<h2>Your quizzes:</h2>
 		<% if @quizzes.any? %>
 
-			<table class="table-custom">
-				<thead>
-					<th>ID</th>
-					<th>Title</th>
-					<th>Status</th>
-					<th>Type</th>
-					<th>Actions</th>
-				</thead>
-				<tbody>
-				
-				<% current_user.quizzes.each do |quiz| %>
-					<tr>
-						<td><%= quiz.id %></td>
-						<td><%= quiz.title %></td>
-						<td>
-							<% quiz_presenter = ResultStatusPresenter.new(quiz: quiz, user: current_user) %>
-							<%= quiz_presenter.status %>
-						</td>
-						<td>
+		<% current_user.quizzes.each do |quiz| %>
+			<div class="rounded-lg flex-initial" style="box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;">
+					<div class="bg-gray-100 rounded-lg w-96">
+
+							<div class="px-10 py-6 text-center">
+									<div class="mb-4 text-3xl font-bold text-blue-600 uppercase"><%= quiz.title %></div>
+									<span class="text-sm">
+											Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptate tempore eligendi magnam
+											distinctio molestias. Incidunt at consequuntur consequatur
+											officiis repudiandae! Culpa cum vel tenetur itaque eius provident voluptatum similique impedit?
+									</span>
+							</div>
+
+							<div class="px-10 py-1 mb-2 text-center">
+								<span class="text-lg">
+									<% quiz_presenter = ResultStatusPresenter.new(quiz: quiz, user: current_user) %>
+									Status <%= quiz_presenter.status %>
+								</span>
+							</div>
+
 							<% if quiz.theory %>
-								Theory
+										<%= button_to "Let's Start", quiz_prepare_path(quiz), method: :get, class: "w-full h-16 text-lg font-extrabold text-gray-100 transition duration-300 bg-blue-500 rounded-b-lg hover:bg-purple-700 cursor-pointer" %>
 							<% else %>
-								Practice
+
+										<%= button_to "Let's Start", practice_index_path, method: :get, class: "w-full h-16 text-lg font-extrabold text-gray-100 transition duration-300 bg-blue-500 rounded-b-lg hover:bg-purple-700 cursor-pointer" %>
 							<% end %>
-						</td>
-						<% if quiz.theory %>
-							<td><%= link_to "Start", quiz_prepare_path(quiz), class: 'actions' %></td>
-						<% else %>
-							<td><%= link_to "Start", practice_index_path, class: 'actions' %></td>
-						<% end %>
-					</tr>
-				<% end %>
-				</tbody>
-			</table>
-		<% else %>
-			<p>No any quizzes</p>
+
+					</div>
+			</div>
 		<% end %>
-	</div>
+			<% else %>
+				No Any Quizzes
+			<% end %>
+	</main>
+
 
 <% else %>
 

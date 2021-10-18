@@ -1,5 +1,5 @@
 <div class="questions-description">
-		<h2 class="box-title"><%= @total_answered_questions + 1 %>. <%= @question.title %></h2>
+		<h2 class="box-title font-bold p-10 uppercase" style="color: #903F00;"><%= @total_answered_questions + 1 %>. <%= @question.title %></h2>
 			<%= form_with model: @answer_question do |f| %>
 				<%= f.hidden_field :question_id, value: @question.id %>
 				<%= f.hidden_field :quiz_id, value: params[:quiz_id] %>

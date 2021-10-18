@@ -1,9 +1,14 @@
-<div class="flex-centrilize-two-boxes two-boxes">
+<div class="min-h-screen bg-gray-100 py-6 flex flex-row justify-evenly items-center sm:py-12">
 
-	<div class="questions-list">
+  <div class="relative py-3">
+    <div
+      class="absolute inset-0 bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl">
+    </div>
+    <div class="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
+      <div class="">
 		<p class="count-of-questions">
 		<b><%= @total_answered_questions %>/<%= @total_category_questions %> </b> 
-		küsimusele vastatud
+		<span class="text-black font-bold">Küsimusele vastatud</span>
 		</p>
 
 		<% if @question.question_type == 'multiple choice' %>
@@ -31,13 +36,14 @@
 			</ul>
 		</p>
 		<% end %>
+      </div></div></div>
 
-	</div>
-
+      <div>
 	<% if @question.question_type == 'multiple choice' %>
 		<%= render partial: 'checkbox_question' %>
 	<% else %>
 		<%= render partial: 'radiobutton_question' %>
 	<% end %>
+      </div>
 </div>
 
