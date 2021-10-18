@@ -45,6 +45,10 @@ RailsAdmin.config do |config|
     visible false
   end
 
+  config.model 'AnswerQuestion' do
+    visible false
+  end
+
   config.model 'Question' do
     # object_label_method do
     #   :custom_label_method

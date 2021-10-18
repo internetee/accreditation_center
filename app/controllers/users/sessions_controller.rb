@@ -51,11 +51,14 @@ class Users::SessionsController < Devise::SessionsController
       user = User.find_by(username: username)
 
       initialize_сache_values
-      generate_quizzes(user)
+
+      p "+++++++++"
+      p user.present?
+      p user
 
       if user.present?
 
-
+        generate_quizzes(user)
         sign_in user
       else
         new_user = User.create!(
@@ -64,6 +67,7 @@ class Users::SessionsController < Devise::SessionsController
           superadmin_role: false,
         )
 
+        generate_quizzes(new_user)
         sign_in new_user
         Rails.logger.info "#{new_user.username} sign in"
       end
