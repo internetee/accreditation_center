@@ -30,17 +30,17 @@ RailsAdmin.config do |config|
 
   # MODELS
 
-  Answer.class_eval do
-    def custom_label_method
-      "Answer: #{self.title_en}"
-    end
-  end
-
-  Question.class_eval do
-    def custom_label_method
-      "Answer"
-    end
-  end
+  # Answer.class_eval do
+  #   def custom_label_method
+  #     "Answer: #{self.title_en}"
+  #   end
+  # end
+  #
+  # Question.class_eval do
+  #   def custom_label_method
+  #     "Answer"
+  #   end
+  # end
 
   # =========================
 
