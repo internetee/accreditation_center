@@ -1,4 +1,5 @@
 class Results < ApiConnector
+  attr_reader :username
 
 	def initialize(username)
 		@username = username

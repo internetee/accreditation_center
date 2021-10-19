@@ -1,6 +1,7 @@
 class ResultPresenter
 	include ActionView::Helpers::TagHelper
 
+	attr_reader :result
 	delegate_missing_to :@result
 
 	def initialize(result)

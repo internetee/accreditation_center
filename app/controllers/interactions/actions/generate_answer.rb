@@ -10,7 +10,7 @@ module GenerateAnswer
 																															user_answer: user_answer)
 		end
 
-		question_id = QuestionId.generate_id_for_new_question(question_id: answer_question_params[:question_id],
+		QuestionId.generate_id_for_new_question(question_id: answer_question_params[:question_id],
 																											user_answer: user_answer)
 	end
 end

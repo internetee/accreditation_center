@@ -3,7 +3,7 @@ class AnswerQuestionsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def create
-    question = Question.find(params[:answer_question][:question_id])
+    # question = Question.find(params[:answer_question][:question_id])
 
     next_question_id = GenerateAnswer.process(answer_question_params, @user_answer)
 

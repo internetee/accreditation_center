@@ -1,6 +1,7 @@
 class ResultStatusPresenter
 	include ActionView::Helpers::TagHelper
 
+  attr_reader :quiz
 	delegate_missing_to :@quiz
 
 	def initialize(quiz:, user:)
