@@ -9,4 +9,8 @@ class Answer < ApplicationRecord
 	def correct_answer?
 		correct
 	end
+
+	def custom_label_method
+		"<span>#{self.title_ee}</span><br />".html_safe
+	end
 end

@@ -58,4 +58,8 @@ class Question < ApplicationRecord
     
     correct_answers.count == count
   end
+
+  def custom_label_method
+    "#{self.title}<br />".html_safe
+  end
 end

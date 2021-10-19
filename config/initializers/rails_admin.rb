@@ -13,6 +13,9 @@ RailsAdmin.config do |config|
   ## == CancanCan ==
   config.authorize_with :cancancan
 
+  config.sidescroll = true
+  config.sidescroll = {num_frozen_columns: 4}
+
   ## == Pundit ==
   # config.authorize_with :pundit
 
@@ -33,11 +36,11 @@ RailsAdmin.config do |config|
     end
   end
 
-  # Question.class_eval do
-  #   def custom_label_method
-  #     "Question: #{self.title}"
-  #   end
-  # end
+  Question.class_eval do
+    def custom_label_method
+      "Answer"
+    end
+  end
 
   # =========================
 
@@ -50,15 +53,37 @@ RailsAdmin.config do |config|
   end
 
   config.model 'Question' do
-    # object_label_method do
-    #   :custom_label_method
-    # end
+    object_label_method do
+      :custom_label_method
+    end
+
+    list do
+      sidescroll true
+      field :title do
+        label 'Küsimus Eesti keeles'
+      end
+      field :title_en do
+        label 'Question in English'
+      end
+      field :category
+      field :created_at
+      field :updated_at
+
+      field :answers do
+        searchable [:title_en]
+      end
+    end
 
     edit do
-      field :title
+      field :title do
+        label 'Küsimus Eesti keeles'
+      end
+      field :title_en do
+        label 'Question in English'
+      end
+      field :title_en
       field :category
       field :question_type
-      field :answers
     end
   end
 
@@ -69,7 +94,6 @@ RailsAdmin.config do |config|
       :custom_label_method
     end
 
-    
     edit do
       field :title_en
       field :title_ee
