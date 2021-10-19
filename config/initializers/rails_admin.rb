@@ -13,8 +13,8 @@ RailsAdmin.config do |config|
   ## == CancanCan ==
   config.authorize_with :cancancan
 
-  config.sidescroll = true
-  config.sidescroll = {num_frozen_columns: 4}
+  # config.sidescroll = true
+  # config.sidescroll = {num_frozen_columns: 4}
 
   ## == Pundit ==
   # config.authorize_with :pundit
@@ -45,6 +45,22 @@ RailsAdmin.config do |config|
   # =========================
 
   config.model 'UserAnswer' do
+    visible false
+  end
+
+  config.model 'UserQuestion' do
+    visible false
+  end
+
+  config.model 'Result' do
+    visible false
+  end
+
+  config.model 'PracticeResult' do
+    visible false
+  end
+
+  config.model 'Practice' do
     visible false
   end
 
@@ -87,8 +103,17 @@ RailsAdmin.config do |config|
     end
   end
 
+  config.model 'Quiz' do
+    list do
+      field :user
+      field :result
+      field :theory
+      field :created_at
+    end
+  end
+
   config.model 'Answer' do
-    parent Question
+    # parent Question
 
     object_label_method do
       :custom_label_method
