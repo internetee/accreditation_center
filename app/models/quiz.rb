@@ -7,4 +7,8 @@ class Quiz < ApplicationRecord
 	belongs_to :user
 
   validates :title, presence: true
+
+	def has_result?
+		!quiz.result.blank?
+	end
 end

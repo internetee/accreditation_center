@@ -11,6 +11,7 @@ class AnswerQuestionsController < ApplicationController
       redirect_to quiz_question_path(quiz_id: answer_question_params[:quiz_id], id: next_question_id), notice: 'Question was answered.'
     else
       result = GenerateResult.process(user_answer: @user_answer, quiz_id: params[:answer_question][:quiz_id])
+      GenerateTheoreticalQuiz(user: current_user)
       redirect_to result_path(id: result.id)
     end
   end
