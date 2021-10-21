@@ -6,8 +6,8 @@
     </div>
     <div class="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
       <div class="">
-		<p class="count-of-questions">
-		<b><%= @total_answered_questions %>/<%= @total_category_questions %> </b> 
+		<p class="count-of-questions text-black">
+		<b class="text-black"><%= @total_answered_questions %>/<%= @total_category_questions %> </b>
 		<span class="text-black font-bold">Küsimusele vastatud</span>
 		</p>
 
@@ -15,8 +15,8 @@
 			<ul class="question-number-list">
 				<% @questions.each_with_index do |question, index| %>
 					<li class="<%= 'active-question' if index+1 == @total_answered_questions + 1 %>
-										<%= 'answered' if question.answered?(current_user) %>
-										<%= ' green' if question.multiple_answers_were_correct?(current_user) %>
+										<%= 'answered' if question.answered?(current_user: current_user, quiz: @quiz) %>
+										<%= ' green' if question.multiple_answers_were_correct?(current_user: current_user, quiz: @quiz) %>
 					">
 					<%= index+1 %>. Question</li>
 				<% end %>
@@ -28,8 +28,8 @@
 			<ul class="question-number-list">
 				<% @questions.each_with_index do |question, index| %>
 					<li class="<%= 'active-question' if index+1 == @total_answered_questions + 1 %>
-										<%= 'answered' if question.answered?(current_user) %>
-										<%= ' green' if question.answered_was_correct?(current_user) %>
+										<%= 'answered' if question.answered?(current_user: current_user, quiz: @quiz) %>
+										<%= ' green' if question.answered_was_correct?(current_user: current_user, quiz: @quiz) %>
 					">
 					<%= index+1 %>. Question</li>
 				<% end %>

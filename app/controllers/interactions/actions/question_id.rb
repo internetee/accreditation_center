@@ -1,21 +1,26 @@
 module QuestionId
 	extend self
 
-	def generate_id_for_new_question(question_id:, user_answer:)
-		question = Question.find(question_id)
-
+	def generate_id_for_new_question(question_id:, user_answer:, quiz:)
 		user = user_answer.user
-		# results = Question.where(category_id: category.id)
-		questions_ids = user.user_questions.pluck(:question_id)
-    results = Question.where(id: questions_ids)
+		# quiz = Quiz.find(quiz_id)
 
-		actual_questions = results.reject { |r| user_answer.question_ids.include? r.id }
+		questions_ids = user.user_questions.where(quiz: quiz).pluck(:question_id)
+		questions_of_current_quiz = Question.where(id: questions_ids)
 
-		return false if actual_questions.nil?
+		questions_of_current_quiz.each do |q|
+			return q.id if !q.answered?(current_user: user, quiz: quiz)
+		end
 
-		return false if actual_questions.size < 1
+		return false
 
-		actual_questions.first.id
+		# actual_questions = results.reject { |r| user_answer.question_ids.include? r.id && r.answered?(current_user: user, quiz: quiz) }
+		#
+		# return false if actual_questions.nil?
+		#
+		# return false if actual_questions.size < 1
+		#
+		# actual_questions.first.id
 	end
 end
 

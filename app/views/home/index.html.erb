@@ -1,11 +1,11 @@
 <% if user_signed_in? %>
 
-	<main class="w-full place-content-center flex justify-evenly content-center mt-10 mb-48 pt-12 h-4/5">
+	<main class="w-full place-content-center flex justify-evenly flex-wrap content-center mt-10 mb-48 pt-12 h-4/5">
 
 		<% if @quizzes.any? %>
 
-		<% current_user.quizzes.each do |quiz| %>
-			<div class="rounded-lg flex-initial" style="box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;">
+		<% current_user.quizzes.order(created_at: :desc).each do |quiz| %>
+			<div class="rounded-lg flex-initial my-6" style="box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;">
 					<div class="bg-gray-100 rounded-lg w-96">
 
 							<div class="px-10 py-6 text-center">

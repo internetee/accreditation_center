@@ -45,7 +45,7 @@ def add_unique_question(category_instance)
 		offset = rand(category_instance.questions.count)
     rand_record = category_instance.questions.offset(offset).first
 
-		flag = false unless UserQuestion.find_by(user: @user, question_id: rand_record.id).present?
+		flag = false unless UserQuestion.find_by(user: @user, quiz: @quiz_theory, question_id: rand_record.id).present?
 	end
 
 	rand_record

@@ -79,6 +79,7 @@ class Users::SessionsController < Devise::SessionsController
     practice = Quiz.where(theory: false, user: user)
 
     Quiz.create!(title: "Theory 1", user: user, theory: true) if theory.empty?
+    GenerateTheoreticalQuiz.run(user: user)
     Quiz.create!(title: "Practice 1", user: user, theory: false) if practice.empty?
   end
 

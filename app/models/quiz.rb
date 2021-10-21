@@ -9,6 +9,6 @@ class Quiz < ApplicationRecord
   validates :title, presence: true
 
 	def has_result?
-		!quiz.result.blank?
+		!self.result.blank?
 	end
 end

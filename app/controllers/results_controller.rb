@@ -12,7 +12,8 @@ class ResultsController < ApplicationController
   private
 
   def generate_result_output
-    questions_ids = @user_answer.answer_questions.uniq.pluck(:question_id)
+    quiz_id = @result.quiz.id
+    questions_ids = @user_answer.answer_questions.where(quiz_id: quiz_id).uniq.pluck(:question_id)
     questions = Question.where(id: questions_ids)
     questions
   end
@@ -23,7 +24,7 @@ class ResultsController < ApplicationController
   end
 
   def set_result
-    result = Result.find(params[:id])
-    @result = ResultPresenter.new(result)
+    @result = Result.find(params[:id])
+    @result_presenter = ResultPresenter.new(@result)
   end
 end
