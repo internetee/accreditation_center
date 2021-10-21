@@ -2,11 +2,12 @@ require 'rails_helper'
 
 RSpec.describe ResultPresenter do
 	let(:user_answer) { build(:user_answer) }
+  let(:quiz) { build(:quiz) }
 	let(:question) { build(:question) }
 	let(:answer) { build(:answer) }
-	let(:answer_question) { build(:answer_question) }
+	let(:answer_question) { build(:answer_question, quiz: quiz) }
 	let(:user) { build(:user) }
-	let(:result) { build(:result) }
+	let(:result) { build(:result, quiz: quiz) }
 
 	before(:each) do
 		user_answer.user = user

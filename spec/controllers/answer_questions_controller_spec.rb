@@ -45,9 +45,9 @@ RSpec.describe AnswerQuestionsController, type: :controller do
 			answer_question.save
 			quiz.save
 
-			a = user_answer.answer_questions.last
+			user_answer.answer_questions.last
 
-			result = GenerateResult.process(user_answer: user_answer, quiz_id: quiz.id)
+			GenerateResult.process(user_answer: user_answer, quiz_id: quiz.id)
 		end
 
 		it 'generate answer' do
@@ -62,7 +62,7 @@ RSpec.describe AnswerQuestionsController, type: :controller do
 
 			user_answer.answer_questions.empty?
 
-			id = GenerateAnswer.process(answer_question_params, user_answer)
+			GenerateAnswer.process(answer_question_params: answer_question_params, user_answer: user_answer, quiz_id: quiz.id)
 			expect(user_answer.answer_questions.count).to eq(2)
 		end
 
