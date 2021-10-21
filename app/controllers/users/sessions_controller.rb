@@ -33,7 +33,7 @@ class Users::SessionsController < Devise::SessionsController
     
     if username && username.valid_password?(params[:user][:password]) && username.superadmin_role
       sign_in username
-      # generate_quizzes(username)
+      # generate_quizzes(username) # if uncomment it then quizzez will added for amin user
 
       initialize_сache_values
     else
@@ -51,10 +51,6 @@ class Users::SessionsController < Devise::SessionsController
       user = User.find_by(username: username)
 
       initialize_сache_values
-
-      p "+++++++++"
-      p user.present?
-      p user
 
       if user.present?
 
