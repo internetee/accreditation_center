@@ -85,9 +85,7 @@ RailsAdmin.config do |config|
       field :created_at
       field :updated_at
 
-      field :answers do
-        searchable [:title_en]
-      end
+      include_fields :answers
     end
 
     edit do
@@ -100,6 +98,8 @@ RailsAdmin.config do |config|
       field :title_en
       field :category
       field :question_type
+
+      include_fields :answers
     end
   end
 
