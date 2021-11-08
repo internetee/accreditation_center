@@ -2,7 +2,15 @@
 
 # Temporary secret key for registry
 TEMPORARY_SECRET_KEY: "temporary-secret-key"
+
+# here we will use TEST environment registry base url
+# because all operation with domains and contacts should be in test registry environment
 BASE_URL: "http://registry:3000"
+
+# here we will use PRODUCTION environment registry base url
+# because results of tests will be record in production data base
+BASE_PRODUCTION_URL: "http://registry:3000"
+
 BASE_REPP_URL: "http://registry:3000"
 
 GET_INFO: "/api/v1/accreditation_center/auth"

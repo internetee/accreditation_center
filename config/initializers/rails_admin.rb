@@ -43,6 +43,10 @@ RailsAdmin.config do |config|
   # end
 
   # =========================
+  #
+
+  # config.included_models = ["Question", "Category", "Quiz", "TemplateSettingDisplay", "User", "Answer"]
+  # config.included_models.sort! { |a, b| b <=> a }
 
   config.model 'UserAnswer' do
     visible false
@@ -69,6 +73,8 @@ RailsAdmin.config do |config|
   end
 
   config.model 'Question' do
+    weight -1
+
     object_label_method do
       :custom_label_method
     end
@@ -114,6 +120,7 @@ RailsAdmin.config do |config|
 
   config.model 'Answer' do
     # parent Question
+    weight 1
 
     object_label_method do
       :custom_label_method
