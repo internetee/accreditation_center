@@ -1,7 +1,7 @@
 # Add configuration values here, as shown below.
 
 # Temporary secret key for registry
-TEMPORARY_SECRET_KEY: "temporary-secret-key"
+TEMPORARY_SECRET_KEY: "let-is-use-some-key"
 
 # here we will use TEST environment registry base url
 # because all operation with domains and contacts should be in test registry environment
