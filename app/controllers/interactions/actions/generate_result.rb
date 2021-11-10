@@ -2,7 +2,9 @@ module GenerateResult
 	extend self
 
 	def process(user_answer:, quiz_id:)
-		result = Result.find_by(user: user_answer.user)
+		@quiz = Quiz.find(quiz_id)
+
+		result = Result.find_by(user: user_answer.user, quiz: @quiz)
 		return result.id if result.present?
 
 		result = result_generator(user_answer: user_answer, quiz_id: quiz_id)
@@ -10,19 +12,14 @@ module GenerateResult
 	end
 
 	def result_generator(user_answer: , quiz_id:)
-
-		quiz = Quiz.find(quiz_id)
-		
-		questions = user_answer.answer_questions.where(quiz_id: quiz_id).distinct.pluck(:question_id)
-
+		questions = user_answer.answer_questions.where(quiz: @quiz).distinct.pluck(:question_id)
 		questions_count = questions.count
 
 		
 		correctly_answers_count = correctly_answer_iterator(questions: questions, user_answer: user_answer)
-
 		percent = percent_counter(correctly_answers_count: correctly_answers_count, questions_count: questions_count)
+		result = create_result(percent: percent, quiz: @quiz, user_answer: user_answer)
 
-		result = create_result(percent: percent, quiz: quiz, user_answer: user_answer)
 		result
 	end
 
@@ -30,7 +27,7 @@ module GenerateResult
 			correctly_answers_count = 0
 
 			questions.each do |question|
-				answer_ids = user_answer.answer_questions.where(question: question).pluck(:answer_id) 
+				answer_ids = user_answer.answer_questions.where(quiz: @quiz, question: question).pluck(:answer_id)
 
 				answers = Answer.where(id: answer_ids)
 				flag = true

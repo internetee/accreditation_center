@@ -1,6 +1,7 @@
 class ResultPresenter
 	include ActionView::Helpers::TagHelper
 
+	attr_reader :result
 	delegate_missing_to :@result
 
 	def initialize(result)
@@ -8,14 +9,15 @@ class ResultPresenter
 	end
 
 	def user_answer_questions(user_answer:, question:)
-		answer_ids = user_answer.answer_questions.where(question: question).pluck(:answer_id)
+		quiz_id = @result.quiz_id
+		answer_ids = user_answer.answer_questions.where(question: question, quiz_id: quiz_id).pluck(:answer_id)
 		col = Answer.where(id: answer_ids)
 
 		col.reduce(''.html_safe) { |x, answer| x << content_tag(:li, answer.title_en) }
 	end
 
 	def answer_result(user_answer:, question:)
-		answer_ids = user_answer.answer_questions.where(question: question).pluck(:answer_id)
+		answer_ids = user_answer.answer_questions.where(question: question, quiz_id: quiz_id).pluck(:answer_id)
 		col = Answer.where(id: answer_ids)
 
 		flag = true

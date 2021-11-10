@@ -4,7 +4,7 @@ require_relative "../support/devise"
 RSpec.describe QuestionsController, type: :controller do
 	login_user
 
-	let(:quiz) { build(:quiz, id: 1) }
+	let(:quiz) { create(:quiz, id: 1) }
 	let(:question) { create(:question, id: 1) }
 
 	before(:each) do

@@ -13,6 +13,9 @@ RailsAdmin.config do |config|
   ## == CancanCan ==
   config.authorize_with :cancancan
 
+  # config.sidescroll = true
+  # config.sidescroll = {num_frozen_columns: 4}
+
   ## == Pundit ==
   # config.authorize_with :pundit
 
@@ -27,45 +30,102 @@ RailsAdmin.config do |config|
 
   # MODELS
 
-  Answer.class_eval do
-    def custom_label_method
-      "Answer: #{self.title_en}"
-    end
-  end
-
+  # Answer.class_eval do
+  #   def custom_label_method
+  #     "Answer: #{self.title_en}"
+  #   end
+  # end
+  #
   # Question.class_eval do
   #   def custom_label_method
-  #     "Question: #{self.title}"
+  #     "Answer"
   #   end
   # end
 
   # =========================
+  #
+
+  # config.included_models = ["Question", "Category", "Quiz", "TemplateSettingDisplay", "User", "Answer"]
+  # config.included_models.sort! { |a, b| b <=> a }
 
   config.model 'UserAnswer' do
     visible false
   end
 
-  config.model 'Question' do
-    # object_label_method do
-    #   :custom_label_method
-    # end
-
-    edit do
-      field :title
-      field :category
-      field :question_type
-      field :answers
-    end
+  config.model 'UserQuestion' do
+    visible false
   end
 
-  config.model 'Answer' do
-    parent Question
+  config.model 'Result' do
+    visible false
+  end
+
+  config.model 'PracticeResult' do
+    visible false
+  end
+
+  config.model 'Practice' do
+    visible false
+  end
+
+  config.model 'AnswerQuestion' do
+    visible false
+  end
+
+  config.model 'Question' do
+    weight -1
 
     object_label_method do
       :custom_label_method
     end
 
-    
+    list do
+      sidescroll true
+      field :title do
+        label 'Küsimus Eesti keeles'
+      end
+      field :title_en do
+        label 'Question in English'
+      end
+      field :category
+      field :created_at
+      field :updated_at
+
+      include_fields :answers
+    end
+
+    edit do
+      field :title do
+        label 'Küsimus Eesti keeles'
+      end
+      field :title_en do
+        label 'Question in English'
+      end
+      field :title_en
+      field :category
+      field :question_type
+
+      include_fields :answers
+    end
+  end
+
+  config.model 'Quiz' do
+    list do
+      field :user
+      field :result
+      field :theory
+      field :created_at
+    end
+  end
+
+  config.model 'Answer' do
+    # parent Question
+    weight 1
+
+    object_label_method do
+      :custom_label_method
+    end
+
     edit do
       field :title_en
       field :title_ee
@@ -94,7 +154,7 @@ RailsAdmin.config do |config|
     show
     edit
     delete
-    show_in_app
+    # show_in_app
 
     ## With an audit adapter, you can add:
     # history_index

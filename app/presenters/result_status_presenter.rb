@@ -1,6 +1,7 @@
 class ResultStatusPresenter
 	include ActionView::Helpers::TagHelper
 
+  attr_reader :quiz
 	delegate_missing_to :@quiz
 
 	def initialize(quiz:, user:)
@@ -27,6 +28,6 @@ class ResultStatusPresenter
 
   def generate_tag(flag)
     return content_tag(:span, "Passed", class: "text-sm px-3 py-1 bg-green-200 text-green-800 rounded-full") if flag
-	  content_tag(:span, "Failed", class: "text-sm px-3 py-1 bg-gray-200 text-gray-800 rounded-full")
+	  content_tag(:span, "Failed", class: "text-sm px-3 py-1 bg-red-400 text-gray-800 rounded-full")
   end
 end

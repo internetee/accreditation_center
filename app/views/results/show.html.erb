@@ -19,12 +19,12 @@
 
 							<td>
 								<ul>
-									<%= raw @result.user_answer_questions(user_answer: @user_answer, question: question) %>
+									<%= raw @result_presenter.user_answer_questions(user_answer: @user_answer, question: question) %>
 								</ul>
 							</td>
 
 							<td>
-								<%= raw @result.answer_result(user_answer: @user_answer, question: question) %>
+								<%= raw @result_presenter.answer_result(user_answer: @user_answer, question: question) %>
 							</td> 
 
 							<td>
