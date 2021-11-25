@@ -6,8 +6,7 @@ class Results < ApiConnector
 	end
 
 	def push_endpoint
-		base_url = ENV['BASE_PRODUCTION_URL']
-		base_url = ENV['BASE_URL'] if Rails.env.staging?
+		base_url = ENV['BASE_URL']
 		endpoint = ENV['PUSH_RESULT'] 
 
 		base_url + endpoint
