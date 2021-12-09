@@ -4,6 +4,11 @@ development:
 test:
   adapter: test
 
+demo:
+  adapter: redis
+  url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
+  channel_prefix: accreditation_center_v2_demo
+
 production:
   adapter: redis
   url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
