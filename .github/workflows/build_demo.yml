@@ -22,3 +22,5 @@ jobs:
           echo $TAG
           echo ***
           echo ${{ GITHUB_REF }}
+          echo ---
+          echo ${{github.ref_name}}
