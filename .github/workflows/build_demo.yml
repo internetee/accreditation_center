@@ -16,5 +16,6 @@ jobs:
 
       - name: Set image tag
         run: |
+          printenv
           echo "TAG=ghcr.io/internetee/accreditation_center:${GITHUB_REF##*/}" >> $GITHUB_ENV
           echo $TAG
