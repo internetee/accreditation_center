@@ -16,7 +16,7 @@ jobs:
 
       - name: Set image tag
         run: |
-          echo "TAG=ghcr.io/internetee/accreditation_center:${{github.ref_name}}" >> $GITHUB_ENV
+          echo "TAG=ghcr.io/internetee/accreditation_center:"${{github.ref_name}} >> $GITHUB_ENV
           echo ***
           echo $TAG
           echo ---
