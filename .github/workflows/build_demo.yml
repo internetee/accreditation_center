@@ -1,0 +1,20 @@
+name: Build Docker image for demo deployment
+
+on:
+  push:
+    tags: ['v-*']
+
+jobs:
+
+  build:
+  
+    runs-on: ubuntu-20.04
+
+    steps:
+  
+      - uses: actions/checkout@v2
+
+      - name: Set image tag
+        run: |
+          echo "TAG=ghcr.io/internetee/accreditation_center:${GITHUB_REF##*/}" >> $GITHUB_ENV
+          echo $GITHUB_ENV
