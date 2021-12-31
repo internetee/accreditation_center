@@ -29,7 +29,7 @@ jobs:
         env:
           KEY_BASE: ${{ secrets.KEY_BASE}}
         run: |
-          docker build -t $TAG --build-arg RAILS_ENV=production --build-arg SECRET_KEY_BASE="$KEY_BASE" -f Dockerfile.generic .
+          docker build -t $TAG --build-arg RAILS_ENV=staging --build-arg SECRET_KEY_BASE="$KEY_BASE" -f Dockerfile.generic .
 
       - name: Build static content image
         run: |
