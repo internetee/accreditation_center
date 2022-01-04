@@ -42,7 +42,7 @@ class CreateDomain < ApiConnector
         registrant: ENV['ACCR_CONTACT_CODE'],
         period: 1,
         period_unit: 'y',
-        'admin_contacts': [
+        admin_contacts: [
           ENV['ACCR_CONTACT_CODE']
         ],
       }
