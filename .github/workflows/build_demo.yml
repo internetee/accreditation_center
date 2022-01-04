@@ -1,0 +1,46 @@
+name: Build Docker image for demo deployment
+
+on:
+  push:
+    tags: ['v-*']
+
+jobs:
+
+  build:
+  
+    runs-on: ubuntu-20.04
+
+    steps:
+  
+      - uses: actions/checkout@v2
+
+      - name: Set image tag
+        run: |
+          echo "TAG=ghcr.io/internetee/accreditation_center:${{github.ref_name}}" >> $GITHUB_ENV
+          echo "STATIC_TAG=ghcr.io/internetee/accreditation_center:STATIC_${{github.ref_name}}" >> $GITHUB_ENV
+
+      - name: Set files only needed for building
+        run: |
+          cp config/database.yml.sample config/database.yml
+          cp config/application.yml.sample config/application.yml
+
+
+      - name: Build rails image
+        env:
+          KEY_BASE: ${{ secrets.KEY_BASE}}
+        run: |
+          docker build -t $TAG --build-arg RAILS_ENV=staging --build-arg SECRET_KEY_BASE="$KEY_BASE" -f Dockerfile.generic .
+
+      - name: Build static content image
+        run: |
+          docker create -ti --name rails $TAG bash
+          docker cp rails:/opt/webapps/app/public/ ./public/
+          docker build -t $STATIC_TAG -f Dockerfile.generic-static .
+
+      - name: Push Docker images to gh container registry
+        env:
+          PASSWORD: ${{ secrets.GHCR }}
+        run: |
+          echo $PASSWORD | docker login ghcr.io -u eisbot --password-stdin
+          docker push $TAG
+          docker push $STATIC_TAG
