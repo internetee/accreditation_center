@@ -41,7 +41,10 @@ class CreateDomain < ApiConnector
         name: (0...12).map { (65 + rand(26)).chr }.join + '.ee',
         registrant: ENV['ACCR_CONTACT_CODE'],
         period: 1,
-        period_unit: 'y'
+        period_unit: 'y',
+        'admin_contacts': [
+          ENV['ACCR_CONTACT_CODE']
+        ],
       }
     }
   end
