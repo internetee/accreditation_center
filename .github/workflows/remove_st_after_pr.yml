@@ -4,11 +4,7 @@ on:
   pull_request:
     types: [closed]
     paths-ignore:
-      - 'Gemfile.lock'
-      - 'Gemfile'
-      - 'CHANGELOG.md'
-      - 'README.md'
-      - 'yarn.lock'
+      - '**md'
 
 jobs:
   delete-deployment:
@@ -72,9 +68,9 @@ jobs:
           bash
           cd "$REPO"/"$PR_REF"
           export KUBECONFIG=./kubeconfig
-          helm delete accreditation-st-"$PR_REF" -n accreditation-staging
-          helm delete reg-repp-"$PR_REF" -n accreditation-staging
-          helm delete reg-api-"$PR_REF" -n accreditation-staging
+          helm delete accreditation-st-"$PR_REF" -n accreditation
+          helm delete reg-repp-"$PR_REF" -n epp
+          helm delete reg-api-"$PR_REF" -n reg-api
           cd ..
           rm -rf "$PR_REF"
           echo "Removing URLs"
