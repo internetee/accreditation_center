@@ -87,6 +87,8 @@ jobs:
               echo "CNAME update failed"
           fi
           EOSSH
+          cd ../..
+          rm -r "$REPO"
 
       - name: Notify developers
         timeout-minutes: 1
