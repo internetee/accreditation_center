@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :results
   has_many :user_questions
 
-  validates :email, presence: false
+  validates :username, presence: false
 
   attr_writer :login
 

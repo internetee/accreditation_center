@@ -13,6 +13,8 @@ class Users::SessionsController < Devise::SessionsController
     login_request
 
     super
+
+    flash[:notice] = "sign in" 
   end
 
   # DELETE /resource/sign_out

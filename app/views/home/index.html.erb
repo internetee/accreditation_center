@@ -45,11 +45,11 @@
 <div class="login-wrapper">
 	<%= form_for resource, as: resource_name, url: session_path(resource_name) do |f| %>
 		<div class="field">
-			<%= f.text_field :username, autofocus: true, autocomplete: "username", placeholder: "Username" %>
+			<%= f.text_field :username, autofocus: true, required: true, placeholder: "Username" %>
 		</div>
 
 		<div class="field">
-			<%= f.password_field :password, autocomplete: "current-password", placeholder: "Password" %>
+			<%= f.password_field :password, required: true, placeholder: "Password" %>
 		</div>
 
 		<% if devise_mapping.rememberable? %>
