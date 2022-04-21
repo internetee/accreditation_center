@@ -25,7 +25,9 @@ jobs:
 
       - name: Set variables
         run: |
+          echo "REGISTRY_VERSION_FILE=staging_registry_version"
           echo "REGISTRY_VERSION_FILE=staging_registry_version" >> $GITHUB_ENV
+          echo $GITHUB_ENV
 
       - name: Set image tag
         run: |
