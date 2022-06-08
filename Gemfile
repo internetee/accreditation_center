@@ -29,7 +29,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise'
 gem 'faker'
-gem 'rails_admin', '~> 2.2'
+gem 'rails_admin', '~> 3.0'
 gem 'cancancan'
 gem 'rexml', '~> 3.2', '>= 3.2.4'
 gem 'faraday'
