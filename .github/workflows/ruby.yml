@@ -70,17 +70,17 @@ jobs:
           bundle exec rake db:seed
           bundle exec rspec spec
 
-      - name: Dependabot
-        if: ${{ github.event.label.name == 'dependencies' }}
-        run: bundle exec rails assets:precompile
+      # - name: Dependabot
+      #   if: ${{ github.event.label.name == 'dependencies' }}
+      #   run: bundle exec rails assets:precompile
 
-      - name: Save coverage
-        run: ./cc-test-reporter format-coverage --output coverage/codeclimate.${{ matrix.ruby }}.json
+      # - name: Save coverage
+      #   run: ./cc-test-reporter format-coverage --output coverage/codeclimate.${{ matrix.ruby }}.json
 
-      - uses: actions/upload-artifact@v2.3.1
-        with:
-          name: coverage-${{ matrix.ruby }}
-          path: coverage/codeclimate.${{ matrix.ruby }}.json
+      # - uses: actions/upload-artifact@v2.3.1
+      #   with:
+      #     name: coverage-${{ matrix.ruby }}
+      #     path: coverage/codeclimate.${{ matrix.ruby }}.json
 
   upload_coverage:
     strategy:
