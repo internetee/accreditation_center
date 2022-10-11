@@ -1,7 +1,7 @@
 module GenerateTransferCode
-	extend self
+  extend self
 
-	def process
+  def process
     username = ENV['ACCR_USERNAME']
     password = ENV['ACCR_PASSWORD']
 

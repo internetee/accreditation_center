@@ -1,4 +1,4 @@
-Rails.application.eager_load!
+# Rails.application.eager_load!
 
 RailsAdmin.config do |config|
   config.main_app_name = Proc.new { |controller| [ "EIS", "Accreditation Admin Panel - #{controller.params[:action].try(:titleize)}" ] }
