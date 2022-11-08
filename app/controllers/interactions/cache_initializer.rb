@@ -39,10 +39,6 @@ module CacheInitializer
   def set_transfer_domain_data
     result = GenerateTransferCode.process
 
-    p '---- !!!'
-    p result
-    p '-----------------------'
-
     Rails.logger.info 'No domain was generated. Got empty value from registry' if result.nil?
     Rails.logger.info result['message'] if result['code'] == 2104
 
