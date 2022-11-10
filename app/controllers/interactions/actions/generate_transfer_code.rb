@@ -6,6 +6,6 @@ module GenerateTransferCode
     password = ENV['ACCR_PASSWORD']
 
     domain_creator = CreateDomain.new(username: username, password: password)
-    domain_creator.create_domain
+    res = domain_creator.create_domain
   end
 end

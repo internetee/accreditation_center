@@ -1,76 +1,79 @@
 require 'rails_helper'
-require_relative "../support/devise"
+require_relative '../support/devise'
 
 RSpec.describe QuizController, type: :controller do
-	let(:result) { build(:result) }
-	let(:category) { build(:category) }
-	let(:quiz) { build(:quiz) }
-	let(:another_user) { build(:user) }
-	let(:user_answer) { build(:user_answer) }
-	let(:user_questions) { build(:user_question) }
+  let(:result) { build(:result) }
+  let(:category) { build(:category) }
+  let(:quiz) { build(:quiz) }
+  let(:another_user) { build(:user) }
+  let(:user_answer) { build(:user_answer) }
+  let(:user_questions) { build(:user_question) }
 
-	let(:answer_question) { build(:answer_question) }
-	let(:question) { build(:question) }
-	let(:answer) { build(:answer) }
+  let(:answer_question) { build(:answer_question) }
+  let(:question) { build(:question) }
+  let(:answer) { build(:answer) }
 
-	login_user
+  login_user
 
-	before(:each) do
-		hash = {
-			"data" => {
-				"domain" => {
-					"transfer_code": "asddsfsf32",
-					"name": "awesome.test"
-				}
-			}
-		}
+  before(:each) do
+    hash = {
+      'data' => {
+        'domain' => {
+          "transfer_code": 'asddsfsf32',
+          "name": 'awesome.test'
+        }
+      }
+    }
 
-		allow(GenerateTransferCode).to receive(:process).and_return(hash)
-	end
+    structed_response = Struct.new(:success?, :payload, :errors)
+                              .new(true, hash, nil)
 
-	context 'render actions' do
-		it "should render show action if there are start_id and quiz is theory" do
-			question.save
+    allow_any_instance_of(PracticeServices::GenerateTransferCodeService).to receive(:call).and_return(structed_response)
+  end
 
-			user_questions.category = category
-			user_questions.question = question
-			user_questions.quiz = quiz
-			user_questions.user = @user
-			user_questions.save
-			
-			user_answer.user = @user
-			user_answer.save
-			
-			quiz.theory = true
-			quiz.save
+  context 'render actions' do
+    it 'should render show action if there are start_id and quiz is theory' do
+      question.save
 
-			allow(GenerateQuestions).to receive(:process).with(user: @user, quiz: quiz).and_return(quiz.id)
+      user_questions.category = category
+      user_questions.question = question
+      user_questions.quiz = quiz
+      user_questions.user = @user
+      user_questions.save
 
-			get :show, params: { id: quiz.id }
-			expect(response).to have_http_status(:redirect)
-			expect(response).to redirect_to(quiz_question_path(quiz_id: quiz.id, id: question.id))
-		end
+      user_answer.user = @user
+      user_answer.save
 
-		it 'should render if there is not any start ids and quiz has result' do
-			@controller = QuizController.new
+      quiz.theory = true
+      quiz.save
 
-			question.save
-			
-			user_answer.user = @user
-			user_answer.save
-			
-			quiz.theory = false
-			quiz.result = result
-			quiz.save
+      allow(GenerateQuestions).to receive(:process).with(user: @user, quiz: quiz).and_return(quiz.id)
 
-			result.quiz = quiz
-			result.save
+      get :show, params: { id: quiz.id }
+      expect(response).to have_http_status(:redirect)
+      expect(response).to redirect_to(quiz_question_path(quiz_id: quiz.id, id: question.id))
+    end
 
-			allow(@controller).to receive(:generate_start_id).and_return(question.id)
+    it 'should render if there is not any start ids and quiz has result' do
+      @controller = QuizController.new
 
-			get :show, params: { id: quiz.id }
-			expect(response).to have_http_status(:redirect)
-			expect(response).to redirect_to(result_path(id: result.id))
-		end
-	end
+      question.save
+
+      user_answer.user = @user
+      user_answer.save
+
+      quiz.theory = false
+      quiz.result = result
+      quiz.save
+
+      result.quiz = quiz
+      result.save
+
+      allow(@controller).to receive(:generate_start_id).and_return(question.id)
+
+      get :show, params: { id: quiz.id }
+      expect(response).to have_http_status(:redirect)
+      expect(response).to redirect_to(result_path(id: result.id))
+    end
+  end
 end
