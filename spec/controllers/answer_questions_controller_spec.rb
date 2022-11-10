@@ -1,87 +1,91 @@
 require 'rails_helper'
-require_relative "../support/devise"
+require_relative '../support/devise'
 
 RSpec.describe AnswerQuestionsController, type: :controller do
   let(:quiz) { create(:quiz) }
-	let(:category) { create(:category) }
-	let(:question) { create(:question, category: category) }
-  let(:answer) { create(:answer, title_ee: "Title", title_en: "Title") }
-  let(:answer_t) { create(:answer, title_ee: "Title", title_en: "Title") }
-	let(:user_answer) { build(:user_answer) }
-	let(:answer_question) { build(:answer_question, user_answer: user_answer, question: question, answer: answer) }
-	let(:answer_question_t) { build(:answer_question) }
+  let(:category) { create(:category) }
+  let(:question) { create(:question, category: category) }
+  let(:answer) { create(:answer, title_ee: 'Title', title_en: 'Title') }
+  let(:answer_t) { create(:answer, title_ee: 'Title', title_en: 'Title') }
+  let(:user_answer) { build(:user_answer) }
+  let(:answer_question) { build(:answer_question, user_answer: user_answer, question: question, answer: answer) }
+  let(:answer_question_t) { build(:answer_question) }
 
-	login_user
+  login_user
 
   before(:each) do
-		hash = {
-			"data" => {
-				"domain" => {
-					"transfer_code": "asddsfsf32",
-					"name": "awesome.test"
-				}
-			}
-		}
+    hash = {
+      'data' => {
+        'domain' => {
+          "transfer_code": 'asddsfsf32',
+          "name": 'awesome.test'
+        }
+      }
+    }
 
-		allow(GenerateTransferCode).to receive(:process).and_return(hash)
-	end
+    structed_response = Struct.new(:success?, :payload, :errors)
+                     .new(true, hash, nil)
 
-	context 'actions' do
-		it 'post create action' do
-			post :create, params: { answer_question: {quiz_id: quiz.id, answer_id: answer.id , question_id: question.id } }
+    allow_any_instance_of(PracticeServices::GenerateTransferCodeService).to receive(:call).and_return(structed_response)
+  end
 
-     	expect(response.content_type).to eq "text/html; charset=utf-8"
-			expect(response).to have_http_status(:redirect)
-		end
-	end
+  context 'actions' do
+    it 'post create action' do
+      post :create, params: { answer_question: { quiz_id: quiz.id, answer_id: answer.id, question_id: question.id } }
 
-	context 'interactions' do
-		it 'generate results return false' do
-			answer.correct = false
-			answer.save
-			question.save
+      expect(response.content_type).to eq 'text/html; charset=utf-8'
+      expect(response).to have_http_status(:redirect)
+    end
+  end
 
-			user_answer.save
-			answer_question.save
-			quiz.save
+  context 'interactions' do
+    it 'generate results return false' do
+      answer.correct = false
+      answer.save
+      question.save
 
-			user_answer.answer_questions.last
+      user_answer.save
+      answer_question.save
+      quiz.save
 
-			GenerateResult.process(user_answer: user_answer, quiz_id: quiz.id)
-		end
+      user_answer.answer_questions.last
 
-		it 'generate answer' do
-			question.update(question_type: 1)
-			answer_question_params = {}
+      GenerateResult.process(user_answer: user_answer, quiz_id: quiz.id)
+    end
 
-			user_answer.save
+    it 'generate answer' do
+      question.update(question_type: 1)
+      answer_question_params = {}
 
-			answer_question_params[:answer_id] = [answer.id , answer_t.id]
-			answer_question_params[:quiz_id] = quiz.id
-			answer_question_params[:question_id] = question.id
+      user_answer.save
 
-			user_answer.answer_questions.empty?
+      answer_question_params[:answer_id] = [answer.id, answer_t.id]
+      answer_question_params[:quiz_id] = quiz.id
+      answer_question_params[:question_id] = question.id
 
-			GenerateAnswer.process(answer_question_params: answer_question_params, user_answer: user_answer, quiz_id: quiz.id)
-			expect(user_answer.answer_questions.count).to eq(2)
-		end
+      user_answer.answer_questions.empty?
 
-		it 'multiple answers' do
-			question.update(question_type: 1)
-			answer_question_params = {}
+      GenerateAnswer.process(answer_question_params: answer_question_params, user_answer: user_answer,
+                             quiz_id: quiz.id)
+      expect(user_answer.answer_questions.count).to eq(2)
+    end
 
-			user_answer.save
+    it 'multiple answers' do
+      question.update(question_type: 1)
+      answer_question_params = {}
 
-			answer_question_params[:answer_id] = [answer.id , answer_t.id]
-			answer_question_params[:quiz_id] = quiz.id
-			answer_question_params[:question_id] = question.id
+      user_answer.save
 
-			user_answer.answer_questions.empty?
+      answer_question_params[:answer_id] = [answer.id, answer_t.id]
+      answer_question_params[:quiz_id] = quiz.id
+      answer_question_params[:question_id] = question.id
 
-			MultipleAnswerCreate.create_multiple_answer(answer_question_params: answer_question_params,
-																															user_answer: user_answer)
+      user_answer.answer_questions.empty?
 
-			expect(user_answer.answer_questions.count).to eq(2)
-		end
-	end
+      MultipleAnswerCreate.create_multiple_answer(answer_question_params: answer_question_params,
+                                                  user_answer: user_answer)
+
+      expect(user_answer.answer_questions.count).to eq(2)
+    end
+  end
 end
