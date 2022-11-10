@@ -1,6 +1,8 @@
 module CacheInitializer
   extend self
 
+  class InitializeParametersError < StandardError; end
+
   # Also priv_contact_id and org_contact_id
 
   def generate_values
@@ -37,13 +39,11 @@ module CacheInitializer
   private
 
   def set_transfer_domain_data
-    result = GenerateTransferCode.process
+    result = PracticeServices::GenerateTransferCodeService.new.call
+    raise InitializeParametersError, result.errors unless result.success?
 
-    Rails.logger.info 'No domain was generated. Got empty value from registry' if result.nil?
-    Rails.logger.info result['message'] if result['code'] == 2104
-
-    transfer_code = result['data']['domain']['transfer_code']
-    transfer_domain_name = result['data']['domain']['name']
+    transfer_code = result.payload['transfer_code']
+    transfer_domain_name = result.payload['name']
 
     Rails.cache.write('transfer_code', transfer_code) unless Rails.cache.exist?('transfer_code')
     Rails.cache.write('transfer_domain_name', transfer_domain_name) unless Rails.cache.exist?('transfer_domain_name')
