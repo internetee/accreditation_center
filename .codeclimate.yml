@@ -1,0 +1,31 @@
+version: "2"
+prepare:
+  fetch:
+  - "https://raw.githubusercontent.com/internetee/style-guide/master/.rubocop-ruby.yml"
+  - url: "https://raw.githubusercontent.com/internetee/style-guide/master/.rubocop-rails.yml"
+    path: ".rubocop.yml"
+plugins:
+  brakeman:
+    enabled: true
+  bundler-audit:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - ruby
+      - javascript
+  eslint:
+    enabled: true
+  rubocop:
+    enabled: true
+    channel: rubocop-1-12-1
+exclude_patterns:
+  - "bin/"
+  - "config/"
+  - "db/"
+  - "lib/"
+  - "vendor/"
+  - "test/"
+  - "karma.conf.js"
+  - "app/packs/src/semantic/"
