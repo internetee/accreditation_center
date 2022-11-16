@@ -43,12 +43,9 @@ checks:
     config:
       threshold: 25
 exclude_patterns:
-  - "app/models/version/"
   - "bin/"
   - "config/"
   - "db/"
-  - "lib/core_monkey_patches/"
-  - "lib/gem_monkey_patches/"
   - "lib/tasks/*"
   - "spec/"
   - "vendor/"
