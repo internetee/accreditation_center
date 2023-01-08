@@ -51,4 +51,3 @@ exclude_patterns:
   - "vendor/"
   - "CHANGELOG.md"
   - "babel.config.js"
-  
