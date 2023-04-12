@@ -6,10 +6,9 @@ Rails.application.configure do
   require 'syslog/logger'
   config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new(ENV['app_name'] || 'accreditation'))
 
-	# Enable stdout logger
-config.logger = Logger.new(STDOUT)
+  # Enable stdout logger
+  config.logger = Logger.new(STDOUT)
 
-# Set log level
-config.log_level = :ERROR
-
+  # Set log level
+  config.log_level = :ERROR
 end
