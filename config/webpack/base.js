@@ -1,32 +1,39 @@
-// const { webpackConfig } = require('@rails/webpacker')
+const { environment } = require('@rails/webpacker')
 
-// module.exports = webpackConfig
-
-const { webpackConfig, merge } = require('@rails/webpacker')
-const webpack = require('webpack');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
-const plugins = [
-    new webpack.ProvidePlugin({
-        $: 'jquery',
-        jQuery: 'jquery',
-        jquery: 'jquery'
-    }),
-    new MiniCssExtractPlugin({
-        filename: "[name].css",
-        chunkFilename: "[id].css",
-    }),
-]
-
-module.exports = merge(
-    webpackConfig,
-    {
-        module: {
-            rules: []
-        },
-        plugins: plugins,
+const customConfig = {
+  resolve: {
+    fallback: {
+      dgram: false,
+      fs: false,
+      net: false,
+      tls: false,
+      child_process: false
     }
-)
+  }
+};
 
-const scssConfigIndex = webpackConfig.module.rules.findIndex((config) => ".scss".match(config.test))
-webpackConfig.module.rules.splice(scssConfigIndex, 1)
+environment.config.delete('node.dgram')
+environment.config.delete('node.fs')
+environment.config.delete('node.net')
+environment.config.delete('node.tls')
+environment.config.delete('node.child_process')
+
+environment.loaders.append('sass', {
+    test: /\.scss$/,
+    use: [
+      'style-loader',
+      'css-loader',
+      {
+        loader: 'sass-loader',
+        options: {
+          sassOptions: {
+            includePaths: ['app/assets/stylesheets'],
+          },
+        },
+      },
+    ],
+  });
+
+environment.config.merge(customConfig);
+
+module.exports = environment
